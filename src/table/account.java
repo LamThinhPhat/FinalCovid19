@@ -2,7 +2,16 @@ package table;
 
 public class account {
     String username, pass;
-    int user_role;
+
+    public int getBan_unban() {
+        return ban_unban;
+    }
+
+    public void setBan_unban(int ban_unban) {
+        this.ban_unban = ban_unban;
+    }
+
+    int user_role, ban_unban;
 
     public String getUsername() {
         return username;

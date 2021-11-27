@@ -1,3 +1,9 @@
+import AdminFrame.AdminFrame;
+import ManagerFrame.ManagerFrame;
+import UserFrame.UserFrame;
+import getDB.Account.FunctionAccount;
+import table.account;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -80,23 +86,50 @@ public class LogInFrame extends JFrame {
         contentPane.add(PassPannel);
 
         JButton Login = new JButton("Login");
-        JButton Signup = new JButton("Signup");
         JPanel ButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         Login.setForeground(color.my_white);
         Login.setBackground(new Color(77,82,77));
-
-        Signup.setForeground(color.my_white);
-        Signup.setBackground(new Color(77,82,77));
-        ButtonPanel.add(Signup);
         ButtonPanel.add(Login);
         ButtonPanel.setBackground(color.my_gray);
         contentPane.add(ButtonPanel);
 
-        Signup.addActionListener(new ActionListener() {
+
+        Login.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new SignUpFrame().setVisible(true);
-                LogInFrame.this.dispose();
+                String username = UserNameInput.getText();
+                String password = String.valueOf(String.valueOf(PassInput.getPassword()).hashCode());
+                account login = FunctionAccount.GetAccountToLogin(username,password);
+                if (login==null)
+                {
+                    JOptionPane.showMessageDialog(LogInFrame.this, "Wrong id or password", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                else
+                {
+                    if (login.getBan_unban() == 1)
+                    {
+                        JOptionPane.showMessageDialog(LogInFrame.this, "This account is being banned", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                    else
+                    {
+                        if (login.getUser_role() == 1)
+                        {
+                            new ManagerFrame().setVisible(true);
+                            LogInFrame.this.dispose();
+                        }
+                        else if (login.getUser_role() == 2)
+                        {
+                            new AdminFrame().setVisible(true);
+                            LogInFrame.this.dispose();
+                        }
+                        else
+                        {
+                            new UserFrame().setVisible(true);
+                            LogInFrame.this.dispose();
+                        }
+                    }
+                }
+
             }
         });
 

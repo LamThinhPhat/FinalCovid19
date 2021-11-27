@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Function {
+public class FunctionAddress {
     static public Set<String> GetAllProvince()
     {
         Set<String> provinces = new HashSet<String>();
@@ -79,6 +79,25 @@ public class Function {
         return wards;
     }
 
-
-
+    static public String GetAddressId(String Province, String Ward, String District)
+    {
+        Connection conn = jdbc_connector.getConnection();
+        String sql  = "SELECT * FROM address where province = ? and ward = ? and district = ?";
+        try
+        {
+            PreparedStatement PrSt = conn.prepareStatement(sql);
+            PrSt.setString(1, Province);
+            PrSt.setString(2, Ward);
+            PrSt.setString(3, District);
+            ResultSet rs = PrSt.executeQuery();
+            while(rs.next())
+            {
+                return rs.getString(1);
+            }
+        }catch (SQLException err)
+        {
+            err.printStackTrace();
+        }
+        return null;
+    }
 }
