@@ -8,7 +8,6 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import java.security.MessageDigest;
-import java.util.ArrayList;
 import java.util.Set;
 
 
@@ -25,7 +24,7 @@ public class SignUpFrame extends JFrame {
         }
         setIconImage(covid_icon.getImage());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(700, 500);
+        setSize(460, 500);
         setResizable(false);
         setLocationRelativeTo(null);
 
@@ -89,25 +88,34 @@ public class SignUpFrame extends JFrame {
         InputAddressPane.add(InputAddressLabel);
         InputAddressPane.add(AddressField);
 
-        JPanel PWDPane = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        PWDPane.setBackground(color.my_gray);
-        contentPane.add(PWDPane);
+        JPanel PPane = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        PPane.setBackground(color.my_gray);
+        contentPane.add(PPane);
+
+        JPanel DPane = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        DPane.setBackground(color.my_gray);
+        contentPane.add(DPane);
+
+        JPanel WPane = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        WPane.setBackground(color.my_gray);
+        contentPane.add(WPane);
+
         JLabel ProvinceLable = new JLabel("Province");
         ProvinceLable.setForeground(color.my_white);
         JComboBox Province = new JComboBox();
-        JLabel WardLable = new JLabel("Ward");
+        JLabel WardLable = new JLabel("Ward      ");
         WardLable.setForeground(color.my_white);
         JComboBox Ward = new JComboBox();
-        JLabel DistrictLable = new JLabel("District");
+        JLabel DistrictLable = new JLabel("District   ");
         DistrictLable.setForeground(color.my_white);
         JComboBox District = new JComboBox();
 
-        PWDPane.add(ProvinceLable);
-        PWDPane.add(Province);
-        PWDPane.add(DistrictLable);
-        PWDPane.add(District);
-        PWDPane.add(WardLable);
-        PWDPane.add(Ward);
+        PPane.add(ProvinceLable);
+        PPane.add(Province);
+        DPane.add(DistrictLable);
+        DPane.add(District);
+        WPane.add(WardLable);
+        WPane.add(Ward);
 
 
         Set<String> provinces = getDB.Address.Function.GetAllProvince();
