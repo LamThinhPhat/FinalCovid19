@@ -33,7 +33,7 @@ public class FunctionFacility {
         return facilities;
     }
 
-    static public String getIdFacility(String facilityname)
+    static public String getIdFacilityByName(String facilityname)
     {
         Connection conn = jdbc_connector.getConnection();
         String sql  = "SELECT * FROM facility where facility_name = ?";
@@ -45,6 +45,25 @@ public class FunctionFacility {
             while(rs.next())
             {
                 return rs.getString(1);
+            }
+        }catch(SQLException err){
+            err.printStackTrace();
+        }
+        return null;
+    }
+
+    static public String GetNameFacilityById(String ID)
+    {
+        Connection conn = jdbc_connector.getConnection();
+        String sql  = "SELECT * FROM facility where facility_id = ?";
+        try
+        {
+            PreparedStatement PrSt = conn.prepareStatement(sql);
+            PrSt.setString(1,ID);
+            ResultSet rs = PrSt.executeQuery();
+            while(rs.next())
+            {
+                return rs.getString(2);
             }
         }catch(SQLException err){
             err.printStackTrace();

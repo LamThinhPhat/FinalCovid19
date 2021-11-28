@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class FunctionAccount {
     static public boolean CheckExisted(String username){
@@ -95,4 +96,89 @@ public class FunctionAccount {
         }
         return null;
     }
+
+    static public ArrayList<covid_user> GetAllCovidUserInfo()
+    {
+        ArrayList<covid_user> CovidUser = new ArrayList<covid_user>();
+        Connection conn = jdbc_connector.getConnection();
+        String sql  = "SELECT * FROM covid_user";
+        try
+        {
+            PreparedStatement PrSt = conn.prepareStatement(sql);
+            ResultSet rs = PrSt.executeQuery();
+            while(rs.next())
+            {
+                covid_user user = new covid_user();
+                user.setUsername(rs.getString(1));
+                user.setFull_name(rs.getString(2));
+                user.setId(rs.getString(3));
+                user.setDob(rs.getDate(4));
+                user.setHouse_number(rs.getString(5));
+                user.setAddress_id(rs.getString(6));
+                user.setPatient_status(rs.getString(7));
+                user.setFacility_id(rs.getString(8));
+                CovidUser.add(user);
+            }
+        }catch (SQLException err)
+        {
+            err.printStackTrace();
+        }
+        return CovidUser;
+    }
+
+    static public covid_user GetCovidUserInfoByUserName(String username)
+    {
+        Connection conn = jdbc_connector.getConnection();
+        String sql  = "SELECT * FROM covid_user WHERE username = ?";
+        try
+        {
+            PreparedStatement PrSt = conn.prepareStatement(sql);
+            PrSt.setString(1,username);
+            ResultSet rs = PrSt.executeQuery();
+            while(rs.next())
+            {
+                covid_user user = new covid_user();
+                user.setUsername(rs.getString(1));
+                user.setFull_name(rs.getString(2));
+                user.setId(rs.getString(3));
+                user.setDob(rs.getDate(4));
+                user.setHouse_number(rs.getString(5));
+                user.setAddress_id(rs.getString(6));
+                user.setPatient_status(rs.getString(7));
+                user.setFacility_id(rs.getString(8));
+                return user;
+            }
+        }catch (SQLException err)
+        {
+            err.printStackTrace();
+        }
+        return null;
+    }
+
+    static public void UpdateCovidUser(covid_user user)
+    {
+        Connection conn = jdbc_connector.getConnection();
+        String sql = "UPDATE covid_user SET" +
+                " username = ?, full_name = ?, id = ?, dob = ?, house_number = ?, address_id = ?" +
+                    ",patient_status = ?, facility_id = ?  WHERE USERNAME = ?";
+        try {
+            PreparedStatement PrSt = conn.prepareStatement(sql);
+
+            PrSt.setString(1, user.getUsername());
+            PrSt.setString(2, user.getFull_name());
+            PrSt.setString(3, user.getId());
+            PrSt.setDate(4, user.getDob());
+            PrSt.setString(5, user.getHouse_number());
+            PrSt.setString(6, user.getAddress_id());
+            PrSt.setString(7, user.getPatient_status());
+            PrSt.setString(8, user.getFacility_id());
+            PrSt.setString(9, user.getUsername());
+
+            PrSt.executeUpdate();
+        }catch(SQLException err)
+        {
+            err.printStackTrace();
+        }
+    }
+
 }

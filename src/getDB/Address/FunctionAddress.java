@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -93,6 +94,30 @@ public class FunctionAddress {
             while(rs.next())
             {
                 return rs.getString(1);
+            }
+        }catch (SQLException err)
+        {
+            err.printStackTrace();
+        }
+        return null;
+    }
+
+    static public ArrayList<String> GetPDW(String id_address)
+    {
+        Connection conn = jdbc_connector.getConnection();
+        String sql  = "SELECT * FROM address where address_id = ?";
+        try
+        {
+            PreparedStatement PrSt = conn.prepareStatement(sql);
+            PrSt.setString(1, id_address);
+            ResultSet rs = PrSt.executeQuery();
+            while(rs.next())
+            {
+                ArrayList<String> PDW = new ArrayList<String>();
+                PDW.add(rs.getString(2));
+                PDW.add(rs.getString(3));
+                PDW.add(rs.getString(4));
+                return PDW;
             }
         }catch (SQLException err)
         {

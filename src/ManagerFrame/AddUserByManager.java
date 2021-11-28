@@ -1,3 +1,5 @@
+package ManagerFrame;
+
 import getDB.Account.FunctionAccount;
 import getDB.Address.FunctionAddress;
 import getDB.Facility.FunctionFacility;
@@ -18,10 +20,10 @@ import java.text.SimpleDateFormat;
 import java.util.Set;
 
 
-public class AddUserByAdmin extends JFrame {
+public class AddUserByManager extends JFrame {
     Color my_gray=new Color(61,64,62);
     Color my_white=new Color(235,235,235);
-    public AddUserByAdmin() {
+    public AddUserByManager() {
         setTitle("Covid Management System");
         ImageIcon covid_icon=null;
         try {
@@ -41,7 +43,7 @@ public class AddUserByAdmin extends JFrame {
         setContentPane(contentPane);
 
 
-        JLabel SignUpLabel = new JLabel("Sign up");
+        JLabel SignUpLabel = new JLabel("Add new user to the system");
         SignUpLabel.setForeground(my_white);
         contentPane.add(SignUpLabel);
 
@@ -212,8 +214,8 @@ public class AddUserByAdmin extends JFrame {
         CancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new LogInFrame().setVisible(true);
-                AddUserByAdmin.this.dispose();
+                new ManagerFrame().setVisible(true);
+                AddUserByManager.this.dispose();
             }
         });
         ButtonPane.add(CancelButton);
@@ -235,7 +237,7 @@ public class AddUserByAdmin extends JFrame {
                         || IdField.getText().isEmpty() || province.equals("")|| district.equals("")|| ward.equals("")
                         || facility_name.equals(""))
                 {
-                    JOptionPane.showMessageDialog(AddUserByAdmin.this, "Please fill correcly information","error",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(AddUserByManager.this, "Please fill correcly information","error",JOptionPane.ERROR_MESSAGE);
                 }
                 else {
                     account acc = new account();
@@ -245,7 +247,7 @@ public class AddUserByAdmin extends JFrame {
                     acc.setBan_unban(0);
                     if (FunctionAccount.CheckExisted(acc.getUsername()))
                     {
-                        JOptionPane.showMessageDialog(AddUserByAdmin.this, "Username's already existed","error",JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(AddUserByManager.this, "Username's already existed","error",JOptionPane.ERROR_MESSAGE);
                     }
                     else
                     {
@@ -267,14 +269,14 @@ public class AddUserByAdmin extends JFrame {
 
                         coviduser.setAddress_id(FunctionAddress.GetAddressId(province,ward,district));
                         coviduser.setPatient_status(status_patient);
-                        coviduser.setFacility_id(FunctionFacility.getIdFacility(facility_name));
+                        coviduser.setFacility_id(FunctionFacility.getIdFacilityByName(facility_name));
 
 
                         FunctionAccount.AddAccount(acc);
                         FunctionAccount.AddInfoAccount(coviduser);
-                        JOptionPane.showMessageDialog(AddUserByAdmin.this, "Create successfully","success",JOptionPane.ERROR_MESSAGE);
-                        new LogInFrame().setVisible(true);
-                        AddUserByAdmin.this.dispose();
+                        JOptionPane.showMessageDialog(AddUserByManager.this, "Create successfully","success",JOptionPane.ERROR_MESSAGE);
+                        new ManagerFrame().setVisible(true);
+                        AddUserByManager.this.dispose();
 
                     }
                 }
