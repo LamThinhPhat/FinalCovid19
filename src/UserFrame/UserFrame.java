@@ -1,20 +1,138 @@
 package UserFrame;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class UserFrame extends JFrame {
+    private JMenuBar mainMenu;
+    private JMenu mUser, mSupply, mPayment;
+    private JMenuItem iInformation, iManagedHistory, iLogout, iSupplyHistory, iBuySupply ,iCheckOut, iPaymentHistory;
+
     public UserFrame()
     {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(475, 300);
+        setSize(600, 500);
         setResizable(false);
         setLocationRelativeTo(null);
 
-        JPanel contentPane = new JPanel();
-        contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
+        mainMenu = new JMenuBar();
+        mUser = new JMenu("User");
+        mSupply = new JMenu("Suppy");
+        mPayment = new JMenu("Payment");
+        iInformation = new JMenuItem("Information");
+        iManagedHistory = new JMenuItem("Managed history");
+        iSupplyHistory = new JMenuItem("Supply history");
+        iBuySupply = new JMenuItem("Buy Supply");
+        iPaymentHistory = new JMenuItem("Payment history");
+        iCheckOut = new JMenuItem("Checkout");
+        iLogout = new JMenuItem("Log out");
 
-        setContentPane(contentPane);
-        JLabel DAYLAUSER = new JLabel("DAY LA USER FRAME");
-        contentPane.add(DAYLAUSER);
+        mUser.add(iInformation);
+        mUser.add(iManagedHistory);
+        mUser.add(iLogout);
+
+        mSupply.add(iSupplyHistory);
+        mSupply.add(iBuySupply);
+
+        mPayment.add(iPaymentHistory);
+        mPayment.add(iCheckOut);
+
+        mainMenu.add(mUser);
+        mainMenu.add(mSupply);
+        mainMenu.add(mPayment);
+        setJMenuBar(mainMenu);
+
+        JPanel informationPanel = new Information();
+        setContentPane(informationPanel);
+
+        iInformation.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JPanel contentPane = (JPanel) getContentPane();
+                JPanel informationPanel = new Information();
+
+                contentPane.removeAll();
+                contentPane.add(informationPanel);
+                contentPane.revalidate();
+                contentPane.repaint();
+            }
+        });
+
+        iManagedHistory.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JPanel contentPane = (JPanel) getContentPane();
+                JPanel managedHistoryPanel = new ManagedHistory();
+
+                contentPane.removeAll();
+                contentPane.add(managedHistoryPanel);
+                contentPane.revalidate();
+                contentPane.repaint();
+            }
+        });
+
+        iLogout.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                //open login frame
+            }
+        });
+
+        iSupplyHistory.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JPanel contentPane = (JPanel) getContentPane();
+                JPanel supplyHistory = new SupplyHistory();
+
+                contentPane.removeAll();
+                contentPane.add(supplyHistory);
+                contentPane.revalidate();
+                contentPane.repaint();
+            }
+        });
+
+        iBuySupply.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JPanel contentPane = (JPanel) getContentPane();
+                JPanel buySupply = new BuySupply();
+
+                contentPane.removeAll();
+                contentPane.add(buySupply);
+                contentPane.revalidate();
+                contentPane.repaint();
+            }
+        });
+
+        iPaymentHistory.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JPanel contentPane = (JPanel) getContentPane();
+                JPanel paymentHistory = new PaymentHistory();
+
+                contentPane.removeAll();
+                contentPane.add(paymentHistory);
+                contentPane.revalidate();
+                contentPane.repaint();
+            }
+        });
+
+        iCheckOut.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JPanel contentPane = (JPanel) getContentPane();
+                JPanel checkOut = new CheckOut();
+
+                contentPane.removeAll();
+                contentPane.add(checkOut);
+                contentPane.revalidate();
+                contentPane.repaint();
+            }
+        });
+
+
     }
 }
