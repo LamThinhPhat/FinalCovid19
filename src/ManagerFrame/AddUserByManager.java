@@ -248,8 +248,7 @@ public class AddUserByManager extends JFrame {
                 String status_patient = (String) Status_patient.getSelectedItem();
                 if (UserField.getText().isEmpty() || String.valueOf(PassField.getPassword()) ==""
                         || NameField.getText().isEmpty() || DobField.getText().isEmpty()|| AddressField.getText().isEmpty()
-                        || IdField.getText().isEmpty() || province.equals("")|| district.equals("")|| ward.equals("")
-                        || facility_name.equals(""))
+                        || IdField.getText().isEmpty() || province.equals("")|| district.equals("")|| ward.equals(""))
                 {
                     JOptionPane.showMessageDialog(AddUserByManager.this, "Please fill correcly information","error",JOptionPane.ERROR_MESSAGE);
                 }
@@ -265,6 +264,7 @@ public class AddUserByManager extends JFrame {
                     }
                     else
                     {
+
                         covid_user coviduser = new covid_user();
                         coviduser.setUsername(acc.getUsername());
                         coviduser.setFull_name(NameField.getText());
@@ -285,12 +285,20 @@ public class AddUserByManager extends JFrame {
                         coviduser.setPatient_status(status_patient);
                         coviduser.setFacility_id(FunctionFacility.getIdFacilityByName(facility_name));
 
-
-                        FunctionAccount.AddAccount(acc);
-                        FunctionAccount.AddInfoAccount(coviduser);
-                        JOptionPane.showMessageDialog(AddUserByManager.this, "Create successfully","success",JOptionPane.ERROR_MESSAGE);
-                        new ManagerFrame().setVisible(true);
-                        AddUserByManager.this.dispose();
+                        int CQuantity = getDB.Facility.FunctionFacility.GetCurrentQuantity(coviduser.getFacility_id());
+                        int Capacity = getDB.Facility.FunctionFacility.GetCapacity(coviduser.getFacility_id());
+                        if ( CQuantity >= Capacity && Capacity != -1)
+                        {
+                            JOptionPane.showMessageDialog(AddUserByManager.this,"Facility is full", "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                        else {
+                            getDB.Facility.FunctionFacility.SetCurrentQuantity(coviduser.getFacility_id(), CQuantity + 1);
+                            FunctionAccount.AddAccount(acc);
+                            FunctionAccount.AddInfoAccount(coviduser);
+                            JOptionPane.showMessageDialog(AddUserByManager.this, "Create successfully", "success", JOptionPane.ERROR_MESSAGE);
+                            new ManagerFrame().setVisible(true);
+                            AddUserByManager.this.dispose();
+                        }
 
                     }
                 }

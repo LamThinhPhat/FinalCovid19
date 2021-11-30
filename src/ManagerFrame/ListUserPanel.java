@@ -129,9 +129,11 @@ public class ListUserPanel extends JPanel {
         ListUsercontentPane.add(EastPanelListUser,BorderLayout.EAST);
 
         JButton ShowListRelated = new JButton("List related");
+        JButton ShowHistoryUpdate = new JButton("Update History");
         JButton EditUser = new JButton("Edit");
 
         EastPanelListUser.add(ShowListRelated);
+        EastPanelListUser.add(ShowHistoryUpdate);
         EastPanelListUser.add(EditUser);
 
         JPanel WestPanelSortUser = new JPanel();
@@ -312,6 +314,26 @@ public class ListUserPanel extends JPanel {
                     ShowPanel.setVisible(false);
                     ShowPanel.removeAll();
                     ShowPanel.add(new ListRelatedPanel(username));
+                    ShowPanel.revalidate();
+                    ShowPanel.setVisible(true);
+                }
+            }
+        });
+
+        ShowHistoryUpdate.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int row = CovidUserTable.getSelectedRow();
+                if(row == -1)
+                {
+                    JOptionPane.showMessageDialog(ListUserPanel.this, "Please pick a user to show", "Error",JOptionPane.ERROR_MESSAGE);
+                }
+                else {
+                    String  username = (String) CovidUserTable.getValueAt(row, 0);
+
+                    ShowPanel.setVisible(false);
+                    ShowPanel.removeAll();
+                    ShowPanel.add(new UpdateHistoryPanel(username));
                     ShowPanel.revalidate();
                     ShowPanel.setVisible(true);
                 }

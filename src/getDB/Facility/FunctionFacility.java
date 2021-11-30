@@ -74,7 +74,7 @@ public class FunctionFacility {
         {
             err.printStackTrace();
         }
-        return 0;
+        return -1;
     }
 
 
