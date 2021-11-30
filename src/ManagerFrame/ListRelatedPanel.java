@@ -1,5 +1,6 @@
 package ManagerFrame;
 
+import ColorFont.Constant;
 import table.related_user;
 
 import javax.swing.*;
@@ -13,13 +14,13 @@ import java.util.ArrayList;
 public class ListRelatedPanel extends JPanel{
     public ListRelatedPanel(String username)
     {
-        setBackground(color.my_gray);
+        setBackground(Constant.my_gray);
         JPanel ListRelatedPanel = new JPanel(new BorderLayout());
         add(ListRelatedPanel);
 
         JScrollPane ShowListCenter = new JScrollPane();
         ListRelatedPanel.add(ShowListCenter, BorderLayout.CENTER);
-        ListRelatedPanel.setBackground(color.my_gray);
+        ListRelatedPanel.setBackground(Constant.my_gray);
 
         JTable RelatedTable = new JTable();
         RelatedTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -75,6 +76,6 @@ public class ListRelatedPanel extends JPanel{
         ListRelatedPanel.add(ListRelatedPaneSouth, BorderLayout.SOUTH);
         ListRelatedPaneSouth.add(CancelRelatedListButton);
         ListRelatedPaneSouth.add(RefreshRelatedListButton);
-        ListRelatedPaneSouth.setBackground(color.my_gray);
+        ListRelatedPaneSouth.setBackground(Constant.my_gray);
     }
 }

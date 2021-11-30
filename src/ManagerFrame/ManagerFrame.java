@@ -1,6 +1,8 @@
 package ManagerFrame;
 
 
+import ColorFont.Constant;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -48,7 +50,7 @@ public class ManagerFrame extends JFrame {
         ButtonChangePane.add(AddNewUserButton);
         ButtonChangePane.add(ChangeListUserButton);
         ButtonChangePane.add(ChangeListProductButton);
-        ButtonChangePane.setBackground(color.my_gray);
+        ButtonChangePane.setBackground(Constant.my_gray);
 
 
         setContentPane(contentPane);

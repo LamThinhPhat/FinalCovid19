@@ -1,5 +1,6 @@
 package ManagerFrame;
 
+import ColorFont.Constant;
 import table.covid_user;
 
 import javax.swing.*;
@@ -14,13 +15,13 @@ import static ManagerFrame.ManagerFrame.ShowPanel;
 public class ListUserPanel extends JPanel {
     public ListUserPanel()
     {
-        setBackground(color.my_gray);
+        setBackground(Constant.my_gray);
         JPanel ListUsercontentPane = new JPanel(new BorderLayout());
         add(ListUsercontentPane);
 
         JPanel ListUserbuttonPaneSouth = new JPanel(new FlowLayout(FlowLayout.LEFT));
         ListUsercontentPane.add(ListUserbuttonPaneSouth, BorderLayout.SOUTH);
-        ListUserbuttonPaneSouth.setBackground(color.my_gray);
+        ListUserbuttonPaneSouth.setBackground(Constant.my_gray);
 
         JScrollPane ListCovidUserCenter = new JScrollPane();
         ListCovidUserCenter.setPreferredSize(new Dimension(800,600));
@@ -123,7 +124,7 @@ public class ListUserPanel extends JPanel {
         ListUserbuttonPaneSouth.add(SearchUserNameButton);
 
         JPanel EastPanelListUser = new JPanel();
-        EastPanelListUser.setBackground(color.my_gray);
+        EastPanelListUser.setBackground(Constant.my_gray);
         EastPanelListUser.setLayout(new BoxLayout(EastPanelListUser, BoxLayout.Y_AXIS));
         ListUsercontentPane.add(EastPanelListUser,BorderLayout.EAST);
 
@@ -134,7 +135,7 @@ public class ListUserPanel extends JPanel {
         EastPanelListUser.add(EditUser);
 
         JPanel WestPanelSortUser = new JPanel();
-        WestPanelSortUser.setBackground(color.my_gray);
+        WestPanelSortUser.setBackground(Constant.my_gray);
         WestPanelSortUser.setLayout(new BoxLayout(WestPanelSortUser, BoxLayout.Y_AXIS));
         ListUsercontentPane.add(WestPanelSortUser,BorderLayout.WEST);
 

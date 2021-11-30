@@ -1,4 +1,5 @@
 import AdminFrame.AdminFrame;
+import ColorFont.Constant;
 import ManagerFrame.ManagerFrame;
 import UserFrame.UserFrame;
 import getDB.Account.FunctionAccount;
@@ -46,7 +47,7 @@ public class LogInFrame extends JFrame {
         JPanel contentPane = new JPanel();
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
         setContentPane(contentPane);
-        contentPane.setBackground(color.my_gray);
+        contentPane.setBackground(Constant.my_gray);
         JPanel Header = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
         JLabel Icon_label = new JLabel(covid_icon);
@@ -60,16 +61,17 @@ public class LogInFrame extends JFrame {
 
         Header.add(Icon_label);
         Header.add(Text_Icon_label);
-        Header.setBackground(color.my_gray);
+        Header.setBackground(Constant.my_gray);
         contentPane.add(Header);
 
 
 
         JPanel UserNamePannel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JLabel UserNameLabel = new JLabel("Username");
+        UserNameLabel.setFont(Constant.LABEL_FONT);
         JTextField UserNameInput = new JTextField();
-        UserNameLabel.setForeground(color.my_white);
-        UserNamePannel.setBackground(color.my_gray);
+        UserNameLabel.setForeground(Constant.my_white);
+        UserNamePannel.setBackground(Constant.my_gray);
         UserNameInput.setColumns(15);
         UserNamePannel.add(UserNameLabel);
         UserNamePannel.add(UserNameInput);
@@ -77,9 +79,10 @@ public class LogInFrame extends JFrame {
 
         JPanel PassPannel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JLabel PassLabel = new JLabel("Password");
+        PassLabel.setFont(Constant.LABEL_FONT);
         JPasswordField PassInput = new JPasswordField();
-        PassLabel.setForeground(color.my_white);
-        PassPannel.setBackground(color.my_gray);
+        PassLabel.setForeground(Constant.my_white);
+        PassPannel.setBackground(Constant.my_gray);
         PassInput.setColumns(15);
         PassPannel.add(PassLabel);
         PassPannel.add(PassInput);
@@ -87,10 +90,10 @@ public class LogInFrame extends JFrame {
 
         JButton Login = new JButton("Login");
         JPanel ButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        Login.setForeground(color.my_white);
+        Login.setForeground(Constant.my_white);
         Login.setBackground(new Color(77,82,77));
         ButtonPanel.add(Login);
-        ButtonPanel.setBackground(color.my_gray);
+        ButtonPanel.setBackground(Constant.my_gray);
         contentPane.add(ButtonPanel);
 
 

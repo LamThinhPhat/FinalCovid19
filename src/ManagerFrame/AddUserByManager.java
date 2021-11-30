@@ -1,5 +1,6 @@
 package ManagerFrame;
 
+import ColorFont.Constant;
 import getDB.Account.FunctionAccount;
 import getDB.Address.FunctionAddress;
 import getDB.Facility.FunctionFacility;
@@ -21,8 +22,6 @@ import java.util.Set;
 
 
 public class AddUserByManager extends JFrame {
-    Color my_gray=new Color(61,64,62);
-    Color my_white=new Color(235,235,235);
     public AddUserByManager() {
         setTitle("Covid Management System");
         ImageIcon covid_icon=null;
@@ -33,90 +32,102 @@ public class AddUserByManager extends JFrame {
         }
         setIconImage(covid_icon.getImage());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(460, 500);
+        setSize(700, 500);
         setResizable(false);
         setLocationRelativeTo(null);
 
         JPanel contentPane = new JPanel();
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
-        contentPane.setBackground(my_gray);
+        contentPane.setBackground(Constant.my_gray);
         setContentPane(contentPane);
 
 
         JLabel SignUpLabel = new JLabel("Add new user to the system");
-        SignUpLabel.setForeground(my_white);
+        SignUpLabel.setFont(Constant.LABEL_FONT);
+        SignUpLabel.setForeground(Constant.my_white);
         contentPane.add(SignUpLabel);
 
-        JPanel InputUserPane = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JPanel InputUserPane = new JPanel(new FlowLayout(FlowLayout.LEFT));
         contentPane.add(InputUserPane);
-        JLabel InputUserLabel = new JLabel("Input Username:      ");
-        InputUserLabel.setForeground(my_white);
+        JLabel InputUserLabel = new JLabel("Input Username:        ");
+        InputUserLabel.setFont(Constant.LABEL_FONT);
+        InputUserLabel.setForeground(Constant.my_white);
         JTextField UserField = new JTextField();
-        UserField.setColumns(30);
-        InputUserPane.setBackground(my_gray);
+        UserField.setColumns(40);
+        InputUserPane.setBackground(Constant.my_gray);
         InputUserPane.add(InputUserLabel);
         InputUserPane.add(UserField);
 
-        JPanel InputPasstPane = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JPanel InputPasstPane = new JPanel(new FlowLayout(FlowLayout.LEFT));
         contentPane.add(InputPasstPane);
-        JLabel InputPassLabel = new JLabel("Input Password:      ");
-        InputPassLabel.setForeground(my_white);
+        JLabel InputPassLabel = new JLabel("Input Password:         ");
+        InputPassLabel.setFont(Constant.LABEL_FONT);
+        InputPassLabel.setForeground(Constant.my_white);
         JPasswordField PassField = new JPasswordField();
-        PassField.setColumns(30);
-        InputPasstPane.setBackground(my_gray);
+        PassField.setColumns(40);
+        InputPasstPane.setBackground(Constant.my_gray);
         InputPasstPane.add(InputPassLabel);
         InputPasstPane.add(PassField);
 
-        JPanel InputNamePane = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JPanel InputNamePane = new JPanel(new FlowLayout(FlowLayout.LEFT));
         contentPane.add(InputNamePane);
-        JLabel InputNameLabel = new JLabel("Input FullName:        ");
-        InputNameLabel.setForeground(my_white);
+        JLabel InputNameLabel = new JLabel("Input FullName:         ");
+        InputNameLabel.setFont(Constant.LABEL_FONT);
+        InputNameLabel.setForeground(Constant.my_white);
         JTextField NameField = new JTextField();
-        NameField.setColumns(30);
-        InputNamePane.setBackground(my_gray);
+        NameField.setColumns(40);
+        InputNamePane.setBackground(Constant.my_gray);
         InputNamePane.add(InputNameLabel);
         InputNamePane.add(NameField);
 
-        JPanel InputDoBPane = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JPanel InputDoBPane = new JPanel(new FlowLayout(FlowLayout.LEFT));
         contentPane.add(InputDoBPane);
-        JLabel InputDobLabel = new JLabel("Input Date of birth(yyyy-mm-dd):");
-        InputDobLabel.setForeground(my_white);
+        JLabel InputDobLabel = new JLabel("Input Date of birth:    ");
+        InputDobLabel.setFont(Constant.LABEL_FONT);
+        InputDobLabel.setForeground(Constant.my_white);
         JTextField DobField = new JTextField();
-        DobField.setColumns(25);
-        InputDoBPane.setBackground(my_gray);
+        DobField.setColumns(32);
+        JLabel FormatDob = new JLabel("(yyyy-mm-dd)");
+        FormatDob.setForeground(Constant.my_white);
+        InputDoBPane.setBackground(Constant.my_gray);
         InputDoBPane.add(InputDobLabel);
         InputDoBPane.add(DobField);
+        InputDoBPane.add(FormatDob);
 
-        JPanel InputAddressPane = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JPanel InputAddressPane = new JPanel(new FlowLayout(FlowLayout.LEFT));
         contentPane.add(InputAddressPane);
         JLabel InputAddressLabel = new JLabel("Input House Number:");
-        InputAddressLabel.setForeground(my_white);
+        InputAddressLabel.setFont(Constant.LABEL_FONT);
+        InputAddressLabel.setForeground(Constant.my_white);
         JTextField AddressField = new JTextField();
-        AddressField.setColumns(30);
-        InputAddressPane.setBackground(my_gray);
+        AddressField.setColumns(40);
+        InputAddressPane.setBackground(Constant.my_gray);
         InputAddressPane.add(InputAddressLabel);
         InputAddressPane.add(AddressField);
 
         JPanel PPane = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        PPane.setBackground(color.my_gray);
+        PPane.setBackground(Constant.my_gray);
         contentPane.add(PPane);
 
         JPanel DPane = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        DPane.setBackground(color.my_gray);
+        DPane.setBackground(Constant.my_gray);
         contentPane.add(DPane);
 
         JPanel WPane = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        WPane.setBackground(color.my_gray);
+        WPane.setBackground(Constant.my_gray);
         contentPane.add(WPane);
 
-        JLabel ProvinceLable = new JLabel("Province");
-        ProvinceLable.setForeground(color.my_white);
+        JLabel ProvinceLable = new JLabel("Province:                     ");
+        ProvinceLable.setFont(Constant.LABEL_FONT);
+        ProvinceLable.setForeground(Constant.my_white);
         JComboBox Province = new JComboBox();
-        JLabel WardLable = new JLabel("Ward      ");
-        WardLable.setForeground(color.my_white);
+        JLabel WardLable = new JLabel("Ward:                          ");
+        WardLable.setFont(Constant.LABEL_FONT);
+        WardLable.setForeground(Constant.my_white);
         JComboBox Ward = new JComboBox();
-        JLabel DistrictLable = new JLabel("District   ");
-        DistrictLable.setForeground(color.my_white);
+        JLabel DistrictLable = new JLabel("District:                       ");
+        DistrictLable.setFont(Constant.LABEL_FONT);
+        DistrictLable.setForeground(Constant.my_white);
         JComboBox District = new JComboBox();
 
         PPane.add(ProvinceLable);
@@ -162,23 +173,26 @@ public class AddUserByManager extends JFrame {
             }
         });
 
-        JPanel InputIdPane = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JPanel InputIdPane = new JPanel(new FlowLayout(FlowLayout.LEFT));
         contentPane.add(InputIdPane);
         JLabel InputIdLabel = new JLabel("Input ID:                     ");
-        InputIdLabel.setForeground(my_white);
+        InputIdLabel.setFont(Constant.LABEL_FONT);
+        InputIdLabel.setForeground(Constant.my_white);
         JTextField IdField = new JTextField();
-        IdField.setColumns(30);
-        InputIdPane.setBackground(my_gray);
+        IdField.setColumns(40);
+        InputIdPane.setBackground(Constant.my_gray);
         InputIdPane.add(InputIdLabel);
         InputIdPane.add(IdField);
 
         JPanel StatusPanel = new JPanel(new FlowLayout(FlowLayout.LEFT,20,1));
         JLabel FacilityLabel = new JLabel("Facility: ");
-        FacilityLabel.setForeground(color.my_white);
+        FacilityLabel.setFont(Constant.LABEL_FONT);
+        FacilityLabel.setForeground(Constant.my_white);
         JComboBox Facility = new JComboBox();
 
         JLabel StatusLabel = new JLabel("Status: ");
-        StatusLabel.setForeground(color.my_white);
+        StatusLabel.setFont(Constant.LABEL_FONT);
+        StatusLabel.setForeground(Constant.my_white);
         JComboBox Status_patient = new JComboBox();
 
         Set<String> facilities = FunctionFacility.getNameFacility();
@@ -197,7 +211,7 @@ public class AddUserByManager extends JFrame {
 
 
         contentPane.add(StatusPanel);
-        StatusPanel.setBackground(color.my_gray);
+        StatusPanel.setBackground(Constant.my_gray);
         StatusPanel.add(FacilityLabel);
         StatusPanel.add(Facility);
         StatusPanel.add(StatusLabel);
@@ -205,12 +219,12 @@ public class AddUserByManager extends JFrame {
 
 
         JPanel ButtonPane = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        ButtonPane.setBackground(my_gray);
+        ButtonPane.setBackground(Constant.my_gray);
         contentPane.add(ButtonPane);
 
         JButton CancelButton = new JButton("Cancel");
         CancelButton.setBackground(new Color(77,82,77));
-        CancelButton.setForeground(my_white);
+        CancelButton.setForeground(Constant.my_white);
         CancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -222,7 +236,7 @@ public class AddUserByManager extends JFrame {
 
         JButton ConfirmButton = new JButton("Confirm");
         ConfirmButton.setBackground(new Color(77,82,77));
-        ConfirmButton.setForeground(my_white);
+        ConfirmButton.setForeground(Constant.my_white);
 
         ConfirmButton.addActionListener(new ActionListener() {
             @Override
