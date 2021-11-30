@@ -1,6 +1,7 @@
 package AdminFrame;
 
 import ColorFont.Constant;
+import Login.LogInFrame;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -9,7 +10,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class AdminFrame extends JFrame {
-    public AdminFrame()
+    public AdminFrame(String username)
     {
         setTitle("Covid Management System");
 
@@ -21,10 +22,9 @@ public class AdminFrame extends JFrame {
         }
         setIconImage(covid_icon.getImage());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1400, 800);
+        setSize(1400, 600);
         setResizable(false);
         setLocationRelativeTo(null);
-
         JPanel ShowPanel = new JPanel();
         ShowPanel.setLayout(new BoxLayout(ShowPanel,BoxLayout.Y_AXIS));
         JPanel ManagerPanel = new ListManagerPanel();
@@ -34,7 +34,7 @@ public class AdminFrame extends JFrame {
 
 
         JPanel contentPane = new JPanel();
-        contentPane.setLayout(new BoxLayout(contentPane,BoxLayout.X_AXIS));
+        contentPane.setLayout(new FlowLayout(FlowLayout.LEFT));
         contentPane.setBackground(Constant.my_gray);
 
         JPanel controlPanel = new JPanel();
@@ -66,13 +66,30 @@ public class AdminFrame extends JFrame {
             FacilityPanel.setVisible(true);
         });
 
-        controlPanel.add(Box.createRigidArea(new Dimension(20,0)));
+        JLabel UserName=new JLabel();
+        UserName.setText("Login as: "+username);
+        UserName.setForeground(Constant.my_white);
+        JButton Logout= new JButton("Logout");
+        Logout.setForeground(Constant.my_white);
+        Logout.setBackground(new Color(77,82,77));
+        Logout.addActionListener(e->{
+            new LogInFrame().setVisible(true);
+            this.dispose();
+
+        });
+        controlPanel.add(UserName);
+        controlPanel.add(Logout);
         controlPanel.add(manage_manager);
-        controlPanel.add(Box.createRigidArea(new Dimension(0,10)));
-        controlPanel.add(Box.createRigidArea(new Dimension(20,0)));
+        controlPanel.add(Box.createRigidArea(new Dimension(20,10)));
         controlPanel.add(manage_facility);
 
-        ShowPanel.add(Box.createRigidArea(new Dimension(200,100)));
+        JLabel AdminLabel=new JLabel("Adminstrator");
+        AdminLabel.setFont(new Font("Serif", Font.BOLD, 45));
+        AdminLabel.setForeground(Constant.my_white);
+        JPanel HeaderPane=new JPanel(new FlowLayout(FlowLayout.LEFT));
+        HeaderPane.setBackground(Constant.my_gray);
+        HeaderPane.add(AdminLabel);
+        ShowPanel.add(HeaderPane);
         ShowPanel.add(ManagerPanel);
         ShowPanel.add(FacilityPanel);
         ShowPanel.setBackground(Constant.my_gray);

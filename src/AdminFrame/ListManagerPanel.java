@@ -23,7 +23,7 @@ public class ListManagerPanel extends JPanel {
         ListUserbuttonPaneNorth.setBackground(Constant.my_gray);
 
         JScrollPane ListCovidUserCenter = new JScrollPane();
-        ListCovidUserCenter.setPreferredSize(new Dimension(1000,400));
+        ListCovidUserCenter.setPreferredSize(new Dimension(1100,400));
         ListUsercontentPane.add(ListCovidUserCenter,BorderLayout.CENTER);
 
         JTable CovidUserTable = new JTable();
@@ -67,7 +67,8 @@ public class ListManagerPanel extends JPanel {
         SearchUserNameField.setColumns(15);
 
         JButton SearchUserNameButton = new JButton("Search by UserName");
-
+        SearchUserNameButton.setForeground(Constant.my_white);
+        SearchUserNameButton.setBackground(new Color(77,82,77));
         SearchUserNameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e)
@@ -104,6 +105,8 @@ public class ListManagerPanel extends JPanel {
 
         String sort_list[]={"Sort username","Sort fullname","Sort ID","Sort DoB","Sort City","Sort Status","Sort Facility"};
         JComboBox Sort = new JComboBox(sort_list);
+        Sort.setForeground(Constant.my_white);
+        Sort.setBackground(new Color(77,82,77));
 
         Sort.addActionListener(new ActionListener() {
             @Override
@@ -128,15 +131,16 @@ public class ListManagerPanel extends JPanel {
         ListUserbuttonPaneNorth.add(SearchUserNameField);
         ListUserbuttonPaneNorth.add(Sort);
 
-        JPanel EastPanelListUser = new JPanel();
-        EastPanelListUser.setBackground(Constant.my_gray);
-        EastPanelListUser.setLayout(new BoxLayout(EastPanelListUser, BoxLayout.Y_AXIS));
-        ListUsercontentPane.add(EastPanelListUser,BorderLayout.EAST);
-
         JButton CreateManager   = new JButton("Create Manager");
+        CreateManager.setForeground(Constant.my_white);
+        CreateManager.setBackground(new Color(77,82,77));
+
         JButton BanUser = new JButton("Ban User");
-        EastPanelListUser.add(CreateManager);
-        EastPanelListUser.add(BanUser);
+        BanUser.setForeground(Constant.my_white);
+        BanUser.setBackground(new Color(77,82,77));
+
+        ListUserbuttonPaneNorth.add(CreateManager);
+        ListUserbuttonPaneNorth.add(BanUser);
 
         BanUser.addActionListener(e -> {
             int row = CovidUserTable.getSelectedRow();
@@ -151,7 +155,7 @@ public class ListManagerPanel extends JPanel {
                 if(user.getBan_unban()==0){
                     user.setBan_unban(1);
                     String mess= username+" has been banned";
-                    JOptionPane.showMessageDialog(EastPanelListUser,mess);
+                    JOptionPane.showMessageDialog(ListUserbuttonPaneNorth,mess);
                 }
                 else if (user.getBan_unban()==1)
                 {

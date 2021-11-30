@@ -1,3 +1,5 @@
+package Login;
+
 import AdminFrame.AdminFrame;
 import ColorFont.Constant;
 import ManagerFrame.ManagerFrame;
@@ -122,7 +124,7 @@ public class LogInFrame extends JFrame {
                         }
                         else if (login.getUser_role() == 2)
                         {
-                            new AdminFrame().setVisible(true);
+                            new AdminFrame(username).setVisible(true);
                             LogInFrame.this.dispose();
                         }
                         else

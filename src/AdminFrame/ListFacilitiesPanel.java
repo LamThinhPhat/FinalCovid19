@@ -47,6 +47,8 @@ public class ListFacilitiesPanel extends JPanel {
         ListFacilitiesCenter.setViewportView(FacilityTable);
 
         JButton EditFacility = new JButton("Edit Facility");
+        EditFacility.setForeground(Constant.my_white);
+        EditFacility.setBackground(new Color(77,82,77));
         EditFacility.addActionListener(e->{
             int row = FacilityTable.getSelectedRow();
             if(row == -1)
@@ -60,6 +62,8 @@ public class ListFacilitiesPanel extends JPanel {
         });
 
         JButton AddFacility = new JButton("Add facility");
+        AddFacility.setForeground(Constant.my_white);
+        AddFacility.setBackground(new Color(77,82,77));
         AddFacility.addActionListener(e->{
             new AddFacilityFrame(def).setVisible(true);
         });
