@@ -10,10 +10,10 @@ public class UserFrame extends JFrame {
     private JMenu mUser, mSupply, mPayment;
     private JMenuItem iInformation, iManagedHistory, iLogout, iSupplyHistory, iBuySupply ,iCheckOut, iPaymentHistory;
 
-    public UserFrame()
+    public UserFrame(String username)
     {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(600, 500);
+        setSize(720, 500);
         setResizable(false);
         setLocationRelativeTo(null);
 
@@ -44,14 +44,14 @@ public class UserFrame extends JFrame {
         mainMenu.add(mPayment);
         setJMenuBar(mainMenu);
 
-        JPanel informationPanel = new Information();
+        JPanel informationPanel = new Information(username);
         setContentPane(informationPanel);
 
         iInformation.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JPanel contentPane = (JPanel) getContentPane();
-                JPanel informationPanel = new Information();
+                JPanel informationPanel = new Information(username);
 
                 contentPane.removeAll();
                 contentPane.add(informationPanel);

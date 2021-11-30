@@ -124,7 +124,7 @@ public class LogInFrame extends JFrame {
                         }
                         else
                         {
-                            new UserFrame().setVisible(true);
+                            new UserFrame(username).setVisible(true);
                             LogInFrame.this.dispose();
                         }
                     }
