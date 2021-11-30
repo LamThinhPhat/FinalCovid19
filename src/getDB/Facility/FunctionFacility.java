@@ -33,6 +33,50 @@ public class FunctionFacility {
         return facilities;
     }
 
+    static public int GetCurrentQuantity(String IdFacility)
+    {
+        Connection conn = jdbc_connector.getConnection();
+        String sql  = "SELECT * FROM facility where facility_id = ?";
+        try
+        {
+            PreparedStatement PrSt = conn.prepareStatement(sql);
+            PrSt.setString(1, IdFacility);
+            ResultSet rs = PrSt.executeQuery();
+            while(rs.next())
+            {
+                int quantity = rs.getInt(3);
+                return quantity;
+            }
+        }catch (SQLException err)
+        {
+            err.printStackTrace();
+        }
+        return 0;
+    }
+
+    static public int GetCapacity(String IdFacility)
+    {
+        Connection conn = jdbc_connector.getConnection();
+        String sql  = "SELECT * FROM facility where facility_id = ?";
+        try
+        {
+            PreparedStatement PrSt = conn.prepareStatement(sql);
+            PrSt.setString(1, IdFacility);
+            ResultSet rs = PrSt.executeQuery();
+            while(rs.next())
+            {
+                int capacity = rs.getInt(4);
+                return capacity;
+            }
+        }catch (SQLException err)
+        {
+            err.printStackTrace();
+        }
+        return 0;
+    }
+
+
+
     static public String getIdFacilityByName(String facilityname)
     {
         Connection conn = jdbc_connector.getConnection();
@@ -52,6 +96,8 @@ public class FunctionFacility {
         return null;
     }
 
+
+
     static public String GetNameFacilityById(String ID)
     {
         Connection conn = jdbc_connector.getConnection();
@@ -69,5 +115,20 @@ public class FunctionFacility {
             err.printStackTrace();
         }
         return null;
+    }
+
+    static public void SetCurrentQuantity(String ID, int quantity)
+    {
+        Connection conn = jdbc_connector.getConnection();
+        String sql  = "UPDATE facility SET current_quantity = ? WHERE facility_id = ?";
+        try
+        {
+            PreparedStatement PrSt = conn.prepareStatement(sql);
+            PrSt.setInt(1,quantity);
+            PrSt.setString(2,ID);
+            PrSt.executeUpdate();
+        }catch(SQLException err){
+            err.printStackTrace();
+        }
     }
 }

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Set;
 
 public class ChangeStatusPatient extends JPanel {
-    public ChangeStatusPatient(String username)
+    public ChangeStatusPatient(String username, String patient_status)
     {
         setBackground(color.my_gray);
 
@@ -127,13 +127,25 @@ public class ChangeStatusPatient extends JPanel {
         JLabel ChangeStatusLabel = new JLabel("Change status: ");
         ChangeStatusLabel.setForeground(color.my_white);
         JComboBox Change_status_patient = new JComboBox();
+        if (patient_status.equals("RV") || patient_status.equals("NI"))
+        {
+            Change_status_patient.addItem("F0");
+            Change_status_patient.addItem("F1");
+            Change_status_patient.addItem("F2");
+            Change_status_patient.addItem("F3");
+            Change_status_patient.addItem("RV");
+            Change_status_patient.addItem("NI");
+        }
+        else {
+            int patient_status_max = Integer.parseInt(patient_status.substring(patient_status.indexOf("F") + 1, patient_status.length()));
+            for (int i = 0; i <= patient_status_max; ++i)
+            {
+                Change_status_patient.addItem("F" + i);
+            }
+            Change_status_patient.addItem("RV");
+            Change_status_patient.addItem("NI");
 
-        Change_status_patient.addItem("F0");
-        Change_status_patient.addItem("F1");
-        Change_status_patient.addItem("F2");
-        Change_status_patient.addItem("F3");
-        Change_status_patient.addItem("RV");
-        Change_status_patient.addItem("NI");
+        }
         ChangeStatusPanel.add(ChangeStatusLabel);
         ChangeStatusPanel.add(Change_status_patient);
 
@@ -182,13 +194,28 @@ public class ChangeStatusPatient extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 user.setPatient_status((String) Change_status_patient.getSelectedItem());
                 String SelectedFacilityName = (String) Change_Facility.getSelectedItem();
-                user.setFacility_id(getDB.Facility.FunctionFacility.getIdFacilityByName(SelectedFacilityName));
-                getDB.Account.FunctionAccount.UpdateCovidUser(user);
-                setVisible(false);
-                removeAll();
-                add(new ListUserPanel());
-                revalidate();
-                setVisible(true);
+                String IdFacility = getDB.Facility.FunctionFacility.getIdFacilityByName(SelectedFacilityName);
+                int CQuantity = getDB.Facility.FunctionFacility.GetCurrentQuantity(IdFacility);
+                int Capacity = getDB.Facility.FunctionFacility.GetCapacity(IdFacility);
+                if ( CQuantity >= Capacity)
+                {
+                    JOptionPane.showMessageDialog(ChangeStatusPatient.this,"Facility is full", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                else
+                {
+                    getDB.Facility.FunctionFacility.SetCurrentQuantity(IdFacility, CQuantity + 1);
+                    covid_user user = getDB.Account.FunctionAccount.GetCovidUserInfoByUserName(username);
+                    int OldCQuantity = getDB.Facility.FunctionFacility.GetCurrentQuantity(user.getFacility_id());
+                    getDB.Facility.FunctionFacility.SetCurrentQuantity(user.getFacility_id(), OldCQuantity - 1);
+
+                    user.setFacility_id(getDB.Facility.FunctionFacility.getIdFacilityByName(SelectedFacilityName));
+                    getDB.Account.FunctionAccount.UpdateCovidUser(user);
+                    setVisible(false);
+                    removeAll();
+                    add(new ListUserPanel());
+                    revalidate();
+                    setVisible(true);
+                }
             }
         });
 
