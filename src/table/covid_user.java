@@ -3,7 +3,7 @@ package table;
 
 import java.sql.Date;
 
-public class covid_user {
+public class covid_user extends account {
     String username, full_name, id, house_number, address_id, patient_status, facility_id;
     Date dob;
 

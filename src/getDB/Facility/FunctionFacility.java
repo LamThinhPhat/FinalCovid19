@@ -1,11 +1,13 @@
 package getDB.Facility;
 
 import jdbc.connect.jdbc_connector;
+import table.facility;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -128,6 +130,93 @@ public class FunctionFacility {
             PrSt.setString(2,ID);
             PrSt.executeUpdate();
         }catch(SQLException err){
+            err.printStackTrace();
+        }
+    }
+
+    static public ArrayList<facility> GetAllFacilityInfo()
+    {
+        ArrayList<facility> Facilities = new ArrayList<facility>();
+        Connection conn = jdbc_connector.getConnection();
+        String sql  = "SELECT * FROM facility";
+        try
+        {
+            PreparedStatement PrSt = conn.prepareStatement(sql);
+            ResultSet rs = PrSt.executeQuery();
+            while(rs.next())
+            {
+                facility fac = new facility();
+                fac.setFacility_id(rs.getString(1));
+                fac.setFacility_name(rs.getString(2));
+                fac.setCurrent_quantity(rs.getInt(3));
+                fac.setCapacity(rs.getInt(4));
+                Facilities.add(fac);
+            }
+        }catch (SQLException err)
+        {
+            err.printStackTrace();
+        }
+        return Facilities;
+    }
+
+    static public void AddFacility(facility acc)
+    {
+        Connection conn = jdbc_connector.getConnection();
+        String sql  = "INSERT INTO facility (facility_id, facility_name, current_quantity, capacity)"
+                + "VALUE(?, ?, ?, ? )";
+        try {
+            PreparedStatement PrSt = conn.prepareStatement(sql);
+
+            PrSt.setString(1, acc.getFacility_id());
+            PrSt.setString(2, acc.getFacility_name());
+            PrSt.setInt(3, acc.getCurrent_quantity());
+            PrSt.setInt(4,acc.getCapacity());
+            PrSt.executeUpdate();
+        }catch(SQLException err)
+        {
+            err.printStackTrace();
+        }
+    }
+
+    static public facility GetFacilityByID(String facility_id)
+    {
+        Connection conn = jdbc_connector.getConnection();
+        String sql  = "SELECT * FROM facility WHERE facility_id = ?";
+        try
+        {
+            PreparedStatement PrSt = conn.prepareStatement(sql);
+            PrSt.setString(1,facility_id);
+            ResultSet rs = PrSt.executeQuery();
+            while(rs.next())
+            {
+                facility fac = new facility();
+                fac.setFacility_id(rs.getString(1));
+                fac.setFacility_name(rs.getString(2));
+                fac.setCurrent_quantity(rs.getInt(3));
+                fac.setCapacity(rs.getInt(4));
+                return fac;
+            }
+        }catch (SQLException err)
+        {
+            err.printStackTrace();
+        }
+        return null;
+    }
+    static public void UpdateFacility(facility fac)
+    {
+        Connection conn = jdbc_connector.getConnection();
+        String sql = "UPDATE facility SET" +
+                " facility_name=?, capacity=?"+"  WHERE facility_id = ?";
+        try {
+            PreparedStatement PrSt = conn.prepareStatement(sql);
+
+            PrSt.setString(1,fac.getFacility_name());
+            PrSt.setInt(2, fac.getCapacity());
+            PrSt.setString(3,fac.getFacility_id());
+
+            PrSt.executeUpdate();
+        }catch(SQLException err)
+        {
             err.printStackTrace();
         }
     }

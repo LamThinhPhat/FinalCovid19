@@ -1,7 +1,6 @@
 package UserFrame;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -19,7 +18,7 @@ public class UserFrame extends JFrame {
 
         mainMenu = new JMenuBar();
         mUser = new JMenu("User");
-        mSupply = new JMenu("Suppy");
+        mSupply = new JMenu("Supply");
         mPayment = new JMenu("Payment");
         iInformation = new JMenuItem("Information");
         iManagedHistory = new JMenuItem("Managed history");

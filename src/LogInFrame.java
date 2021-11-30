@@ -5,14 +5,13 @@ import UserFrame.UserFrame;
 import getDB.Account.FunctionAccount;
 import table.account;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-
-import javax.imageio.ImageIO;
-import javax.swing.*;
 
 
 public class LogInFrame extends JFrame {
@@ -66,16 +65,17 @@ public class LogInFrame extends JFrame {
 
 
 
-        JPanel UserNamePannel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JPanel UserNamePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JLabel UserNameLabel = new JLabel("Username");
         UserNameLabel.setFont(Constant.LABEL_FONT);
         JTextField UserNameInput = new JTextField();
         UserNameLabel.setForeground(Constant.my_white);
-        UserNamePannel.setBackground(Constant.my_gray);
+        UserNamePanel.setBackground(Constant.my_gray);
+
         UserNameInput.setColumns(15);
-        UserNamePannel.add(UserNameLabel);
-        UserNamePannel.add(UserNameInput);
-        contentPane.add(UserNamePannel);
+        UserNamePanel.add(UserNameLabel);
+        UserNamePanel.add(UserNameInput);
+        contentPane.add(UserNamePanel);
 
         JPanel PassPannel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JLabel PassLabel = new JLabel("Password");
