@@ -1,5 +1,6 @@
 package ManagerFrame;
 
+import ColorFont.Constant;
 import table.covid_user;
 
 import javax.swing.*;
@@ -12,7 +13,7 @@ import java.util.Set;
 public class ChangeStatusPatient extends JPanel {
     public ChangeStatusPatient(String username, String patient_status)
     {
-        setBackground(color.my_gray);
+        setBackground(Constant.my_gray);
 
         covid_user user = getDB.Account.FunctionAccount.GetCovidUserInfoByUserName(username);
         ArrayList<String> PDW = getDB.Address.FunctionAddress.GetPDW(user.getAddress_id());
@@ -21,15 +22,16 @@ public class ChangeStatusPatient extends JPanel {
         add(EditUserPane);
 
         JPanel ShowInfoCenter = new JPanel();
-        ShowInfoCenter.setBackground(color.my_gray);
+        ShowInfoCenter.setBackground(Constant.my_gray);
         ShowInfoCenter.setLayout(new BoxLayout(ShowInfoCenter,BoxLayout.Y_AXIS));
         EditUserPane.add(ShowInfoCenter, BorderLayout.CENTER);
 
         JPanel UsernamePane = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        UsernamePane.setBackground(color.my_gray);
+        UsernamePane.setBackground(Constant.my_gray);
         ShowInfoCenter.add(UsernamePane);
         JLabel UserNameLabel = new JLabel("Username:          ");
-        UserNameLabel.setForeground(color.my_white);
+        UserNameLabel.setFont(Constant.LABEL_FONT);
+        UserNameLabel.setForeground(Constant.my_white);
         JTextField UserNameField = new JTextField();
         UserNameField.setColumns(30);
         UserNameField.setText(String.valueOf(user.getUsername()));
@@ -38,10 +40,11 @@ public class ChangeStatusPatient extends JPanel {
         UsernamePane.add(UserNameField);
 
         JPanel NamePane = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        NamePane.setBackground(color.my_gray);
+        NamePane.setBackground(Constant.my_gray);
         ShowInfoCenter.add(NamePane);
-        JLabel NameLabel = new JLabel("Fullname:             ");
-        NameLabel.setForeground(color.my_white);
+        JLabel NameLabel = new JLabel("Fullname:           ");
+        NameLabel.setFont(Constant.LABEL_FONT);
+        NameLabel.setForeground(Constant.my_white);
         JTextField NameField = new JTextField();
         NameField.setColumns(30);
         NameField.setText(String.valueOf(user.getFull_name()));
@@ -50,10 +53,11 @@ public class ChangeStatusPatient extends JPanel {
         NamePane.add(NameField);
 
         JPanel IdNumPane = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        IdNumPane.setBackground(color.my_gray);
+        IdNumPane.setBackground(Constant.my_gray);
         ShowInfoCenter.add(IdNumPane);
-        JLabel IdNumLabel = new JLabel("ID number           ");
-        IdNumLabel.setForeground(color.my_white);
+        JLabel IdNumLabel = new JLabel("ID number:        ");
+        IdNumLabel.setFont(Constant.LABEL_FONT);
+        IdNumLabel.setForeground(Constant.my_white);
         JTextField IdNumField = new JTextField();
         IdNumField.setColumns(30);
         IdNumField.setText(String.valueOf(user.getId()));
@@ -62,10 +66,11 @@ public class ChangeStatusPatient extends JPanel {
         IdNumPane.add(IdNumField);
 
         JPanel DoBPane = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        DoBPane.setBackground(color.my_gray);
+        DoBPane.setBackground(Constant.my_gray);
         ShowInfoCenter.add(DoBPane);
-        JLabel DobLabel = new JLabel("Date of birth:       ");
-        DobLabel.setForeground(color.my_white);
+        JLabel DobLabel = new JLabel("Date of birth:     ");
+        DobLabel.setFont(Constant.LABEL_FONT);
+        DobLabel.setForeground(Constant.my_white);
         JTextField YobField = new JTextField();
         YobField.setColumns(30);
         YobField.setText(String.valueOf(user.getDob()));
@@ -74,10 +79,11 @@ public class ChangeStatusPatient extends JPanel {
         DoBPane.add(YobField);
 
         JPanel AddressPane = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        AddressPane.setBackground(color.my_gray);
+        AddressPane.setBackground(Constant.my_gray);
         ShowInfoCenter.add(AddressPane);
         JLabel AddressLabel = new JLabel("House number:  ");
-        AddressLabel.setForeground(color.my_white);
+        AddressLabel.setFont(Constant.LABEL_FONT);
+        AddressLabel.setForeground(Constant.my_white);
         JTextField AddressField = new JTextField();
         AddressField.setColumns(30);
         AddressField.setText(String.valueOf(user.getHouse_number()));
@@ -86,10 +92,11 @@ public class ChangeStatusPatient extends JPanel {
         AddressPane.add(AddressField);
 
         JPanel ProvincePane = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        ProvincePane.setBackground(color.my_gray);
+        ProvincePane.setBackground(Constant.my_gray);
         ShowInfoCenter.add(ProvincePane);
         JLabel ProvinceLable = new JLabel("Province:            ");
-        ProvinceLable.setForeground(color.my_white);
+        ProvinceLable.setFont(Constant.LABEL_FONT);
+        ProvinceLable.setForeground(Constant.my_white);
         JTextField ProviceField = new JTextField();
         ProviceField.setColumns(30);
         ProviceField.setText(String.valueOf(PDW.get(0)));
@@ -98,10 +105,11 @@ public class ChangeStatusPatient extends JPanel {
         ProvincePane.add(ProviceField);
 
         JPanel DistrictPane = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        DistrictPane.setBackground(color.my_gray);
+        DistrictPane.setBackground(Constant.my_gray);
         ShowInfoCenter.add(DistrictPane);
-        JLabel DistrictLabel = new JLabel("District:               ");
-        DistrictLabel.setForeground(color.my_white);
+        JLabel DistrictLabel = new JLabel("District:              ");
+        DistrictLabel.setFont(Constant.LABEL_FONT);
+        DistrictLabel.setForeground(Constant.my_white);
         JTextField DistrictField = new JTextField();
         DistrictField.setColumns(30);
         DistrictField.setText(String.valueOf(PDW.get(1)));
@@ -111,10 +119,11 @@ public class ChangeStatusPatient extends JPanel {
 
 
         JPanel WardPane = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        WardPane.setBackground(color.my_gray);
+        WardPane.setBackground(Constant.my_gray);
         ShowInfoCenter.add(WardPane);
-        JLabel WardLabel = new JLabel("Ward:                  ");
-        WardLabel.setForeground(color.my_white);
+        JLabel WardLabel = new JLabel("Ward:                 ");
+        WardLabel.setFont(Constant.LABEL_FONT);
+        WardLabel.setForeground(Constant.my_white);
         JTextField WardField = new JTextField();
         WardField.setColumns(30);
         WardField.setText(String.valueOf(PDW.get(2)));
@@ -123,9 +132,10 @@ public class ChangeStatusPatient extends JPanel {
         WardPane.add(WardField);
 
         JPanel ChangeStatusPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        ChangeStatusPanel.setBackground(color.my_gray);
-        JLabel ChangeStatusLabel = new JLabel("Change status: ");
-        ChangeStatusLabel.setForeground(color.my_white);
+        ChangeStatusPanel.setBackground(Constant.my_gray);
+        JLabel ChangeStatusLabel = new JLabel("Change status:   ");
+        ChangeStatusLabel.setFont(Constant.LABEL_FONT);
+        ChangeStatusLabel.setForeground(Constant.my_white);
         JComboBox Change_status_patient = new JComboBox();
         if (patient_status.equals("RV") || patient_status.equals("NI"))
         {
@@ -152,9 +162,10 @@ public class ChangeStatusPatient extends JPanel {
         ShowInfoCenter.add(ChangeStatusPanel);
 
         JPanel ChangeFacilityPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        ChangeFacilityPanel.setBackground(color.my_gray);
+        ChangeFacilityPanel.setBackground(Constant.my_gray);
         JLabel ChangeFacilityLabel = new JLabel("Change facility: ");
-        ChangeFacilityLabel.setForeground(color.my_white);
+        ChangeFacilityLabel.setFont(Constant.LABEL_FONT);
+        ChangeFacilityLabel.setForeground(Constant.my_white);
 
         JComboBox Change_Facility = new JComboBox();
         Set<String> facilites = getDB.Facility.FunctionFacility.getNameFacility();
@@ -169,7 +180,7 @@ public class ChangeStatusPatient extends JPanel {
         ShowInfoCenter.add(ChangeFacilityPanel);
 
         JPanel ChangeStatusButtonPaneSouth = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        ChangeStatusButtonPaneSouth.setBackground(color.my_gray);
+        ChangeStatusButtonPaneSouth.setBackground(Constant.my_gray);
         EditUserPane.add(ChangeStatusButtonPaneSouth,BorderLayout.SOUTH);
 
         JButton ChangeStatusCancelButton = new JButton("Cancel");
