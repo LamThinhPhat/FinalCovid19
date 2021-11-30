@@ -3,6 +3,7 @@ package getDB.Account;
 import jdbc.connect.jdbc_connector;
 import table.account;
 import table.covid_user;
+import table.related_user;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,6 +12,31 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class FunctionAccount {
+
+    static public ArrayList<related_user> GetRealatedUser(String username)
+    {
+        ArrayList<related_user> RealatedUserList = new ArrayList<related_user>();
+        Connection conn = jdbc_connector.getConnection();
+        String sql  = "SELECT * FROM related_user WHERE username = ?";
+        try
+        {
+            PreparedStatement PrSt = conn.prepareStatement(sql);
+            PrSt.setString(1,username);
+            ResultSet rs = PrSt.executeQuery();
+            while(rs.next())
+            {
+                related_user user = new related_user();
+                user.setUsername(rs.getString(1));
+                user.setRelated_username(rs.getString(2));
+                RealatedUserList.add(user);
+            }
+        }catch (SQLException err)
+        {
+            err.printStackTrace();
+        }
+        return RealatedUserList;
+    }
+
     static public boolean CheckExisted(String username){
         Connection conn = jdbc_connector.getConnection();
         String sql  = "SELECT * FROM account_table WHERE username = ?";
@@ -95,6 +121,209 @@ public class FunctionAccount {
             err.printStackTrace();
         }
         return null;
+    }
+
+    static public ArrayList<covid_user> GetAllCovidUserInfoFacilitySort()
+    {
+        ArrayList<covid_user> CovidUser = new ArrayList<covid_user>();
+        Connection conn = jdbc_connector.getConnection();
+        String sql  = "SELECT * FROM covid_user ORDER BY facility_id";
+        try
+        {
+            PreparedStatement PrSt = conn.prepareStatement(sql);
+            ResultSet rs = PrSt.executeQuery();
+            while(rs.next())
+            {
+                covid_user user = new covid_user();
+                user.setUsername(rs.getString(1));
+                user.setFull_name(rs.getString(2));
+                user.setId(rs.getString(3));
+                user.setDob(rs.getDate(4));
+                user.setHouse_number(rs.getString(5));
+                user.setAddress_id(rs.getString(6));
+                user.setPatient_status(rs.getString(7));
+                user.setFacility_id(rs.getString(8));
+                CovidUser.add(user);
+            }
+        }catch (SQLException err)
+        {
+            err.printStackTrace();
+        }
+        return CovidUser;
+    }
+
+    static public ArrayList<covid_user> GetAllCovidUserInfoStatusSort()
+    {
+        ArrayList<covid_user> CovidUser = new ArrayList<covid_user>();
+        Connection conn = jdbc_connector.getConnection();
+        String sql  = "SELECT * FROM covid_user ORDER BY patient_status";
+        try
+        {
+            PreparedStatement PrSt = conn.prepareStatement(sql);
+            ResultSet rs = PrSt.executeQuery();
+            while(rs.next())
+            {
+                covid_user user = new covid_user();
+                user.setUsername(rs.getString(1));
+                user.setFull_name(rs.getString(2));
+                user.setId(rs.getString(3));
+                user.setDob(rs.getDate(4));
+                user.setHouse_number(rs.getString(5));
+                user.setAddress_id(rs.getString(6));
+                user.setPatient_status(rs.getString(7));
+                user.setFacility_id(rs.getString(8));
+                CovidUser.add(user);
+            }
+        }catch (SQLException err)
+        {
+            err.printStackTrace();
+        }
+        return CovidUser;
+    }
+
+    static public ArrayList<covid_user> GetAllCovidUserInfoUserNameSort()
+    {
+        ArrayList<covid_user> CovidUser = new ArrayList<covid_user>();
+        Connection conn = jdbc_connector.getConnection();
+        String sql  = "SELECT * FROM covid_user ORDER BY username";
+        try
+        {
+            PreparedStatement PrSt = conn.prepareStatement(sql);
+            ResultSet rs = PrSt.executeQuery();
+            while(rs.next())
+            {
+                covid_user user = new covid_user();
+                user.setUsername(rs.getString(1));
+                user.setFull_name(rs.getString(2));
+                user.setId(rs.getString(3));
+                user.setDob(rs.getDate(4));
+                user.setHouse_number(rs.getString(5));
+                user.setAddress_id(rs.getString(6));
+                user.setPatient_status(rs.getString(7));
+                user.setFacility_id(rs.getString(8));
+                CovidUser.add(user);
+            }
+        }catch (SQLException err)
+        {
+            err.printStackTrace();
+        }
+        return CovidUser;
+    }
+
+    static public ArrayList<covid_user> GetAllCovidUserInfoFullNameSort()
+    {
+        ArrayList<covid_user> CovidUser = new ArrayList<covid_user>();
+        Connection conn = jdbc_connector.getConnection();
+        String sql  = "SELECT * FROM covid_user ORDER BY full_name";
+        try
+        {
+            PreparedStatement PrSt = conn.prepareStatement(sql);
+            ResultSet rs = PrSt.executeQuery();
+            while(rs.next())
+            {
+                covid_user user = new covid_user();
+                user.setUsername(rs.getString(1));
+                user.setFull_name(rs.getString(2));
+                user.setId(rs.getString(3));
+                user.setDob(rs.getDate(4));
+                user.setHouse_number(rs.getString(5));
+                user.setAddress_id(rs.getString(6));
+                user.setPatient_status(rs.getString(7));
+                user.setFacility_id(rs.getString(8));
+                CovidUser.add(user);
+            }
+        }catch (SQLException err)
+        {
+            err.printStackTrace();
+        }
+        return CovidUser;
+    }
+
+    static public ArrayList<covid_user> GetAllCovidUserCitySort()
+    {
+        ArrayList<covid_user> CovidUser = new ArrayList<covid_user>();
+        Connection conn = jdbc_connector.getConnection();
+        String sql  = "SELECT * FROM covid_user ORDER BY address_id";
+        try
+        {
+            PreparedStatement PrSt = conn.prepareStatement(sql);
+            ResultSet rs = PrSt.executeQuery();
+            while(rs.next())
+            {
+                covid_user user = new covid_user();
+                user.setUsername(rs.getString(1));
+                user.setFull_name(rs.getString(2));
+                user.setId(rs.getString(3));
+                user.setDob(rs.getDate(4));
+                user.setHouse_number(rs.getString(5));
+                user.setAddress_id(rs.getString(6));
+                user.setPatient_status(rs.getString(7));
+                user.setFacility_id(rs.getString(8));
+                CovidUser.add(user);
+            }
+        }catch (SQLException err)
+        {
+            err.printStackTrace();
+        }
+        return CovidUser;
+    }
+
+    static public ArrayList<covid_user> GetAllCovidUserDoBSort()
+    {
+        ArrayList<covid_user> CovidUser = new ArrayList<covid_user>();
+        Connection conn = jdbc_connector.getConnection();
+        String sql  = "SELECT * FROM covid_user ORDER BY dob";
+        try
+        {
+            PreparedStatement PrSt = conn.prepareStatement(sql);
+            ResultSet rs = PrSt.executeQuery();
+            while(rs.next())
+            {
+                covid_user user = new covid_user();
+                user.setUsername(rs.getString(1));
+                user.setFull_name(rs.getString(2));
+                user.setId(rs.getString(3));
+                user.setDob(rs.getDate(4));
+                user.setHouse_number(rs.getString(5));
+                user.setAddress_id(rs.getString(6));
+                user.setPatient_status(rs.getString(7));
+                user.setFacility_id(rs.getString(8));
+                CovidUser.add(user);
+            }
+        }catch (SQLException err)
+        {
+            err.printStackTrace();
+        }
+        return CovidUser;
+    }
+
+    static public ArrayList<covid_user> GetAllCovidUserIDSort()
+    {
+        ArrayList<covid_user> CovidUser = new ArrayList<covid_user>();
+        Connection conn = jdbc_connector.getConnection();
+        String sql  = "SELECT * FROM covid_user ORDER BY id";
+        try
+        {
+            PreparedStatement PrSt = conn.prepareStatement(sql);
+            ResultSet rs = PrSt.executeQuery();
+            while(rs.next())
+            {
+                covid_user user = new covid_user();
+                user.setUsername(rs.getString(1));
+                user.setFull_name(rs.getString(2));
+                user.setId(rs.getString(3));
+                user.setDob(rs.getDate(4));
+                user.setHouse_number(rs.getString(5));
+                user.setAddress_id(rs.getString(6));
+                user.setPatient_status(rs.getString(7));
+                user.setFacility_id(rs.getString(8));
+                CovidUser.add(user);
+            }
+        }catch (SQLException err)
+        {
+            err.printStackTrace();
+        }
+        return CovidUser;
     }
 
     static public ArrayList<covid_user> GetAllCovidUserInfo()

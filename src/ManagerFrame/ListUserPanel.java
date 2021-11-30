@@ -122,16 +122,159 @@ public class ListUserPanel extends JPanel {
         ListUserbuttonPaneSouth.add(SearchUserNameField);
         ListUserbuttonPaneSouth.add(SearchUserNameButton);
 
-        JPanel WestPanelListUser = new JPanel();
-        WestPanelListUser.setBackground(color.my_gray);
-        WestPanelListUser.setLayout(new BoxLayout(WestPanelListUser, BoxLayout.Y_AXIS));
-        ListUsercontentPane.add(WestPanelListUser,BorderLayout.EAST);
+        JPanel EastPanelListUser = new JPanel();
+        EastPanelListUser.setBackground(color.my_gray);
+        EastPanelListUser.setLayout(new BoxLayout(EastPanelListUser, BoxLayout.Y_AXIS));
+        ListUsercontentPane.add(EastPanelListUser,BorderLayout.EAST);
 
         JButton ShowListRelated = new JButton("List related");
         JButton EditUser = new JButton("Edit");
 
-        WestPanelListUser.add(ShowListRelated);
-        WestPanelListUser.add(EditUser);
+        EastPanelListUser.add(ShowListRelated);
+        EastPanelListUser.add(EditUser);
+
+        JPanel WestPanelSortUser = new JPanel();
+        WestPanelSortUser.setBackground(color.my_gray);
+        WestPanelSortUser.setLayout(new BoxLayout(WestPanelSortUser, BoxLayout.Y_AXIS));
+        ListUsercontentPane.add(WestPanelSortUser,BorderLayout.WEST);
+
+        JButton SortByUserName = new JButton("Sort username");
+        JButton SortByFullName = new JButton("Sort fullname");
+        JButton SortByID = new JButton("Sort ID");
+        JButton SortByDoB = new JButton("Sort DoB");
+        JButton SortByCity = new JButton("Sort City");
+        JButton SortByStatus = new JButton("Sort Status");
+        JButton SortByFacility = new JButton("Sort Facility");
+
+        WestPanelSortUser.add(SortByUserName);
+        WestPanelSortUser.add(SortByFullName);
+        WestPanelSortUser.add(SortByID);
+        WestPanelSortUser.add(SortByDoB);
+        WestPanelSortUser.add(SortByCity);
+        WestPanelSortUser.add(SortByStatus);
+        WestPanelSortUser.add(SortByFacility);
+
+        SortByFacility.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                def.setRowCount(0);
+                ArrayList<covid_user> ListCovidUserTable = getDB.Account.FunctionAccount.GetAllCovidUserInfoFacilitySort();
+                for(covid_user i : ListCovidUserTable)
+                {
+                    ArrayList<String> PDW = getDB.Address.FunctionAddress.GetPDW(i.getAddress_id());
+                    String FacilityName = getDB.Facility.FunctionFacility.GetNameFacilityById(i.getFacility_id());
+                    def.addRow(new Object[] {
+                            i.getUsername(), i.getFull_name(), i.getId(), i.getDob(), i.getHouse_number(),
+                            PDW.get(0), PDW.get(1),PDW.get(2), i.getPatient_status(), FacilityName
+                    });
+                }
+            }
+        });
+
+        SortByStatus.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                def.setRowCount(0);
+                ArrayList<covid_user> ListCovidUserTable = getDB.Account.FunctionAccount.GetAllCovidUserInfoStatusSort();
+                for(covid_user i : ListCovidUserTable)
+                {
+                    ArrayList<String> PDW = getDB.Address.FunctionAddress.GetPDW(i.getAddress_id());
+                    String FacilityName = getDB.Facility.FunctionFacility.GetNameFacilityById(i.getFacility_id());
+                    def.addRow(new Object[] {
+                            i.getUsername(), i.getFull_name(), i.getId(), i.getDob(), i.getHouse_number(),
+                            PDW.get(0), PDW.get(1),PDW.get(2), i.getPatient_status(), FacilityName
+                    });
+                }
+            }
+        });
+
+        SortByCity.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                def.setRowCount(0);
+                ArrayList<covid_user> ListCovidUserTable = getDB.Account.FunctionAccount.GetAllCovidUserCitySort();
+                for(covid_user i : ListCovidUserTable)
+                {
+                    ArrayList<String> PDW = getDB.Address.FunctionAddress.GetPDW(i.getAddress_id());
+                    String FacilityName = getDB.Facility.FunctionFacility.GetNameFacilityById(i.getFacility_id());
+                    def.addRow(new Object[] {
+                            i.getUsername(), i.getFull_name(), i.getId(), i.getDob(), i.getHouse_number(),
+                            PDW.get(0), PDW.get(1),PDW.get(2), i.getPatient_status(), FacilityName
+                    });
+                }
+            }
+        });
+
+
+        SortByDoB.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                def.setRowCount(0);
+                ArrayList<covid_user> ListCovidUserTable = getDB.Account.FunctionAccount.GetAllCovidUserDoBSort();
+                for(covid_user i : ListCovidUserTable)
+                {
+                    ArrayList<String> PDW = getDB.Address.FunctionAddress.GetPDW(i.getAddress_id());
+                    String FacilityName = getDB.Facility.FunctionFacility.GetNameFacilityById(i.getFacility_id());
+                    def.addRow(new Object[] {
+                            i.getUsername(), i.getFull_name(), i.getId(), i.getDob(), i.getHouse_number(),
+                            PDW.get(0), PDW.get(1),PDW.get(2), i.getPatient_status(), FacilityName
+                    });
+                }
+            }
+        });
+
+        SortByID.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                def.setRowCount(0);
+                ArrayList<covid_user> ListCovidUserTable = getDB.Account.FunctionAccount.GetAllCovidUserIDSort();
+                for(covid_user i : ListCovidUserTable)
+                {
+                    ArrayList<String> PDW = getDB.Address.FunctionAddress.GetPDW(i.getAddress_id());
+                    String FacilityName = getDB.Facility.FunctionFacility.GetNameFacilityById(i.getFacility_id());
+                    def.addRow(new Object[] {
+                            i.getUsername(), i.getFull_name(), i.getId(), i.getDob(), i.getHouse_number(),
+                            PDW.get(0), PDW.get(1),PDW.get(2), i.getPatient_status(), FacilityName
+                    });
+                }
+            }
+        });
+
+        SortByFullName.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                def.setRowCount(0);
+                ArrayList<covid_user> ListCovidUserTable = getDB.Account.FunctionAccount.GetAllCovidUserInfoFullNameSort();
+                for(covid_user i : ListCovidUserTable)
+                {
+                    ArrayList<String> PDW = getDB.Address.FunctionAddress.GetPDW(i.getAddress_id());
+                    String FacilityName = getDB.Facility.FunctionFacility.GetNameFacilityById(i.getFacility_id());
+                    def.addRow(new Object[] {
+                            i.getUsername(), i.getFull_name(), i.getId(), i.getDob(), i.getHouse_number(),
+                            PDW.get(0), PDW.get(1),PDW.get(2), i.getPatient_status(), FacilityName
+                    });
+                }
+            }
+        });
+
+
+        SortByUserName.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                def.setRowCount(0);
+                ArrayList<covid_user> ListCovidUserTable = getDB.Account.FunctionAccount.GetAllCovidUserInfoUserNameSort();
+                for(covid_user i : ListCovidUserTable)
+                {
+                    ArrayList<String> PDW = getDB.Address.FunctionAddress.GetPDW(i.getAddress_id());
+                    String FacilityName = getDB.Facility.FunctionFacility.GetNameFacilityById(i.getFacility_id());
+                    def.addRow(new Object[] {
+                            i.getUsername(), i.getFull_name(), i.getId(), i.getDob(), i.getHouse_number(),
+                            PDW.get(0), PDW.get(1),PDW.get(2), i.getPatient_status(), FacilityName
+                    });
+                }
+            }
+        });
+
 
         EditUser.addActionListener(new ActionListener() {
             @Override
@@ -143,14 +286,35 @@ public class ListUserPanel extends JPanel {
                     JOptionPane.showMessageDialog(ListUserPanel.this, "Please pick a user to edit", "Error",JOptionPane.ERROR_MESSAGE);
                 }else {
                     String  username = (String) CovidUserTable.getValueAt(row, 0);
+                    String  patient_status = (String) CovidUserTable.getValueAt(row, 8);
                     ShowPanel.setVisible(false);
                     ShowPanel.removeAll();
-                    ShowPanel.add(new ChangeStatusPatient(username));
+                    ShowPanel.add(new ChangeStatusPatient(username, patient_status));
                     ShowPanel.revalidate();
                     ShowPanel.setVisible(true);
                 }
             }
         });
 
+        ShowListRelated.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int row = CovidUserTable.getSelectedRow();
+                if(row == -1)
+                {
+                    JOptionPane.showMessageDialog(ListUserPanel.this, "Please pick a user to show", "Error",JOptionPane.ERROR_MESSAGE);
+                }
+                else
+                {
+                    String  username = (String) CovidUserTable.getValueAt(row, 0);
+
+                    ShowPanel.setVisible(false);
+                    ShowPanel.removeAll();
+                    ShowPanel.add(new ListRelatedPanel(username));
+                    ShowPanel.revalidate();
+                    ShowPanel.setVisible(true);
+                }
+            }
+        });
     }
 }
