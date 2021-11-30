@@ -203,24 +203,29 @@ public class ChangeStatusPatient extends JPanel {
         ChangeStatusConfirmUserButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String old_status = user.getPatient_status();
+                String old_facility = user.getFacility_id();
                 user.setPatient_status((String) Change_status_patient.getSelectedItem());
                 String SelectedFacilityName = (String) Change_Facility.getSelectedItem();
                 String IdFacility = getDB.Facility.FunctionFacility.getIdFacilityByName(SelectedFacilityName);
                 int CQuantity = getDB.Facility.FunctionFacility.GetCurrentQuantity(IdFacility);
                 int Capacity = getDB.Facility.FunctionFacility.GetCapacity(IdFacility);
-                if ( CQuantity >= Capacity)
+                if ( CQuantity >= Capacity && Capacity != -1)
                 {
                     JOptionPane.showMessageDialog(ChangeStatusPatient.this,"Facility is full", "Error", JOptionPane.ERROR_MESSAGE);
                 }
                 else
                 {
                     getDB.Facility.FunctionFacility.SetCurrentQuantity(IdFacility, CQuantity + 1);
-                    covid_user user = getDB.Account.FunctionAccount.GetCovidUserInfoByUserName(username);
+
                     int OldCQuantity = getDB.Facility.FunctionFacility.GetCurrentQuantity(user.getFacility_id());
                     getDB.Facility.FunctionFacility.SetCurrentQuantity(user.getFacility_id(), OldCQuantity - 1);
 
                     user.setFacility_id(getDB.Facility.FunctionFacility.getIdFacilityByName(SelectedFacilityName));
                     getDB.Account.FunctionAccount.UpdateCovidUser(user);
+
+                    getDB.UpdateHistory.FunctionUpdateHistory.UpdateHistoryList(user,old_status, old_facility);
+
                     setVisible(false);
                     removeAll();
                     add(new ListUserPanel());
