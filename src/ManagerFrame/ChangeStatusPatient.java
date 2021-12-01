@@ -2,6 +2,7 @@ package ManagerFrame;
 
 import ColorFont.Constant;
 import table.covid_user;
+import table.related_user;
 
 import javax.swing.*;
 import java.awt.*;
@@ -205,7 +206,6 @@ public class ChangeStatusPatient extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 String old_status = user.getPatient_status();
                 String old_facility = user.getFacility_id();
-                user.setPatient_status((String) Change_status_patient.getSelectedItem());
                 String SelectedFacilityName = (String) Change_Facility.getSelectedItem();
                 String IdFacility = getDB.Facility.FunctionFacility.getIdFacilityByName(SelectedFacilityName);
                 int CQuantity = getDB.Facility.FunctionFacility.GetCurrentQuantity(IdFacility);
@@ -216,6 +216,7 @@ public class ChangeStatusPatient extends JPanel {
                 }
                 else
                 {
+                    user.setPatient_status((String) Change_status_patient.getSelectedItem());
                     getDB.Facility.FunctionFacility.SetCurrentQuantity(IdFacility, CQuantity + 1);
 
                     int OldCQuantity = getDB.Facility.FunctionFacility.GetCurrentQuantity(user.getFacility_id());
@@ -225,7 +226,37 @@ public class ChangeStatusPatient extends JPanel {
                     getDB.Account.FunctionAccount.UpdateCovidUser(user);
 
                     getDB.UpdateHistory.FunctionUpdateHistory.UpdateHistoryList(user,old_status, old_facility);
+                    if (old_status != "NI" && old_status != "RV" )
+                    {
+                        int step = Integer.parseInt(old_status.substring(old_status.indexOf("F") + 1, old_status.length()))
+                                - Integer.parseInt(user.getPatient_status().substring(user.getPatient_status().indexOf("F") + 1, user.getPatient_status().length()));
+                        if (step != 0)
+                        {
 
+                            ArrayList<related_user> related = getDB.Account.FunctionAccount.GetRealatedUser(user.getUsername());
+
+                            for (related_user i : related) {
+                                covid_user related_patient = getDB.Account.FunctionAccount.GetCovidUserInfoByUserName(i.getRelated_username());
+                                String old_related_status = related_patient.getPatient_status();
+                                if (related_patient.getPatient_status() == "NI" || related_patient.getPatient_status() == "RV")
+                                {
+                                    int related_step = step + 1;
+                                    related_patient.setPatient_status("F" + related_step);
+                                    getDB.Account.FunctionAccount.UpdateCovidUser(related_patient);
+                                    getDB.UpdateHistory.FunctionUpdateHistory.UpdateHistoryList(related_patient,old_related_status, related_patient.getFacility_id());
+                                }
+                                else
+                                {
+                                    int related_step = Integer.parseInt(old_related_status.substring(old_related_status.indexOf("F") + 1, old_related_status.length()))
+                                            - step;
+                                    related_patient.setPatient_status("F" + related_step);
+                                    getDB.Account.FunctionAccount.UpdateCovidUser(related_patient);
+                                    getDB.UpdateHistory.FunctionUpdateHistory.UpdateHistoryList(related_patient,old_related_status, related_patient.getFacility_id());
+                                }
+                            }
+                        }
+
+                    }
                     setVisible(false);
                     removeAll();
                     add(new ListUserPanel());

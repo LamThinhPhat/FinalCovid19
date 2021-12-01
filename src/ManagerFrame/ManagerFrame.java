@@ -55,7 +55,7 @@ public class ManagerFrame extends JFrame {
 
         setContentPane(contentPane);
         contentPane.add(ButtonChangePane);
-        ShowPanel = new ListUserPanel();
+        ShowPanel = new ListSupplyPanel();
         contentPane.add(ShowPanel);
 
         AddNewUserButton.addActionListener(new ActionListener() {
@@ -72,6 +72,17 @@ public class ManagerFrame extends JFrame {
                 ShowPanel.setVisible(false);
                 ShowPanel.removeAll();
                 ShowPanel.add(new ListUserPanel());
+                ShowPanel.revalidate();
+                ShowPanel.setVisible(true);
+            }
+        });
+
+        ChangeListProductButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ShowPanel.setVisible(false);
+                ShowPanel.removeAll();
+                ShowPanel.add(new ListSupplyPanel());
                 ShowPanel.revalidate();
                 ShowPanel.setVisible(true);
             }
