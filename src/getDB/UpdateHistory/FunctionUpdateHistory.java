@@ -29,6 +29,7 @@ public class FunctionUpdateHistory {
                 history.setCurrent_status(rs.getString(4));
                 history.setOld_facility(rs.getString(5));
                 history.setCurrent_facility(rs.getString(6));
+                history.setManager_username(rs.getString(7));
 
                 UpdateHistoryList.add(history);
             }

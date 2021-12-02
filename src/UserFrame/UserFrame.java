@@ -63,8 +63,8 @@ public class UserFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JPanel contentPane = (JPanel) getContentPane();
-                JPanel managedHistoryPanel = new ManagedHistory();
-
+                JPanel managedHistoryPanel = new ManagedHistory(username);
+                managedHistoryPanel.setVisible(true);
                 contentPane.removeAll();
                 contentPane.add(managedHistoryPanel);
                 contentPane.revalidate();
@@ -84,7 +84,7 @@ public class UserFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JPanel contentPane = (JPanel) getContentPane();
-                JPanel supplyHistory = new SupplyHistory();
+                JPanel supplyHistory = new SupplyHistory(username);
 
                 contentPane.removeAll();
                 contentPane.add(supplyHistory);
