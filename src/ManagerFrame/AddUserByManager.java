@@ -1,6 +1,7 @@
 package ManagerFrame;
 
 import ColorFont.Constant;
+import Login.LogInFrame;
 import getDB.Account.FunctionAccount;
 import getDB.Address.FunctionAddress;
 import getDB.Facility.FunctionFacility;
@@ -228,7 +229,7 @@ public class AddUserByManager extends JFrame {
         CancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new ManagerFrame().setVisible(true);
+                new ManagerFrame(LogInFrame.ManagerUsername).setVisible(true);
                 AddUserByManager.this.dispose();
             }
         });
@@ -292,7 +293,7 @@ public class AddUserByManager extends JFrame {
                                 FunctionAccount.AddAccount(acc);
                                 FunctionAccount.AddInfoAccount(coviduser);
                                 JOptionPane.showMessageDialog(AddUserByManager.this, "Create successfully", "success", JOptionPane.ERROR_MESSAGE);
-                                new ManagerFrame().setVisible(true);
+                                new ManagerFrame(LogInFrame.ManagerUsername).setVisible(true);
                                 AddUserByManager.this.dispose();
                             }
                         } catch (ParseException err) {

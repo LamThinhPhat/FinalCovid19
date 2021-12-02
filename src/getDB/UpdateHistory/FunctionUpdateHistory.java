@@ -39,11 +39,12 @@ public class FunctionUpdateHistory {
         return UpdateHistoryList;
     }
 
-    static public void UpdateHistoryList(covid_user user, String old_status,String old_facility)
+    static public void UpdateHistoryList(covid_user user, String old_status,String old_facility, String ManagerUsername)
     {
         Connection conn = jdbc_connector.getConnection();
-        String sql  = "INSERT INTO update_history (username, update_date, old_status, current_status, old_facility, current_facility)"
-                + "VALUE(?, ?, ?, ?, ?, ?)";
+        String sql  = "INSERT INTO update_history (username, update_date, old_status, current_status," +
+                " old_facility, current_facility, manager_username)"
+                + "VALUE(?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement PrSt = conn.prepareStatement(sql);
 
@@ -53,6 +54,7 @@ public class FunctionUpdateHistory {
             PrSt.setString(4,user.getPatient_status());
             PrSt.setString(5, old_facility);
             PrSt.setString(6,user.getFacility_id());
+            PrSt.setString(7,ManagerUsername);
             PrSt.executeUpdate();
         }catch(SQLException err)
         {

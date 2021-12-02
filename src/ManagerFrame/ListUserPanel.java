@@ -1,6 +1,7 @@
 package ManagerFrame;
 
 import ColorFont.Constant;
+import Login.LogInFrame;
 import table.covid_user;
 
 import javax.swing.*;
@@ -292,7 +293,7 @@ public class ListUserPanel extends JPanel {
                     String  patient_status = (String) CovidUserTable.getValueAt(row, 8);
                     ShowPanel.setVisible(false);
                     ShowPanel.removeAll();
-                    ShowPanel.add(new ChangeStatusPatient(username, patient_status));
+                    ShowPanel.add(new ChangeStatusPatient(username, patient_status, LogInFrame.ManagerUsername));
                     ShowPanel.revalidate();
                     ShowPanel.setVisible(true);
                 }

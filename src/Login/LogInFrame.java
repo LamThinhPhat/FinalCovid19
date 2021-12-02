@@ -17,7 +17,7 @@ import java.io.IOException;
 
 
 public class LogInFrame extends JFrame {
-
+    static public String ManagerUsername;
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -119,7 +119,8 @@ public class LogInFrame extends JFrame {
                     {
                         if (login.getUser_role() == 1)
                         {
-                            new ManagerFrame().setVisible(true);
+                            ManagerUsername = username;
+                            new ManagerFrame(ManagerUsername).setVisible(true);
                             LogInFrame.this.dispose();
                         }
                         else if (login.getUser_role() == 2)

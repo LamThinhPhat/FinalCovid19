@@ -2,6 +2,7 @@ package ManagerFrame;
 
 
 import ColorFont.Constant;
+import Login.LogInFrame;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -18,7 +19,7 @@ public class ManagerFrame extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    ManagerFrame frame = new ManagerFrame();
+                    ManagerFrame frame = new ManagerFrame(LogInFrame.ManagerUsername);
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -26,7 +27,7 @@ public class ManagerFrame extends JFrame {
             }
         });
     }
-    public ManagerFrame()
+    public ManagerFrame(String ManagerUsername)
     {
         setTitle("Manager - Covid Management System");
         ImageIcon covid_icon=null;

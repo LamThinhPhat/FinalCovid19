@@ -1,6 +1,7 @@
 package ManagerFrame;
 
 import ColorFont.Constant;
+import Login.LogInFrame;
 import table.covid_user;
 import table.related_user;
 
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Set;
 
 public class ChangeStatusPatient extends JPanel {
-    public ChangeStatusPatient(String username, String patient_status)
+    public ChangeStatusPatient(String username, String patient_status, String ManagerUsername)
     {
         setBackground(Constant.my_gray);
 
@@ -225,8 +226,8 @@ public class ChangeStatusPatient extends JPanel {
                     user.setFacility_id(getDB.Facility.FunctionFacility.getIdFacilityByName(SelectedFacilityName));
                     getDB.Account.FunctionAccount.UpdateCovidUser(user);
 
-                    getDB.UpdateHistory.FunctionUpdateHistory.UpdateHistoryList(user,old_status, old_facility);
-                    if (old_status != "NI" && old_status != "RV" )
+                    getDB.UpdateHistory.FunctionUpdateHistory.UpdateHistoryList(user,old_status, old_facility, LogInFrame.ManagerUsername);
+                    if (old_status.equals("NI") && old_status.equals("RV"))
                     {
                         int step = Integer.parseInt(old_status.substring(old_status.indexOf("F") + 1, old_status.length()))
                                 - Integer.parseInt(user.getPatient_status().substring(user.getPatient_status().indexOf("F") + 1, user.getPatient_status().length()));
@@ -238,20 +239,23 @@ public class ChangeStatusPatient extends JPanel {
                             for (related_user i : related) {
                                 covid_user related_patient = getDB.Account.FunctionAccount.GetCovidUserInfoByUserName(i.getRelated_username());
                                 String old_related_status = related_patient.getPatient_status();
-                                if (related_patient.getPatient_status() == "NI" || related_patient.getPatient_status() == "RV")
+                                if (related_patient.getPatient_status().equals("NI") || related_patient.getPatient_status().equals("RV"))
                                 {
                                     int related_step = step + 1;
                                     related_patient.setPatient_status("F" + related_step);
                                     getDB.Account.FunctionAccount.UpdateCovidUser(related_patient);
-                                    getDB.UpdateHistory.FunctionUpdateHistory.UpdateHistoryList(related_patient,old_related_status, related_patient.getFacility_id());
+                                    getDB.UpdateHistory.FunctionUpdateHistory.UpdateHistoryList(related_patient,old_related_status, related_patient.getFacility_id(), LogInFrame.ManagerUsername);
                                 }
                                 else
                                 {
                                     int related_step = Integer.parseInt(old_related_status.substring(old_related_status.indexOf("F") + 1, old_related_status.length()))
                                             - step;
-                                    related_patient.setPatient_status("F" + related_step);
-                                    getDB.Account.FunctionAccount.UpdateCovidUser(related_patient);
-                                    getDB.UpdateHistory.FunctionUpdateHistory.UpdateHistoryList(related_patient,old_related_status, related_patient.getFacility_id());
+                                    if (related_step > 0)
+                                    {
+                                        related_patient.setPatient_status("F" + related_step);
+                                        getDB.Account.FunctionAccount.UpdateCovidUser(related_patient);
+                                        getDB.UpdateHistory.FunctionUpdateHistory.UpdateHistoryList(related_patient,old_related_status, related_patient.getFacility_id(), LogInFrame.ManagerUsername);
+                                    }
                                 }
                             }
                         }

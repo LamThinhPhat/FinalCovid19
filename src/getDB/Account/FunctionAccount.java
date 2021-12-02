@@ -17,7 +17,7 @@ public class FunctionAccount {
     {
         ArrayList<related_user> RealatedUserList = new ArrayList<related_user>();
         Connection conn = jdbc_connector.getConnection();
-        String sql  = "SELECT * FROM related_user WHERE username = ?";
+        String sql  = "SELECT * FROM related_user rl join account_table ac on (rl.username=ac.username) where ac.user_role = 3 and rl.username = ?";
         try
         {
             PreparedStatement PrSt = conn.prepareStatement(sql);
@@ -127,7 +127,7 @@ public class FunctionAccount {
     {
         ArrayList<covid_user> CovidUser = new ArrayList<covid_user>();
         Connection conn = jdbc_connector.getConnection();
-        String sql  = "SELECT * FROM covid_user ORDER BY facility_id";
+        String sql  = "SELECT * FROM covid_user cu join account_table ac on (cu.username=ac.username) where ac.user_role = 3 ORDER BY facility_id";
         try
         {
             PreparedStatement PrSt = conn.prepareStatement(sql);
@@ -156,7 +156,7 @@ public class FunctionAccount {
     {
         ArrayList<covid_user> CovidUser = new ArrayList<covid_user>();
         Connection conn = jdbc_connector.getConnection();
-        String sql  = "SELECT * FROM covid_user ORDER BY patient_status";
+        String sql  = "SELECT * FROM covid_user cu join account_table ac on (cu.username=ac.username) where ac.user_role = 3 ORDER BY patient_status";
         try
         {
             PreparedStatement PrSt = conn.prepareStatement(sql);
@@ -185,7 +185,7 @@ public class FunctionAccount {
     {
         ArrayList<covid_user> CovidUser = new ArrayList<covid_user>();
         Connection conn = jdbc_connector.getConnection();
-        String sql  = "SELECT * FROM covid_user ORDER BY username";
+        String sql  = "SELECT * FROM covid_user cu join account_table ac on (cu.username=ac.username) where ac.user_role = 3 ORDER BY cu.username";
         try
         {
             PreparedStatement PrSt = conn.prepareStatement(sql);
@@ -214,7 +214,7 @@ public class FunctionAccount {
     {
         ArrayList<covid_user> CovidUser = new ArrayList<covid_user>();
         Connection conn = jdbc_connector.getConnection();
-        String sql  = "SELECT * FROM covid_user ORDER BY full_name";
+        String sql  = "SELECT * FROM covid_user cu join account_table ac on (cu.username=ac.username) where ac.user_role = 3 ORDER BY full_name";
         try
         {
             PreparedStatement PrSt = conn.prepareStatement(sql);
@@ -243,7 +243,7 @@ public class FunctionAccount {
     {
         ArrayList<covid_user> CovidUser = new ArrayList<covid_user>();
         Connection conn = jdbc_connector.getConnection();
-        String sql  = "SELECT * FROM covid_user ORDER BY address_id";
+        String sql  = "SELECT * FROM covid_user cu join account_table ac on (cu.username=ac.username) where ac.user_role = 3 ORDER BY address_id";
         try
         {
             PreparedStatement PrSt = conn.prepareStatement(sql);
@@ -272,7 +272,7 @@ public class FunctionAccount {
     {
         ArrayList<covid_user> CovidUser = new ArrayList<covid_user>();
         Connection conn = jdbc_connector.getConnection();
-        String sql  = "SELECT * FROM covid_user ORDER BY dob";
+        String sql  = "SELECT * FROM covid_user cu join account_table ac on (cu.username=ac.username) where ac.user_role = 3 ORDER BY dob";
         try
         {
             PreparedStatement PrSt = conn.prepareStatement(sql);
@@ -301,7 +301,7 @@ public class FunctionAccount {
     {
         ArrayList<covid_user> CovidUser = new ArrayList<covid_user>();
         Connection conn = jdbc_connector.getConnection();
-        String sql  = "SELECT * FROM covid_user ORDER BY id";
+        String sql  = "SELECT * FROM covid_user cu join account_table ac on (cu.username=ac.username) where ac.user_role = 3 ORDER BY id";
         try
         {
             PreparedStatement PrSt = conn.prepareStatement(sql);
@@ -330,7 +330,7 @@ public class FunctionAccount {
     {
         ArrayList<covid_user> CovidUser = new ArrayList<covid_user>();
         Connection conn = jdbc_connector.getConnection();
-        String sql  = "SELECT * FROM covid_user";
+        String sql  = "SELECT * FROM covid_user cu join account_table ac on (cu.username=ac.username) where ac.user_role = 3";
         try
         {
             PreparedStatement PrSt = conn.prepareStatement(sql);
@@ -358,7 +358,7 @@ public class FunctionAccount {
     static public covid_user GetCovidUserInfoByUserName(String username)
     {
         Connection conn = jdbc_connector.getConnection();
-        String sql  = "SELECT * FROM covid_user WHERE username = ?";
+        String sql  = "SELECT * FROM covid_user cu join account_table ac on (cu.username=ac.username) where ac.user_role = 3 and cu.username = ?";
         try
         {
             PreparedStatement PrSt = conn.prepareStatement(sql);
