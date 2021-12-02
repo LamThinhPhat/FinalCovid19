@@ -1,7 +1,6 @@
 package ManagerFrame;
 
 import ColorFont.Constant;
-import table.covid_user;
 import table.supply;
 
 import javax.swing.*;
@@ -10,6 +9,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
+import static ManagerFrame.ManagerFrame.ShowPanel;
 
 public class ListSupplyPanel extends JPanel {
     public ListSupplyPanel()
@@ -24,7 +25,7 @@ public class ListSupplyPanel extends JPanel {
         ListSupplybuttonPaneSouth.setBackground(Constant.my_gray);
 
         JScrollPane ListSupplyCenter = new JScrollPane();
-        ListSupplyCenter.setPreferredSize(new Dimension(800, 600));
+        ListSupplyCenter.setPreferredSize(new Dimension(750, 600));
         ListSupplycontentPane.add(ListSupplyCenter, BorderLayout.CENTER);
 
         JTable SupplyTable = new JTable();
@@ -39,7 +40,9 @@ public class ListSupplyPanel extends JPanel {
         SupplyTable.setModel(Productdef);
         Productdef.addColumn("Supply ID");
         Productdef.addColumn("Supply Name");
-        Productdef.addColumn("Limit Period");
+        Productdef.addColumn("Limit day");
+        Productdef.addColumn("Limit week");
+        Productdef.addColumn("Limit month");
         Productdef.addColumn("Limit per person");
         Productdef.addColumn("Price");
 
@@ -47,7 +50,8 @@ public class ListSupplyPanel extends JPanel {
         for (supply i: SupplyList)
         {
             Productdef.addRow(new Object[]{
-                    i.getSupply_id(), i.getSupply_name(), i.getLimit_period(), i.getLimit_per_person(),i.getPrice()
+                    i.getSupply_id(), i.getSupply_name(), i.getLimit_day(), i.getLimit_week(),
+                    i.getLimit_month(), i.getLimit_per_person(),i.getPrice()
             });
         }
 
@@ -62,7 +66,8 @@ public class ListSupplyPanel extends JPanel {
                 for (supply i: SupplyList)
                 {
                     Productdef.addRow(new Object[]{
-                            i.getSupply_id(), i.getSupply_name(), i.getLimit_period(), i.getLimit_per_person(),i.getPrice()
+                            i.getSupply_id(), i.getSupply_name(), i.getLimit_day(), i.getLimit_week(),
+                            i.getLimit_month(), i.getLimit_per_person(),i.getPrice()
                     });
                 }
             }
@@ -94,7 +99,8 @@ public class ListSupplyPanel extends JPanel {
                         for (supply i: SupplyListName)
                         {
                             Productdef.addRow(new Object[]{
-                                    i.getSupply_id(), i.getSupply_name(), i.getLimit_period(), i.getLimit_per_person(),i.getPrice()
+                                    i.getSupply_id(), i.getSupply_name(), i.getLimit_day(), i.getLimit_week(),
+                                    i.getLimit_month(), i.getLimit_per_person(),i.getPrice()
                             });
                         }
                     }
@@ -142,12 +148,175 @@ public class ListSupplyPanel extends JPanel {
                     for (supply i: SupplyList)
                     {
                         Productdef.addRow(new Object[]{
-                                i.getSupply_id(), i.getSupply_name(), i.getLimit_period(), i.getLimit_per_person(),i.getPrice()
+                                i.getSupply_id(), i.getSupply_name(), i.getLimit_day(), i.getLimit_week(),
+                                i.getLimit_month(), i.getLimit_per_person(),i.getPrice()
                         });
                     }
                 }
             }
         });
+
+
+        AddSupply.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ShowPanel.setVisible(false);
+                ShowPanel.removeAll();
+                ShowPanel.add(new AddNewSupplyPanel());
+                ShowPanel.revalidate();
+                ShowPanel.setVisible(true);
+            }
+        });
+
+        EditSupply.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int row = SupplyTable.getSelectedRow();
+                if(row == -1)
+                {
+                    JOptionPane.showMessageDialog(ListSupplyPanel.this, "Please pick a supply to edit", "Error",JOptionPane.ERROR_MESSAGE);
+                }
+                else
+                {
+                    String supplyId = (String) SupplyTable.getValueAt(row, 0);
+                    ShowPanel.setVisible(false);
+                    ShowPanel.removeAll();
+                    ShowPanel.add(new EditSupplyPanel(supplyId));
+                    ShowPanel.revalidate();
+                    ShowPanel.setVisible(true);
+                }
+            }
+        });
+
+        JPanel WestPanelSortSupply = new JPanel();
+        WestPanelSortSupply.setBackground(Constant.my_gray);
+        WestPanelSortSupply.setLayout(new BoxLayout(WestPanelSortSupply, BoxLayout.Y_AXIS));
+        ListSupplycontentPane.add(WestPanelSortSupply,BorderLayout.WEST);
+
+        JButton SortById = new JButton("Sort ID");
+        JButton SortBySupplyName = new JButton("Sort Name");
+        JButton SortByLimitDay = new JButton("Sort Limit Day");
+        JButton SortByLimitWeek = new JButton("Sort Limit Week");
+        JButton SortByLimitMonth = new JButton("Sort Limit Month");
+        JButton SortByLimitPerPerson= new JButton("Sort Limit Person");
+        JButton SortByPrice = new JButton("Sort Price");
+
+
+        SortById.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Productdef.setRowCount(0);
+                ArrayList<supply> SupplyList = getDB.Supply.FunctionSupply.GetAllSupplyIDSort();
+                for (supply i: SupplyList)
+                {
+                    Productdef.addRow(new Object[]{
+                            i.getSupply_id(), i.getSupply_name(), i.getLimit_day(), i.getLimit_week(),
+                            i.getLimit_month(), i.getLimit_per_person(),i.getPrice()
+                    });
+                }
+            }
+        });
+
+        SortBySupplyName.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Productdef.setRowCount(0);
+                ArrayList<supply> SupplyList = getDB.Supply.FunctionSupply.GetAllSupplySupplyNameSort();
+                for (supply i: SupplyList)
+                {
+                    Productdef.addRow(new Object[]{
+                            i.getSupply_id(), i.getSupply_name(), i.getLimit_day(), i.getLimit_week(),
+                            i.getLimit_month(), i.getLimit_per_person(),i.getPrice()
+                    });
+                }
+            }
+        });
+
+        SortByLimitDay.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Productdef.setRowCount(0);
+                ArrayList<supply> SupplyList = getDB.Supply.FunctionSupply.GetAllSupplyLimitDaySort();
+                for (supply i: SupplyList)
+                {
+                    Productdef.addRow(new Object[]{
+                            i.getSupply_id(), i.getSupply_name(), i.getLimit_day(), i.getLimit_week(),
+                            i.getLimit_month(), i.getLimit_per_person(),i.getPrice()
+                    });
+                }
+            }
+        });
+
+        SortByLimitMonth.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Productdef.setRowCount(0);
+                ArrayList<supply> SupplyList = getDB.Supply.FunctionSupply.GetAllSupplyLimitMonthSort();
+                for (supply i: SupplyList)
+                {
+                    Productdef.addRow(new Object[]{
+                            i.getSupply_id(), i.getSupply_name(), i.getLimit_day(), i.getLimit_week(),
+                            i.getLimit_month(), i.getLimit_per_person(),i.getPrice()
+                    });
+                }
+            }
+        });
+
+        SortByLimitWeek.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Productdef.setRowCount(0);
+                ArrayList<supply> SupplyList = getDB.Supply.FunctionSupply.GetAllSupplyLimitWeekSort();
+                for (supply i: SupplyList)
+                {
+                    Productdef.addRow(new Object[]{
+                            i.getSupply_id(), i.getSupply_name(), i.getLimit_day(), i.getLimit_week(),
+                            i.getLimit_month(), i.getLimit_per_person(),i.getPrice()
+                    });
+                }
+            }
+        });
+
+        SortByLimitPerPerson.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Productdef.setRowCount(0);
+                ArrayList<supply> SupplyList = getDB.Supply.FunctionSupply.GetAllSupplyLimitPersonSort();
+                for (supply i: SupplyList)
+                {
+                    Productdef.addRow(new Object[]{
+                            i.getSupply_id(), i.getSupply_name(), i.getLimit_day(), i.getLimit_week(),
+                            i.getLimit_month(), i.getLimit_per_person(),i.getPrice()
+                    });
+                }
+            }
+        });
+
+        SortByPrice.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Productdef.setRowCount(0);
+                ArrayList<supply> SupplyList = getDB.Supply.FunctionSupply.GetAllSupplyPriceSort();
+                for (supply i: SupplyList)
+                {
+                    Productdef.addRow(new Object[]{
+                            i.getSupply_id(), i.getSupply_name(), i.getLimit_day(), i.getLimit_week(),
+                            i.getLimit_month(), i.getLimit_per_person(),i.getPrice()
+                    });
+                }
+            }
+        });
+
+
+
+
+        WestPanelSortSupply.add(SortById);
+        WestPanelSortSupply.add(SortBySupplyName);
+        WestPanelSortSupply.add(SortByLimitDay);
+        WestPanelSortSupply.add(SortByLimitWeek);
+        WestPanelSortSupply.add(SortByLimitMonth);
+        WestPanelSortSupply.add(SortByLimitPerPerson);
+        WestPanelSortSupply.add(SortByPrice);
 
 
     }

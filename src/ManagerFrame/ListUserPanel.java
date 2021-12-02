@@ -24,7 +24,7 @@ public class ListUserPanel extends JPanel {
         ListUserbuttonPaneSouth.setBackground(Constant.my_gray);
 
         JScrollPane ListCovidUserCenter = new JScrollPane();
-        ListCovidUserCenter.setPreferredSize(new Dimension(800,600));
+        ListCovidUserCenter.setPreferredSize(new Dimension(780,600));
         ListUsercontentPane.add(ListCovidUserCenter,BorderLayout.CENTER);
 
         JTable CovidUserTable = new JTable();

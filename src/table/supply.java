@@ -2,7 +2,28 @@ package table;
 
 public class supply {
     String supply_id, supply_name;
-    int limit_period, limit_per_person, price;
+    int limit_day;
+    int limit_month;
+
+    public int getLimit_month() {
+        return limit_month;
+    }
+
+    public void setLimit_month(int limit_month) {
+        this.limit_month = limit_month;
+    }
+
+    public int getLimit_week() {
+        return limit_week;
+    }
+
+    public void setLimit_week(int limit_week) {
+        this.limit_week = limit_week;
+    }
+
+    int limit_week;
+    int limit_per_person;
+    int price;
 
     public String getSupply_id() {
         return supply_id;
@@ -20,12 +41,12 @@ public class supply {
         this.supply_name = supply_name;
     }
 
-    public int getLimit_period() {
-        return limit_period;
+    public int getLimit_day() {
+        return limit_day;
     }
 
-    public void setLimit_period(int limit_period) {
-        this.limit_period = limit_period;
+    public void setLimit_day(int limit_day) {
+        this.limit_day = limit_day;
     }
 
     public int getLimit_per_person() {

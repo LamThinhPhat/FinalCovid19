@@ -269,15 +269,5 @@ public class ChangeStatusPatient extends JPanel {
         ChangeStatusButtonPaneSouth.add(ChangeStatusConfirmUserButton);
 
 
-
-
-
-
-
-
-
-
-
-
     }
 }

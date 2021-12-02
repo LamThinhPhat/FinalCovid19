@@ -275,30 +275,30 @@ public class AddUserByManager extends JFrame {
                             java.util.Date str = format.parse(DobField.getText());
                             java.sql.Date temp = new java.sql.Date(str.getTime());
                             coviduser.setDob(temp);
+                            coviduser.setHouse_number(AddressField.getText());
+
+                            coviduser.setAddress_id(FunctionAddress.GetAddressId(province,ward,district));
+                            coviduser.setPatient_status(status_patient);
+                            coviduser.setFacility_id(FunctionFacility.getIdFacilityByName(facility_name));
+
+                            int CQuantity = getDB.Facility.FunctionFacility.GetCurrentQuantity(coviduser.getFacility_id());
+                            int Capacity = getDB.Facility.FunctionFacility.GetCapacity(coviduser.getFacility_id());
+                            if ( CQuantity >= Capacity && Capacity != -1)
+                            {
+                                JOptionPane.showMessageDialog(AddUserByManager.this,"Facility is full", "Error", JOptionPane.ERROR_MESSAGE);
+                            }
+                            else {
+                                getDB.Facility.FunctionFacility.SetCurrentQuantity(coviduser.getFacility_id(), CQuantity + 1);
+                                FunctionAccount.AddAccount(acc);
+                                FunctionAccount.AddInfoAccount(coviduser);
+                                JOptionPane.showMessageDialog(AddUserByManager.this, "Create successfully", "success", JOptionPane.ERROR_MESSAGE);
+                                new ManagerFrame().setVisible(true);
+                                AddUserByManager.this.dispose();
+                            }
                         } catch (ParseException err) {
-                            err.printStackTrace();
+                            JOptionPane.showMessageDialog(AddUserByManager.this, "Please fill correct format date (yyyy-mm-dd)","error",JOptionPane.ERROR_MESSAGE);
                         }
 
-                        coviduser.setHouse_number(AddressField.getText());
-
-                        coviduser.setAddress_id(FunctionAddress.GetAddressId(province,ward,district));
-                        coviduser.setPatient_status(status_patient);
-                        coviduser.setFacility_id(FunctionFacility.getIdFacilityByName(facility_name));
-
-                        int CQuantity = getDB.Facility.FunctionFacility.GetCurrentQuantity(coviduser.getFacility_id());
-                        int Capacity = getDB.Facility.FunctionFacility.GetCapacity(coviduser.getFacility_id());
-                        if ( CQuantity >= Capacity && Capacity != -1)
-                        {
-                            JOptionPane.showMessageDialog(AddUserByManager.this,"Facility is full", "Error", JOptionPane.ERROR_MESSAGE);
-                        }
-                        else {
-                            getDB.Facility.FunctionFacility.SetCurrentQuantity(coviduser.getFacility_id(), CQuantity + 1);
-                            FunctionAccount.AddAccount(acc);
-                            FunctionAccount.AddInfoAccount(coviduser);
-                            JOptionPane.showMessageDialog(AddUserByManager.this, "Create successfully", "success", JOptionPane.ERROR_MESSAGE);
-                            new ManagerFrame().setVisible(true);
-                            AddUserByManager.this.dispose();
-                        }
 
                     }
                 }

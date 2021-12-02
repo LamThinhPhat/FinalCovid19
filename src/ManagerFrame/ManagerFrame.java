@@ -46,7 +46,7 @@ public class ManagerFrame extends JFrame {
         JPanel ButtonChangePane = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JButton AddNewUserButton = new JButton("Add new user");
         JButton ChangeListUserButton = new JButton("List User");
-        JButton ChangeListProductButton = new JButton("List Product");
+        JButton ChangeListProductButton = new JButton("List Supply");
         ButtonChangePane.add(AddNewUserButton);
         ButtonChangePane.add(ChangeListUserButton);
         ButtonChangePane.add(ChangeListProductButton);
