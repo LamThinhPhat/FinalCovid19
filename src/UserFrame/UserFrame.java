@@ -110,7 +110,7 @@ public class UserFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JPanel contentPane = (JPanel) getContentPane();
-                JPanel paymentHistory = new PaymentHistory();
+                JPanel paymentHistory = new PaymentHistory(username);
 
                 contentPane.removeAll();
                 contentPane.add(paymentHistory);

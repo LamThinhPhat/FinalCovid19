@@ -11,10 +11,15 @@ import java.util.ArrayList;
 public class SupplyHistory extends JPanel {
     SupplyHistory(String username) {
 
-        JLabel lbHeader = new JLabel("SUPPLY HISTORY");
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        JLabel lbHeader = new JLabel("Supply History");
         lbHeader.setFont(Constant.HEADER_FONT);
         lbHeader.setForeground(Constant.my_white);
         add(lbHeader);
+
+        JLabel lDebt = new JLabel("Current debt:"+getDB.PaymentUser.FunctionPaymentUser.GetPaymentAccount(username).getDebt());
+        lDebt.setForeground(Constant.my_white);
+        add(lDebt);
 
         setBackground(Constant.my_gray);
 
@@ -23,7 +28,7 @@ public class SupplyHistory extends JPanel {
         add(ManageHistoryPanel);
 
         JScrollPane ShowListCenter = new JScrollPane();
-        ShowListCenter.setSize(800, 500);
+        ShowListCenter.setSize(1000, 500);
         ManageHistoryPanel.add(ShowListCenter, BorderLayout.CENTER);
         ManageHistoryPanel.setBackground(Constant.my_gray);
 

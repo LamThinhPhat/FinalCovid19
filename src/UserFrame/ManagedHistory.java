@@ -11,7 +11,8 @@ import java.util.ArrayList;
 public class ManagedHistory extends JPanel {
     ManagedHistory(String username) {
 
-        JLabel lbHeader = new JLabel("Manage HISTORY");
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        JLabel lbHeader = new JLabel("Manage History");
         lbHeader.setFont(Constant.HEADER_FONT);
         lbHeader.setForeground(Constant.my_white);
         add(lbHeader);
