@@ -59,4 +59,33 @@ public class FunctionUpdateHistory {
             err.printStackTrace();
         }
     }
+
+    public static ArrayList<update_history> GetUpdateHistoryByManager(String manager_username) {
+        ArrayList<update_history> UpdateHistoryList = new ArrayList<update_history>();
+        Connection conn = jdbc_connector.getConnection();
+        String sql  = "SELECT * FROM update_history WHERE manager_username = ? ORDER BY update_date DESC";
+        try
+        {
+            PreparedStatement PrSt = conn.prepareStatement(sql);
+            PrSt.setString(1,manager_username);
+            ResultSet rs = PrSt.executeQuery();
+            while(rs.next())
+            {
+                update_history history = new update_history();
+
+                history.setUsername(rs.getString(1));
+                history.setUpdate_date(rs.getDate(2));
+                history.setOld_status(rs.getString(3));
+                history.setCurrent_status(rs.getString(4));
+                history.setOld_facility(rs.getString(5));
+                history.setCurrent_facility(rs.getString(6));
+
+                UpdateHistoryList.add(history);
+            }
+        }catch (SQLException err)
+        {
+            err.printStackTrace();
+        }
+        return UpdateHistoryList;
+    }
 }

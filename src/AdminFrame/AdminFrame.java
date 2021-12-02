@@ -10,7 +10,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class AdminFrame extends JFrame {
-    public AdminFrame(String username)
+    public AdminFrame(String AdminUsername)
     {
         setTitle("Covid Management System");
 
@@ -67,7 +67,7 @@ public class AdminFrame extends JFrame {
         });
 
         JLabel UserName=new JLabel();
-        UserName.setText("Login as: "+username);
+        UserName.setText("Login as: "+AdminUsername);
         UserName.setForeground(Constant.my_white);
         JButton Logout= new JButton("Logout");
         Logout.setForeground(Constant.my_white);

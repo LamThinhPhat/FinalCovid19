@@ -139,8 +139,13 @@ public class ListManagerPanel extends JPanel {
         BanUser.setForeground(Constant.my_white);
         BanUser.setBackground(new Color(77,82,77));
 
+        JButton ManagerHistory = new JButton("Manager History");
+        ManagerHistory.setForeground(Constant.my_white);
+        ManagerHistory.setBackground(new Color(77,82,77));
+
         ListUserbuttonPaneNorth.add(CreateManager);
         ListUserbuttonPaneNorth.add(BanUser);
+        ListUserbuttonPaneNorth.add(ManagerHistory);
 
         BanUser.addActionListener(e -> {
             int row = CovidUserTable.getSelectedRow();
@@ -175,7 +180,19 @@ public class ListManagerPanel extends JPanel {
         CreateManager.addActionListener(e->{
             new AddManager(Sort).setVisible(true);
         });
+
+        ManagerHistory.addActionListener(e->{
+            int row = CovidUserTable.getSelectedRow();
+            if(row == -1)
+            {
+                JOptionPane.showMessageDialog(ListManagerPanel.this, "Please pick a manager to ban", "Error",JOptionPane.ERROR_MESSAGE);
+            }else {
+                new ManagerHistoryFrame((String) CovidUserTable.getValueAt(row, 0)).setVisible(true);
+            }
+        });
     }
+
+
 
 
 }
