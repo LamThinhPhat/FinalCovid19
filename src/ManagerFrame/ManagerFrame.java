@@ -49,16 +49,18 @@ public class ManagerFrame extends JFrame {
         JButton ChangeListUserButton = new JButton("List User");
         JButton ChangeListSupplyButton = new JButton("List Supply");
         JButton ChangeStaticticButton = new JButton("Statistic");
+        JButton LogOutButton = new JButton("Log Out");
         ButtonChangePane.add(AddNewUserButton);
         ButtonChangePane.add(ChangeListUserButton);
         ButtonChangePane.add(ChangeListSupplyButton);
         ButtonChangePane.add(ChangeStaticticButton);
+        ButtonChangePane.add(LogOutButton);
         ButtonChangePane.setBackground(Constant.my_gray);
 
 
         setContentPane(contentPane);
         contentPane.add(ButtonChangePane);
-        ShowPanel = new StatisticPanel();
+        ShowPanel = new ListUserPanel();
         contentPane.add(ShowPanel);
 
         AddNewUserButton.addActionListener(new ActionListener() {
@@ -99,6 +101,14 @@ public class ManagerFrame extends JFrame {
                 ShowPanel.add(new StatisticPanel());
                 ShowPanel.revalidate();
                 ShowPanel.setVisible(true);
+            }
+        });
+
+        LogOutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new LogInFrame().setVisible(true);
+                ManagerFrame.this.dispose();
             }
         });
 

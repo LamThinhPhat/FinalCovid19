@@ -28,6 +28,28 @@ public class FunctionStatistic {
         }
         return GetAllDate;
     }
+
+    static public Set<Date> GetAllDateSupply()
+    {
+        Set<Date> GetAllDate = new HashSet<Date>();
+        Connection conn = jdbc_connector.getConnection();
+        String sql  = "select create_date " +
+                "from supply_history";
+        try {
+            PreparedStatement PrSt = conn.prepareStatement(sql);
+            ResultSet rs = PrSt.executeQuery();
+            while (rs.next())
+            {
+                GetAllDate.add(rs.getDate(1));
+            }
+        }
+        catch (SQLException err)
+        {
+            err.printStackTrace();
+        }
+        return GetAllDate;
+    }
+
     static public Map<String,Integer> GetPerPerson(Date dateChoose)
     {
         Map<String,Integer> Total = new HashMap<String,Integer>();
@@ -99,6 +121,29 @@ public class FunctionStatistic {
             {
                 String Transfer = rs.getString(2) + " -> " + rs.getString(3);
                 Total.put(Transfer, rs.getInt(4));
+            }
+        }
+        catch (SQLException err)
+        {
+            err.printStackTrace();
+        }
+        return Total;
+    }
+
+    static public Map<String,Integer> GetTotalSupply(Date dateChoose)
+    {
+        Map<String,Integer> Total = new HashMap<String,Integer>();
+        Connection conn = jdbc_connector.getConnection();
+        String sql = "select create_date, supply_id, sum(quantity) as TotalSupply " +
+                "from supply_history where create_date = ?" +
+                "group by create_date, supply_id";
+        try {
+            PreparedStatement PrSt = conn.prepareStatement(sql);
+            PrSt.setDate(1, dateChoose);
+            ResultSet rs = PrSt.executeQuery();
+            while (rs.next())
+            {;
+                Total.put(rs.getString(2), rs.getInt(3));
             }
         }
         catch (SQLException err)
