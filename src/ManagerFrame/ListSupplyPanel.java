@@ -1,6 +1,7 @@
 package ManagerFrame;
 
 import ColorFont.Constant;
+import getDB.Supply.FunctionSupply;
 import table.supply;
 
 import javax.swing.*;
@@ -43,7 +44,6 @@ public class ListSupplyPanel extends JPanel {
         Productdef.addColumn("Limit day");
         Productdef.addColumn("Limit week");
         Productdef.addColumn("Limit month");
-        Productdef.addColumn("Limit per person");
         Productdef.addColumn("Price");
 
         ArrayList<supply> SupplyList = getDB.Supply.FunctionSupply.GetAllSupplyInfo();
@@ -51,7 +51,7 @@ public class ListSupplyPanel extends JPanel {
         {
             Productdef.addRow(new Object[]{
                     i.getSupply_id(), i.getSupply_name(), i.getLimit_day(), i.getLimit_week(),
-                    i.getLimit_month(), i.getLimit_per_person(),i.getPrice()
+                    i.getLimit_month(),i.getPrice()
             });
         }
 
@@ -67,7 +67,7 @@ public class ListSupplyPanel extends JPanel {
                 {
                     Productdef.addRow(new Object[]{
                             i.getSupply_id(), i.getSupply_name(), i.getLimit_day(), i.getLimit_week(),
-                            i.getLimit_month(), i.getLimit_per_person(),i.getPrice()
+                            i.getLimit_month(), i.getPrice()
                     });
                 }
             }
@@ -86,7 +86,7 @@ public class ListSupplyPanel extends JPanel {
                 {
                     String supplynamesearch = SearchSupplyField.getText();
 
-                    ArrayList<supply> SupplyListName = getDB.Supply.FunctionSupply.GetSupplyInfoByName(supplynamesearch);
+                    ArrayList<supply> SupplyListName = FunctionSupply.GetSupplyInfoByName(supplynamesearch);
 
                     if (SupplyListName.isEmpty())
                     {
@@ -100,7 +100,7 @@ public class ListSupplyPanel extends JPanel {
                         {
                             Productdef.addRow(new Object[]{
                                     i.getSupply_id(), i.getSupply_name(), i.getLimit_day(), i.getLimit_week(),
-                                    i.getLimit_month(), i.getLimit_per_person(),i.getPrice()
+                                    i.getLimit_month(), i.getPrice()
                             });
                         }
                     }
@@ -149,7 +149,7 @@ public class ListSupplyPanel extends JPanel {
                     {
                         Productdef.addRow(new Object[]{
                                 i.getSupply_id(), i.getSupply_name(), i.getLimit_day(), i.getLimit_week(),
-                                i.getLimit_month(), i.getLimit_per_person(),i.getPrice()
+                                i.getLimit_month(),i.getPrice()
                         });
                     }
                 }
@@ -211,7 +211,7 @@ public class ListSupplyPanel extends JPanel {
                 {
                     Productdef.addRow(new Object[]{
                             i.getSupply_id(), i.getSupply_name(), i.getLimit_day(), i.getLimit_week(),
-                            i.getLimit_month(), i.getLimit_per_person(),i.getPrice()
+                            i.getLimit_month(),i.getPrice()
                     });
                 }
             }
@@ -226,7 +226,7 @@ public class ListSupplyPanel extends JPanel {
                 {
                     Productdef.addRow(new Object[]{
                             i.getSupply_id(), i.getSupply_name(), i.getLimit_day(), i.getLimit_week(),
-                            i.getLimit_month(), i.getLimit_per_person(),i.getPrice()
+                            i.getLimit_month(), i.getPrice()
                     });
                 }
             }
@@ -241,7 +241,7 @@ public class ListSupplyPanel extends JPanel {
                 {
                     Productdef.addRow(new Object[]{
                             i.getSupply_id(), i.getSupply_name(), i.getLimit_day(), i.getLimit_week(),
-                            i.getLimit_month(), i.getLimit_per_person(),i.getPrice()
+                            i.getLimit_month(), i.getPrice()
                     });
                 }
             }
@@ -256,7 +256,7 @@ public class ListSupplyPanel extends JPanel {
                 {
                     Productdef.addRow(new Object[]{
                             i.getSupply_id(), i.getSupply_name(), i.getLimit_day(), i.getLimit_week(),
-                            i.getLimit_month(), i.getLimit_per_person(),i.getPrice()
+                            i.getLimit_month(), i.getPrice()
                     });
                 }
             }
@@ -271,7 +271,7 @@ public class ListSupplyPanel extends JPanel {
                 {
                     Productdef.addRow(new Object[]{
                             i.getSupply_id(), i.getSupply_name(), i.getLimit_day(), i.getLimit_week(),
-                            i.getLimit_month(), i.getLimit_per_person(),i.getPrice()
+                            i.getLimit_month(), i.getPrice()
                     });
                 }
             }
@@ -286,7 +286,7 @@ public class ListSupplyPanel extends JPanel {
                 {
                     Productdef.addRow(new Object[]{
                             i.getSupply_id(), i.getSupply_name(), i.getLimit_day(), i.getLimit_week(),
-                            i.getLimit_month(), i.getLimit_per_person(),i.getPrice()
+                            i.getLimit_month(), i.getPrice()
                     });
                 }
             }
@@ -301,7 +301,7 @@ public class ListSupplyPanel extends JPanel {
                 {
                     Productdef.addRow(new Object[]{
                             i.getSupply_id(), i.getSupply_name(), i.getLimit_day(), i.getLimit_week(),
-                            i.getLimit_month(), i.getLimit_per_person(),i.getPrice()
+                            i.getLimit_month(), i.getPrice()
                     });
                 }
             }

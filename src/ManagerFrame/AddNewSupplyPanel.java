@@ -138,7 +138,6 @@ public class AddNewSupplyPanel extends JPanel {
                         newsupply.setLimit_day(Integer.parseInt(LimitDayField.getText()));
                         newsupply.setLimit_week(Integer.parseInt(LimitWeekField.getText()));
                         newsupply.setLimit_month(Integer.parseInt(LimitMonthField.getText()));
-                        newsupply.setLimit_per_person(Integer.parseInt(LimitPersonField.getText()));
                         newsupply.setPrice(Integer.parseInt(PriceField.getText()));
                         if (getDB.Supply.FunctionSupply.CheckExisted(newsupply.getSupply_id()))
                         {

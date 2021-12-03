@@ -4,7 +4,10 @@ import java.sql.Date;
 
 public class supply_limit {
     String supply_id, username;
-    int current_use;
+    int use_day;
+    int use_week;
+    int use_month;
+
     Date start_date, update_date;
 
     public String getSupply_id() {
@@ -23,12 +26,28 @@ public class supply_limit {
         this.username = username;
     }
 
-    public int getCurrent_use() {
-        return current_use;
+    public int getUse_day() {
+        return use_day;
     }
 
-    public void setCurrent_use(int current_use) {
-        this.current_use = current_use;
+    public void setUse_day(int use_day) {
+        this.use_day = use_day;
+    }
+
+    public int getUse_week() {
+        return use_week;
+    }
+
+    public void setUse_week(int use_week) {
+        this.use_week = use_week;
+    }
+
+    public int getUse_month() {
+        return use_month;
+    }
+
+    public void setUse_month(int use_month) {
+        this.use_month = use_month;
     }
 
     public Date getStart_date() {

@@ -85,19 +85,6 @@ public class EditSupplyPanel extends JPanel {
         LimitMonthPane.add(LimitMonthLabel);
         LimitMonthPane.add(LimitMonthField);
 
-
-        JPanel LimitPersonPane = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        LimitPersonPane.setBackground(Constant.my_gray);
-        EditSupplyPanel.add(LimitPersonPane);
-        JLabel LitmitPersonLabel = new JLabel("Limit person:  ");
-        LitmitPersonLabel.setFont(Constant.LABEL_FONT);
-        LitmitPersonLabel.setForeground(Constant.my_white);
-        JTextField LimitPersonField = new JTextField();
-        LimitPersonField.setText(String.valueOf(EditInfoSupply.getLimit_per_person()));
-        LimitPersonField.setColumns(30);
-        LimitPersonPane.add(LitmitPersonLabel);
-        LimitPersonPane.add(LimitPersonField);
-
         JPanel PricePane = new JPanel(new FlowLayout(FlowLayout.LEFT));
         PricePane.setBackground(Constant.my_gray);
         EditSupplyPanel.add(PricePane);
@@ -134,7 +121,7 @@ public class EditSupplyPanel extends JPanel {
         EditSupplyConfirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(SupplyIdField.getText().isEmpty() || SupplyNameField.getText().isEmpty() || LimitDayField.getText().isEmpty() || LimitPersonField.getText().isEmpty()
+                if(SupplyIdField.getText().isEmpty() || SupplyNameField.getText().isEmpty() || LimitDayField.getText().isEmpty()
                         || LimitWeekField.getText().isEmpty() || LimitMonthField.getText().isEmpty() || PriceField.getText().isEmpty())
                 {
                     JOptionPane.showMessageDialog(EditSupplyPanel.this, "Please fill correcly information","error",JOptionPane.ERROR_MESSAGE);
@@ -149,7 +136,6 @@ public class EditSupplyPanel extends JPanel {
                         newinfosupply.setLimit_day(Integer.parseInt(LimitDayField.getText()));
                         newinfosupply.setLimit_week(Integer.parseInt(LimitWeekField.getText()));
                         newinfosupply.setLimit_month(Integer.parseInt(LimitMonthField.getText()));
-                        newinfosupply.setLimit_per_person(Integer.parseInt(LimitPersonField.getText()));
                         newinfosupply.setPrice(Integer.parseInt(PriceField.getText()));
 
                         getDB.Supply.FunctionSupply.UpdateSupply(newinfosupply);

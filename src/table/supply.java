@@ -49,13 +49,6 @@ public class supply {
         this.limit_day = limit_day;
     }
 
-    public int getLimit_per_person() {
-        return limit_per_person;
-    }
-
-    public void setLimit_per_person(int limit_per_person) {
-        this.limit_per_person = limit_per_person;
-    }
 
     public int getPrice() {
         return price;

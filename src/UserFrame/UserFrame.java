@@ -97,7 +97,7 @@ public class UserFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JPanel contentPane = (JPanel) getContentPane();
-                JPanel buySupply = new BuySupply();
+                JPanel buySupply = new BuySupply(username);
 
                 contentPane.removeAll();
                 contentPane.add(buySupply);

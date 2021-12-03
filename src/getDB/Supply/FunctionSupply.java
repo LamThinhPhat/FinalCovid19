@@ -27,8 +27,7 @@ public class FunctionSupply {
                 supplyinfo.setLimit_day(rs.getInt(3));
                 supplyinfo.setLimit_week(rs.getInt(4));
                 supplyinfo.setLimit_month(rs.getInt(5));
-                supplyinfo.setLimit_per_person(rs.getInt(6));
-                supplyinfo.setPrice(rs.getInt(7));
+                supplyinfo.setPrice(rs.getInt(6));
                 Supplylist.add(supplyinfo);
             }
         }catch (SQLException err)
@@ -54,8 +53,7 @@ public class FunctionSupply {
                 supplyinfo.setSupply_id(rs.getString(1));
                 supplyinfo.setSupply_name(rs.getString(2));
                 supplyinfo.setLimit_day(rs.getInt(3));
-                supplyinfo.setLimit_per_person(rs.getInt(4));
-                supplyinfo.setPrice(rs.getInt(5));
+                supplyinfo.setPrice(rs.getInt(4));
                 Supplylist.add(supplyinfo);
             }
         }catch (SQLException err)
@@ -114,8 +112,7 @@ public class FunctionSupply {
                 supplyinfo.setLimit_day(rs.getInt(3));
                 supplyinfo.setLimit_week(rs.getInt(4));
                 supplyinfo.setLimit_month(rs.getInt(5));
-                supplyinfo.setLimit_per_person(rs.getInt(6));
-                supplyinfo.setPrice(rs.getInt(7));
+                supplyinfo.setPrice(rs.getInt(6));
                 return supplyinfo;
             }
         }catch (SQLException err)
@@ -138,8 +135,7 @@ public class FunctionSupply {
             PrSt.setInt(3, newsupply.getLimit_day());
             PrSt.setInt(4,newsupply.getLimit_week());
             PrSt.setInt(5,newsupply.getLimit_month());
-            PrSt.setInt(6,newsupply.getLimit_per_person());
-            PrSt.setInt(7,newsupply.getPrice());
+            PrSt.setInt(6,newsupply.getPrice());
             PrSt.executeUpdate();
         }catch(SQLException err)
         {
@@ -159,9 +155,8 @@ public class FunctionSupply {
             PrSt.setInt(2, newinfosupply.getLimit_day());
             PrSt.setInt(3, newinfosupply.getLimit_week());
             PrSt.setInt(4, newinfosupply.getLimit_month());
-            PrSt.setInt(5, newinfosupply.getLimit_per_person());
-            PrSt.setInt(6, newinfosupply.getPrice());
-            PrSt.setString(7, newinfosupply.getSupply_id());
+            PrSt.setInt(5, newinfosupply.getPrice());
+            PrSt.setString(6, newinfosupply.getSupply_id());
             PrSt.executeUpdate();
         }catch(SQLException err)
         {
@@ -186,8 +181,7 @@ public class FunctionSupply {
                 supplyinfo.setLimit_day(rs.getInt(3));
                 supplyinfo.setLimit_week(rs.getInt(4));
                 supplyinfo.setLimit_month(rs.getInt(5));
-                supplyinfo.setLimit_per_person(rs.getInt(6));
-                supplyinfo.setPrice(rs.getInt(7));
+                supplyinfo.setPrice(rs.getInt(6));
                 Supplylist.add(supplyinfo);
             }
         }catch (SQLException err)
@@ -214,8 +208,7 @@ public class FunctionSupply {
                 supplyinfo.setLimit_day(rs.getInt(3));
                 supplyinfo.setLimit_week(rs.getInt(4));
                 supplyinfo.setLimit_month(rs.getInt(5));
-                supplyinfo.setLimit_per_person(rs.getInt(6));
-                supplyinfo.setPrice(rs.getInt(7));
+                supplyinfo.setPrice(rs.getInt(6));
                 Supplylist.add(supplyinfo);
             }
         }catch (SQLException err)
@@ -242,8 +235,7 @@ public class FunctionSupply {
                 supplyinfo.setLimit_day(rs.getInt(3));
                 supplyinfo.setLimit_week(rs.getInt(4));
                 supplyinfo.setLimit_month(rs.getInt(5));
-                supplyinfo.setLimit_per_person(rs.getInt(6));
-                supplyinfo.setPrice(rs.getInt(7));
+                supplyinfo.setPrice(rs.getInt(6));
                 Supplylist.add(supplyinfo);
             }
         }catch (SQLException err)
@@ -270,8 +262,7 @@ public class FunctionSupply {
                 supplyinfo.setLimit_day(rs.getInt(3));
                 supplyinfo.setLimit_week(rs.getInt(4));
                 supplyinfo.setLimit_month(rs.getInt(5));
-                supplyinfo.setLimit_per_person(rs.getInt(6));
-                supplyinfo.setPrice(rs.getInt(7));
+                supplyinfo.setPrice(rs.getInt(6));
                 Supplylist.add(supplyinfo);
             }
         }catch (SQLException err)
@@ -298,8 +289,7 @@ public class FunctionSupply {
                 supplyinfo.setLimit_day(rs.getInt(3));
                 supplyinfo.setLimit_week(rs.getInt(4));
                 supplyinfo.setLimit_month(rs.getInt(5));
-                supplyinfo.setLimit_per_person(rs.getInt(6));
-                supplyinfo.setPrice(rs.getInt(7));
+                supplyinfo.setPrice(rs.getInt(6));
                 Supplylist.add(supplyinfo);
             }
         }catch (SQLException err)
@@ -326,8 +316,7 @@ public class FunctionSupply {
                 supplyinfo.setLimit_day(rs.getInt(3));
                 supplyinfo.setLimit_week(rs.getInt(4));
                 supplyinfo.setLimit_month(rs.getInt(5));
-                supplyinfo.setLimit_per_person(rs.getInt(6));
-                supplyinfo.setPrice(rs.getInt(7));
+                supplyinfo.setPrice(rs.getInt(6));
                 Supplylist.add(supplyinfo);
             }
         }catch (SQLException err)
@@ -354,8 +343,7 @@ public class FunctionSupply {
                 supplyinfo.setLimit_day(rs.getInt(3));
                 supplyinfo.setLimit_week(rs.getInt(4));
                 supplyinfo.setLimit_month(rs.getInt(5));
-                supplyinfo.setLimit_per_person(rs.getInt(6));
-                supplyinfo.setPrice(rs.getInt(7));
+                supplyinfo.setPrice(rs.getInt(6));
                 Supplylist.add(supplyinfo);
             }
         }catch (SQLException err)
@@ -365,4 +353,84 @@ public class FunctionSupply {
         return Supplylist;
     }
 
+    public static ArrayList<supply> GetAllSupplyInfoSort(String sortby) {
+        ArrayList<supply> Supplylist = new ArrayList<supply>();
+        Connection conn = jdbc_connector.getConnection();
+        String sql  = "SELECT * FROM supply ";
+        if(sortby.equals("Sort id")) sql  +=  "ORDER BY supply_id";
+        else if(sortby.equals("Sort name")) sql  += "ORDER BY supply_name";
+        else sql  += "ORDER BY price";
+        try
+        {
+            PreparedStatement PrSt = conn.prepareStatement(sql);
+            ResultSet rs = PrSt.executeQuery();
+            while(rs.next())
+            {
+                supply supplyinfo = new supply();
+                supplyinfo.setSupply_id(rs.getString(1));
+                supplyinfo.setSupply_name(rs.getString(2));
+                supplyinfo.setLimit_day(rs.getInt(3));
+                supplyinfo.setLimit_week(rs.getInt(4));
+                supplyinfo.setLimit_month(rs.getInt(5));
+                supplyinfo.setPrice(rs.getInt(6));
+                Supplylist.add(supplyinfo);
+            }
+        }catch (SQLException err)
+        {
+            err.printStackTrace();
+        }
+        return Supplylist;
+    }
+
+    public static ArrayList<supply> GetAllSupplyInfoFilter50k() {
+        ArrayList<supply> Supplylist = new ArrayList<supply>();
+        Connection conn = jdbc_connector.getConnection();
+        String sql  = "SELECT * FROM supply where price<50000 ";
+        try
+        {
+            PreparedStatement PrSt = conn.prepareStatement(sql);
+            ResultSet rs = PrSt.executeQuery();
+            while(rs.next())
+            {
+                supply supplyinfo = new supply();
+                supplyinfo.setSupply_id(rs.getString(1));
+                supplyinfo.setSupply_name(rs.getString(2));
+                supplyinfo.setLimit_day(rs.getInt(3));
+                supplyinfo.setLimit_week(rs.getInt(4));
+                supplyinfo.setLimit_month(rs.getInt(5));
+                supplyinfo.setPrice(rs.getInt(6));
+                Supplylist.add(supplyinfo);
+            }
+        }catch (SQLException err)
+        {
+            err.printStackTrace();
+        }
+        return Supplylist;
+    }
+
+    public static ArrayList<supply> GetAllSupplyInfoFilter100k() {
+        ArrayList<supply> Supplylist = new ArrayList<supply>();
+        Connection conn = jdbc_connector.getConnection();
+        String sql  = "SELECT * FROM supply where price<100000 ";
+        try
+        {
+            PreparedStatement PrSt = conn.prepareStatement(sql);
+            ResultSet rs = PrSt.executeQuery();
+            while(rs.next())
+            {
+                supply supplyinfo = new supply();
+                supplyinfo.setSupply_id(rs.getString(1));
+                supplyinfo.setSupply_name(rs.getString(2));
+                supplyinfo.setLimit_day(rs.getInt(3));
+                supplyinfo.setLimit_week(rs.getInt(4));
+                supplyinfo.setLimit_month(rs.getInt(5));
+                supplyinfo.setPrice(rs.getInt(6));
+                Supplylist.add(supplyinfo);
+            }
+        }catch (SQLException err)
+        {
+            err.printStackTrace();
+        }
+        return Supplylist;
+    }
 }
