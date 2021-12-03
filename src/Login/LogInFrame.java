@@ -65,12 +65,11 @@ public class LogInFrame extends JFrame {
         Header.setBackground(Constant.my_gray);
         contentPane.add(Header);
 
-
-
         JPanel UserNamePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JLabel UserNameLabel = new JLabel("Username");
+        JLabel UserNameLabel = new JLabel("Username: ");
         UserNameLabel.setFont(Constant.LABEL_FONT);
         JTextField UserNameInput = new JTextField();
+        UserNameInput.setFont(Constant.INFO_FONT);
         UserNameLabel.setForeground(Constant.my_white);
         UserNamePanel.setBackground(Constant.my_gray);
 
@@ -80,12 +79,13 @@ public class LogInFrame extends JFrame {
         contentPane.add(UserNamePanel);
 
         JPanel PassPannel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JLabel PassLabel = new JLabel("Password");
+        JLabel PassLabel = new JLabel("Password: ");
         PassLabel.setFont(Constant.LABEL_FONT);
         JPasswordField PassInput = new JPasswordField();
         PassLabel.setForeground(Constant.my_white);
         PassPannel.setBackground(Constant.my_gray);
         PassInput.setColumns(15);
+        PassInput.setFont(Constant.INFO_FONT);
         PassPannel.add(PassLabel);
         PassPannel.add(PassInput);
         contentPane.add(PassPannel);
@@ -94,6 +94,7 @@ public class LogInFrame extends JFrame {
         JPanel ButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         Login.setForeground(Constant.my_white);
         Login.setBackground(new Color(77,82,77));
+        Login.setFont(Constant.LABEL_FONT);
         ButtonPanel.add(Login);
         ButtonPanel.setBackground(Constant.my_gray);
         contentPane.add(ButtonPanel);
