@@ -47,16 +47,18 @@ public class ManagerFrame extends JFrame {
         JPanel ButtonChangePane = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JButton AddNewUserButton = new JButton("Add new user");
         JButton ChangeListUserButton = new JButton("List User");
-        JButton ChangeListProductButton = new JButton("List Supply");
+        JButton ChangeListSupplyButton = new JButton("List Supply");
+        JButton ChangeStaticticButton = new JButton("Statistic");
         ButtonChangePane.add(AddNewUserButton);
         ButtonChangePane.add(ChangeListUserButton);
-        ButtonChangePane.add(ChangeListProductButton);
+        ButtonChangePane.add(ChangeListSupplyButton);
+        ButtonChangePane.add(ChangeStaticticButton);
         ButtonChangePane.setBackground(Constant.my_gray);
 
 
         setContentPane(contentPane);
         contentPane.add(ButtonChangePane);
-        ShowPanel = new ListSupplyPanel();
+        ShowPanel = new StatisticPanel();
         contentPane.add(ShowPanel);
 
         AddNewUserButton.addActionListener(new ActionListener() {
@@ -78,12 +80,23 @@ public class ManagerFrame extends JFrame {
             }
         });
 
-        ChangeListProductButton.addActionListener(new ActionListener() {
+        ChangeListSupplyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ShowPanel.setVisible(false);
                 ShowPanel.removeAll();
                 ShowPanel.add(new ListSupplyPanel());
+                ShowPanel.revalidate();
+                ShowPanel.setVisible(true);
+            }
+        });
+
+        ChangeStaticticButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ShowPanel.setVisible(false);
+                ShowPanel.removeAll();
+                ShowPanel.add(new StatisticPanel());
                 ShowPanel.revalidate();
                 ShowPanel.setVisible(true);
             }
