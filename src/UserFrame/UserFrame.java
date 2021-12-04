@@ -3,11 +3,12 @@ package UserFrame;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import Login.LogInFrame;
 
 public class UserFrame extends JFrame {
     private JMenuBar mainMenu;
     private JMenu mUser, mSupply, mPayment;
-    private JMenuItem iInformation, iManagedHistory, iLogout, iSupplyHistory, iBuySupply ,iCheckOut, iPaymentHistory;
+    private JMenuItem iInformation, iManagedHistory, iChangePass, iLogout, iSupplyHistory, iBuySupply ,iCheckOut, iPaymentHistory;
 
     public UserFrame(String username)
     {
@@ -15,6 +16,8 @@ public class UserFrame extends JFrame {
         setSize(720, 500);
         setResizable(false);
         setLocationRelativeTo(null);
+        JPanel contentPane = (JPanel) getContentPane();
+        setContentPane(contentPane);
 
         mainMenu = new JMenuBar();
         mUser = new JMenu("User");
@@ -27,9 +30,11 @@ public class UserFrame extends JFrame {
         iPaymentHistory = new JMenuItem("Payment history");
         iCheckOut = new JMenuItem("Checkout");
         iLogout = new JMenuItem("Log out");
+        iChangePass = new JMenuItem("Change Password");
 
         mUser.add(iInformation);
         mUser.add(iManagedHistory);
+        mUser.add(iChangePass);
         mUser.add(iLogout);
 
         mSupply.add(iSupplyHistory);
@@ -44,7 +49,7 @@ public class UserFrame extends JFrame {
         setJMenuBar(mainMenu);
 
         JPanel informationPanel = new Information(username);
-        setContentPane(informationPanel);
+        contentPane.add(informationPanel);
 
         iInformation.addActionListener(new ActionListener() {
             @Override
@@ -72,11 +77,24 @@ public class UserFrame extends JFrame {
             }
         });
 
+        iChangePass.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JPanel contentPane = (JPanel) getContentPane();
+                JPanel changePassword = new ChangePassword(username);
+                changePassword.setVisible(true);
+                contentPane.removeAll();
+                contentPane.add(changePassword);
+                contentPane.revalidate();
+                contentPane.repaint();
+            }
+        });
+
         iLogout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                //open login frame
+                new LogInFrame().setVisible(true);
             }
         });
 

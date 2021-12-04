@@ -27,7 +27,9 @@ public class Information  extends JPanel{
 
         lbHeader = new JLabel("USER INFORMATION");
         lbHeader.setFont(Constant.HEADER_FONT);
+        lbHeader.setForeground(Constant.my_white);
         headerPanel.add(lbHeader);
+        headerPanel.setBackground(Constant.my_gray);
 
         lbName = new JLabel("Name:");
         lbId = new JLabel("ID:");
@@ -51,7 +53,6 @@ public class Information  extends JPanel{
             String sql = "select * from covid_user left join facility on covid_user.facility_id = facility.facility_id"
                     + " left join address on covid_user.address_id = address.address_id"
                     + " where username = '" + username + "';";
-            System.out.println(sql);
             ResultSet re = sta.executeQuery(sql);
 
             while(re.next()) {
