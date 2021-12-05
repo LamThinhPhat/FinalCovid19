@@ -1,9 +1,10 @@
 package UserFrame;
 
+import Login.LogInFrame;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import Login.LogInFrame;
 
 public class UserFrame extends JFrame {
     private JMenuBar mainMenu;
@@ -137,17 +138,14 @@ public class UserFrame extends JFrame {
             }
         });
 
-        iCheckOut.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JPanel contentPane = (JPanel) getContentPane();
-                JPanel checkOut = new CheckOut();
+        iCheckOut.addActionListener(e -> {
+            JPanel contentPane1 = (JPanel) getContentPane();
+            JPanel checkOut = new CheckOut();
 
-                contentPane.removeAll();
-                contentPane.add(checkOut);
-                contentPane.revalidate();
-                contentPane.repaint();
-            }
+            contentPane1.removeAll();
+            contentPane1.add(checkOut);
+            contentPane1.revalidate();
+            contentPane1.repaint();
         });
 
 

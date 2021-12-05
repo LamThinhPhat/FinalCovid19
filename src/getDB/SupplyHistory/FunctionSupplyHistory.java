@@ -53,4 +53,24 @@ public class FunctionSupplyHistory {
         }
         return result;
     }
+
+    static public void AddNewSupplyHistory(supply_history new_history)
+    {
+        Connection conn = jdbc_connector.getConnection();
+        String sql  = "INSERT INTO supply_history (supply_id, username, create_date, quantity) "
+                + "VALUE(?, ?, ?, ?)";
+        try {
+            PreparedStatement PrSt = conn.prepareStatement(sql);
+
+            PrSt.setString(1, new_history.getSupply_id());
+            PrSt.setString(2, new_history.getUsername());
+            PrSt.setDate(3, new_history.getCreate_date());
+            PrSt.setInt(4,new_history.getQuantity());
+
+            PrSt.executeUpdate();
+        }catch(SQLException err)
+        {
+            err.printStackTrace();
+        }
+    }
 }

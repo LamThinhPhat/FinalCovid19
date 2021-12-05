@@ -28,6 +28,14 @@ public class FunctionPaymentUser {
                 login.setDebt(rs.getInt(3));
                 return login;
             }
+            if(rs.wasNull()){
+                payment_user user = new payment_user();
+                user.setUsername(username);
+                user.setBalance(10000);
+                user.setDebt(0);
+                AddPaymentAccount(user);
+                return user;
+            }
         }catch (SQLException err)
         {
             err.printStackTrace();
@@ -58,5 +66,37 @@ public class FunctionPaymentUser {
             err.printStackTrace();
         }
         return list;
+    }
+
+    static public void AddPaymentAccount(payment_user user) {
+        Connection conn = jdbc_connector.getConnection();
+        String sql = "INSERT INTO payment_user (username,balance,debt) "
+                + "VALUE(?, ?, ? )";
+        try {
+            PreparedStatement PrSt = conn.prepareStatement(sql);
+            PrSt.setString(1, user.getUsername());
+            PrSt.setInt(2, user.getBalance());
+            PrSt.setInt(3, user.getDebt());
+            PrSt.executeUpdate();
+        } catch (SQLException err) {
+            err.printStackTrace();
+        }
+    }
+    static public void UpdateDebt(payment_user user)
+    {
+        Connection conn = jdbc_connector.getConnection();
+        String sql = "UPDATE payment_user SET" +
+                " debt=?"+"  WHERE username = ?";
+        try {
+            PreparedStatement PrSt = conn.prepareStatement(sql);
+
+            PrSt.setInt(1,user.getDebt());
+            PrSt.setString(2, user.getUsername());
+
+            PrSt.executeUpdate();
+        }catch(SQLException err)
+        {
+            err.printStackTrace();
+        }
     }
 }

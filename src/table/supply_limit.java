@@ -4,11 +4,25 @@ import java.sql.Date;
 
 public class supply_limit {
     String supply_id, username;
+    Date start_date,update_date;
     int use_day;
     int use_week;
     int use_month;
 
-    Date start_date, update_date;
+    public static supply_limit create_new(String supply_id, String username){
+        supply_limit new_sl=new supply_limit();
+        long millis=System.currentTimeMillis();
+
+        new_sl.setSupply_id(supply_id);
+        new_sl.setUsername(username);
+        new_sl.setUse_month(0);
+        new_sl.setUse_week(0);
+        new_sl.setUse_day(0);
+        new_sl.setStart_date(new Date(millis));
+        new_sl.setUpdate_date(new Date(millis));
+
+        return new_sl;
+    };
 
     public String getSupply_id() {
         return supply_id;
@@ -65,4 +79,6 @@ public class supply_limit {
     public void setUpdate_date(Date update_date) {
         this.update_date = update_date;
     }
+
+
 }

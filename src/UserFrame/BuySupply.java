@@ -193,7 +193,15 @@ public class BuySupply extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                
+                int row = SupplyTable.getSelectedRow();
+                if(row == -1)
+                {
+                    JOptionPane.showMessageDialog(BuySupply.this, "Please pick a supply to buy", "Error",JOptionPane.ERROR_MESSAGE);
+                }else {
+                    supply chosen=getDB.Supply.FunctionSupply.GetInfoSupply((String) SupplyTable.getValueAt(row, 0));
+                    String supply_id=chosen.getSupply_id();
+                    new BuyFrame(chosen,username ).setVisible(true);
+                }
             }});
 
         add(nav);
