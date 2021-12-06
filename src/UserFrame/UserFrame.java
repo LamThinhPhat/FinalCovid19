@@ -2,9 +2,12 @@ package UserFrame;
 
 import Login.LogInFrame;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
 public class UserFrame extends JFrame {
     private JMenuBar mainMenu;
@@ -13,6 +16,14 @@ public class UserFrame extends JFrame {
 
     public UserFrame(String username)
     {
+        setTitle("Covid Management System");
+        ImageIcon covid_icon=null;
+        try {
+            covid_icon=new ImageIcon(ImageIO.read(new File("rsc/covid_icon.png")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        setIconImage(covid_icon.getImage());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(720, 500);
         setResizable(false);

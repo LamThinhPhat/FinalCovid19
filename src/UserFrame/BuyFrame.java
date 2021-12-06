@@ -6,16 +6,27 @@ import table.supply;
 import table.supply_history;
 import table.supply_limit;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 public class BuyFrame extends JFrame {
     public BuyFrame(supply chosen, String user) {
+        setTitle("Covid Management System");
+        ImageIcon covid_icon=null;
+        try {
+            covid_icon=new ImageIcon(ImageIO.read(new File("rsc/covid_icon.png")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        setIconImage(covid_icon.getImage());
         setSize(720, 800);
         setResizable(true);
         setLocationRelativeTo(null);
@@ -244,9 +255,7 @@ public class BuyFrame extends JFrame {
                 newSH.setSupply_id(new_limit.getSupply_id());
                 newSH.setCreate_date(new_limit.getUpdate_date());
                 newSH.setQuantity(Integer.parseInt(QuantityBox.getSelectedItem().toString()));
-                int shid= getDB.SupplyHistory.FunctionSupplyHistory.GetNewID(newSH);
-                if(shid==-1) shid=1;
-                newSH.setSHId(shid);
+                newSH.setSHId(getDB.SupplyHistory.FunctionSupplyHistory.GetNewID(newSH));
                 getDB.SupplyHistory.FunctionSupplyHistory.AddNewSupplyHistory(newSH);
                 payment_user update_user = getDB.PaymentUser.FunctionPaymentUser.GetPaymentAccount(user);
                 update_user.setDebt(update_user.getDebt()+Integer.parseInt(QuantityBox.getSelectedItem().toString())*chosen.getPrice());

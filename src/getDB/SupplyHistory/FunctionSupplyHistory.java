@@ -80,14 +80,12 @@ public class FunctionSupplyHistory {
 
     static public int GetNewID(supply_history sh) {
         Connection conn = jdbc_connector.getConnection();
-        String sql = "SELECT * FROM supply_history WHERE username = ? and supply_id = ? ORDER BY sh_id DESC";
+        String sql = "SELECT * FROM supply_history  ORDER BY sh_id DESC";
         try {
             PreparedStatement PrSt = conn.prepareStatement(sql);
-            PrSt.setString(1, sh.getSupply_id());
-            PrSt.setString(2, sh.getUsername());
             ResultSet rs = PrSt.executeQuery();
             while(rs.next()){
-                if(rs.wasNull()) return -1;
+                if(rs.wasNull()) return 0;
             else return rs.getInt(1)+1;}
 
 
