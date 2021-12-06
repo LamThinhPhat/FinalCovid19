@@ -41,7 +41,7 @@ public class FunctionSupplyLimit {
     static public void AddNewSupplyLimit(supply_limit new_limit)
     {
         Connection conn = jdbc_connector.getConnection();
-        String sql  = "INSERT INTO supply_limit (supply_id, username, start_day, update_day, use_day, use_week, use_month)"
+        String sql  = "INSERT INTO supply_limit (supply_id, username, start_date, update_date, use_day, use_week, use_month)"
                 + "VALUE(?, ?, ?, ? , ?, ? ,?)";
         try {
             PreparedStatement PrSt = conn.prepareStatement(sql);

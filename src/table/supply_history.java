@@ -5,7 +5,16 @@ import java.sql.Date;
 public class supply_history {
     String supply_id, username;
     Date create_date;
+    int sh_id;
     int quantity;
+
+    public int getSHId() {
+        return sh_id;
+    }
+
+    public void setSHId(int sh_id) {
+        this.sh_id = sh_id;
+    }
 
     public String getSupply_id() {
         return supply_id;

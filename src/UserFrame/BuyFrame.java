@@ -214,6 +214,8 @@ public class BuyFrame extends JFrame {
         BuySupplyPanel.add(EditSupplyButtonSouth);
 
         JButton EditSupplyCancelButton = new JButton("Cancel");
+        EditSupplyCancelButton.setForeground(Constant.my_white);
+        EditSupplyCancelButton.setBackground(new Color(77,82,77));
         EditSupplyCancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -223,6 +225,8 @@ public class BuyFrame extends JFrame {
 
 
         JButton EditSupplyConfirmButton = new JButton("Confirm");
+        EditSupplyConfirmButton.setForeground(Constant.my_white);
+        EditSupplyConfirmButton.setBackground(new Color(77,82,77));
         boolean finalIsNew = isNew;
         EditSupplyConfirmButton.addActionListener(new ActionListener() {
             @Override
@@ -240,6 +244,9 @@ public class BuyFrame extends JFrame {
                 newSH.setSupply_id(new_limit.getSupply_id());
                 newSH.setCreate_date(new_limit.getUpdate_date());
                 newSH.setQuantity(Integer.parseInt(QuantityBox.getSelectedItem().toString()));
+                int shid= getDB.SupplyHistory.FunctionSupplyHistory.GetNewID(newSH);
+                if(shid==-1) shid=1;
+                newSH.setSHId(shid);
                 getDB.SupplyHistory.FunctionSupplyHistory.AddNewSupplyHistory(newSH);
                 payment_user update_user = getDB.PaymentUser.FunctionPaymentUser.GetPaymentAccount(user);
                 update_user.setDebt(update_user.getDebt()+Integer.parseInt(QuantityBox.getSelectedItem().toString())*chosen.getPrice());
@@ -257,8 +264,8 @@ public class BuyFrame extends JFrame {
             ReachLimit.setForeground(Constant.my_white);
             EditSupplyButtonSouth.add(ReachLimit);
             EditSupplyConfirmButton.setEnabled(false);
-            EditSupplyButtonSouth.add(EditSupplyCancelButton);
         }
+        EditSupplyButtonSouth.add(EditSupplyCancelButton);
         EditSupplyButtonSouth.add(EditSupplyConfirmButton);
 
 

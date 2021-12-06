@@ -187,7 +187,6 @@ public class BuySupply extends JPanel {
         Buy.setForeground(Constant.my_white);
         Buy.setBackground(new Color(77,82,77));
         BuyPanel.add(Buy);
-        BuyPanel.setBackground(Constant.my_gray);
 
         Buy.addActionListener(new ActionListener() {
             @Override

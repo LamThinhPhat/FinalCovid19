@@ -52,7 +52,7 @@ public class SupplyHistory extends JPanel {
         for(supply_history i : UDList)
         {
             SupplyDef.addRow(new Object[] {
-                    i.getSupply_id(),i.getCreate_date(),i.getQuantity(),getDB.SupplyHistory.FunctionSupplyHistory.GetPrice(i.getSupply_id(),username)
+                    i.getSupply_id(),i.getCreate_date(),i.getQuantity(),getDB.SupplyHistory.FunctionSupplyHistory.GetPrice(i.getSupply_id(),username,i.getSHId())
             });
         }
 
