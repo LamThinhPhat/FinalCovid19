@@ -23,7 +23,6 @@ public class AddFacilityFrame extends JFrame {
             e.printStackTrace();
         }
         setIconImage(covid_icon.getImage());
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(700, 500);
         setResizable(false);
         setLocationRelativeTo(null);
@@ -40,7 +39,7 @@ public class AddFacilityFrame extends JFrame {
 
         JPanel InputFacilityPane = new JPanel(new FlowLayout(FlowLayout.LEFT));
         contentPane.add(InputFacilityPane);
-        JLabel InputFacilityLabel = new JLabel("Input Facility Name:        ");
+        JLabel InputFacilityLabel = new JLabel("Input Facility ID:        ");
         InputFacilityLabel.setFont(Constant.LABEL_FONT);
         InputFacilityLabel.setForeground(Constant.my_white);
         JTextField NameField = new JTextField();
