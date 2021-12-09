@@ -53,7 +53,9 @@ public class FunctionSupply {
                 supplyinfo.setSupply_id(rs.getString(1));
                 supplyinfo.setSupply_name(rs.getString(2));
                 supplyinfo.setLimit_day(rs.getInt(3));
-                supplyinfo.setPrice(rs.getInt(4));
+                supplyinfo.setLimit_week(rs.getInt(4));
+                supplyinfo.setLimit_week(rs.getInt(5));
+                supplyinfo.setLimit_month(rs.getInt(6));
                 Supplylist.add(supplyinfo);
             }
         }catch (SQLException err)
@@ -125,8 +127,8 @@ public class FunctionSupply {
     static public void AddNewSupply(supply newsupply)
     {
         Connection conn = jdbc_connector.getConnection();
-        String sql  = "INSERT INTO supply (supply_id, supply_name, limit_day, limit_week, limit_month, limit_per_person, price)"
-                + "VALUE(?, ?, ?, ? , ?, ? ,?)";
+        String sql  = "INSERT INTO supply (supply_id, supply_name, limit_day, limit_week, limit_month, price)"
+                + "VALUE(?, ?, ?, ? , ?, ?)";
         try {
             PreparedStatement PrSt = conn.prepareStatement(sql);
 
@@ -147,7 +149,7 @@ public class FunctionSupply {
     {
         Connection conn = jdbc_connector.getConnection();
         String sql = "UPDATE supply SET supply_name = ?, limit_day = ? ,limit_week = ?, " +
-                "limit_month =?, limit_per_person = ?, price =? " +
+                "limit_month =?, price =? " +
                 "WHERE supply_id = ?";
         try {
             PreparedStatement PrSt = conn.prepareStatement(sql);
@@ -299,32 +301,6 @@ public class FunctionSupply {
         return Supplylist;
     }
 
-    static public ArrayList<supply> GetAllSupplyLimitPersonSort()
-    {
-        ArrayList<supply> Supplylist = new ArrayList<supply>();
-        Connection conn = jdbc_connector.getConnection();
-        String sql  = "SELECT * FROM supply ORDER BY limit_per_person";
-        try
-        {
-            PreparedStatement PrSt = conn.prepareStatement(sql);
-            ResultSet rs = PrSt.executeQuery();
-            while(rs.next())
-            {
-                supply supplyinfo = new supply();
-                supplyinfo.setSupply_id(rs.getString(1));
-                supplyinfo.setSupply_name(rs.getString(2));
-                supplyinfo.setLimit_day(rs.getInt(3));
-                supplyinfo.setLimit_week(rs.getInt(4));
-                supplyinfo.setLimit_month(rs.getInt(5));
-                supplyinfo.setPrice(rs.getInt(6));
-                Supplylist.add(supplyinfo);
-            }
-        }catch (SQLException err)
-        {
-            err.printStackTrace();
-        }
-        return Supplylist;
-    }
 
     static public ArrayList<supply> GetAllSupplyPriceSort()
     {

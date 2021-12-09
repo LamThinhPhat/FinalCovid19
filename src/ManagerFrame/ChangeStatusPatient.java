@@ -186,6 +186,8 @@ public class ChangeStatusPatient extends JPanel {
         EditUserPane.add(ChangeStatusButtonPaneSouth,BorderLayout.SOUTH);
 
         JButton ChangeStatusCancelButton = new JButton("Cancel");
+        ChangeStatusCancelButton.setForeground(Constant.my_white);
+        ChangeStatusCancelButton.setBackground(new Color(77,82,77));
         ChangeStatusCancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -202,6 +204,9 @@ public class ChangeStatusPatient extends JPanel {
 
 
         JButton ChangeStatusConfirmUserButton = new JButton("Confirm");
+        ChangeStatusConfirmUserButton.setForeground(Constant.my_white);
+        ChangeStatusConfirmUserButton.setBackground(new Color(77,82,77));
+
         ChangeStatusConfirmUserButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

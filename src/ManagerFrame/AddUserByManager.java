@@ -224,6 +224,9 @@ public class AddUserByManager extends JFrame {
         contentPane.add(ButtonPane);
 
         JButton CancelButton = new JButton("Cancel");
+        CancelButton.setForeground(Constant.my_white);
+        CancelButton.setBackground(new Color(77,82,77));
+
         CancelButton.setBackground(new Color(77,82,77));
         CancelButton.setForeground(Constant.my_white);
         CancelButton.addActionListener(new ActionListener() {

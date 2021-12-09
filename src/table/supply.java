@@ -22,7 +22,6 @@ public class supply {
     }
 
     int limit_week;
-    int limit_per_person;
     int price;
 
     public String getSupply_id() {

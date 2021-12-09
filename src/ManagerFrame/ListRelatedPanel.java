@@ -46,6 +46,9 @@ public class ListRelatedPanel extends JPanel{
         ShowListCenter.setViewportView(RelatedTable);
 
         JButton RefreshRelatedListButton = new JButton("Refresh list");
+        RefreshRelatedListButton.setForeground(Constant.my_white);
+        RefreshRelatedListButton.setBackground(new Color(77,82,77));
+
         RefreshRelatedListButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -61,6 +64,9 @@ public class ListRelatedPanel extends JPanel{
         });
 
         JButton CancelRelatedListButton = new JButton("Cancel");
+        CancelRelatedListButton.setForeground(Constant.my_white);
+        CancelRelatedListButton.setBackground(new Color(77,82,77));
+
         CancelRelatedListButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

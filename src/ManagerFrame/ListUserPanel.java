@@ -63,7 +63,10 @@ public class ListUserPanel extends JPanel {
 
         ListCovidUserCenter.setViewportView(CovidUserTable);
 
+
         JButton RefreshButton = new JButton("Refresh");
+        RefreshButton.setForeground(Constant.my_white);
+        RefreshButton.setBackground(new Color(77,82,77));
         RefreshButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -85,7 +88,8 @@ public class ListUserPanel extends JPanel {
         SearchUserNameField.setColumns(15);
 
         JButton SearchUserNameButton = new JButton("Search by UserName");
-
+        SearchUserNameButton.setForeground(Constant.my_white);
+        SearchUserNameButton.setBackground(new Color(77,82,77));
         SearchUserNameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e)
@@ -130,8 +134,16 @@ public class ListUserPanel extends JPanel {
         ListUsercontentPane.add(EastPanelListUser,BorderLayout.EAST);
 
         JButton ShowListRelated = new JButton("List related");
+        ShowListRelated.setForeground(Constant.my_white);
+        ShowListRelated.setBackground(new Color(77,82,77));
+
         JButton ShowHistoryUpdate = new JButton("Update History");
+        ShowHistoryUpdate.setForeground(Constant.my_white);
+        ShowHistoryUpdate.setBackground(new Color(77,82,77));
+
         JButton EditUser = new JButton("Edit");
+        EditUser.setForeground(Constant.my_white);
+        EditUser.setBackground(new Color(77,82,77));
 
         EastPanelListUser.add(ShowListRelated);
         EastPanelListUser.add(ShowHistoryUpdate);
@@ -143,12 +155,32 @@ public class ListUserPanel extends JPanel {
         ListUsercontentPane.add(WestPanelSortUser,BorderLayout.WEST);
 
         JButton SortByUserName = new JButton("Sort username");
+        SortByUserName.setForeground(Constant.my_white);
+        SortByUserName.setBackground(new Color(77,82,77));
+
         JButton SortByFullName = new JButton("Sort fullname");
+        SortByFullName.setForeground(Constant.my_white);
+        SortByFullName.setBackground(new Color(77,82,77));
+
         JButton SortByID = new JButton("Sort ID");
+        SortByID.setForeground(Constant.my_white);
+        SortByID.setBackground(new Color(77,82,77));
+
         JButton SortByDoB = new JButton("Sort DoB");
+        SortByDoB.setForeground(Constant.my_white);
+        SortByDoB.setBackground(new Color(77,82,77));
+
         JButton SortByCity = new JButton("Sort City");
+        SortByCity.setForeground(Constant.my_white);
+        SortByCity.setBackground(new Color(77,82,77));
+
         JButton SortByStatus = new JButton("Sort Status");
+        SortByStatus.setForeground(Constant.my_white);
+        SortByStatus.setBackground(new Color(77,82,77));
+
         JButton SortByFacility = new JButton("Sort Facility");
+        SortByFacility.setForeground(Constant.my_white);
+        SortByFacility.setBackground(new Color(77,82,77));
 
         WestPanelSortUser.add(SortByUserName);
         WestPanelSortUser.add(SortByFullName);

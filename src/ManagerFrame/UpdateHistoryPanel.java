@@ -51,6 +51,9 @@ public class UpdateHistoryPanel extends JPanel {
         ShowHistoryCenter.setViewportView(HistoryTable);
 
         JButton RefreshHistoryListButton = new JButton("Refresh list");
+        RefreshHistoryListButton.setForeground(Constant.my_white);
+        RefreshHistoryListButton.setBackground(new Color(77,82,77));
+
         RefreshHistoryListButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -68,6 +71,9 @@ public class UpdateHistoryPanel extends JPanel {
         });
 
         JButton CancelHistoryListButton = new JButton("Cancel");
+        CancelHistoryListButton.setForeground(Constant.my_white);
+        CancelHistoryListButton.setBackground(new Color(77,82,77));
+
         CancelHistoryListButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

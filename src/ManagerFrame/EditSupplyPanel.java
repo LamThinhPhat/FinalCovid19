@@ -102,6 +102,9 @@ public class EditSupplyPanel extends JPanel {
         EditSupplyPanel.add(EditSupplyButtonSouth);
 
         JButton EditSupplyCancelButton = new JButton("Cancel");
+        EditSupplyCancelButton.setForeground(Constant.my_white);
+        EditSupplyCancelButton.setBackground(new Color(77,82,77));
+
         EditSupplyCancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -118,6 +121,9 @@ public class EditSupplyPanel extends JPanel {
         EditSupplyButtonSouth.add(EditSupplyCancelButton);
 
         JButton EditSupplyConfirmButton = new JButton("Confirm");
+        EditSupplyConfirmButton.setForeground(Constant.my_white);
+        EditSupplyConfirmButton.setBackground(new Color(77,82,77));
+
         EditSupplyConfirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

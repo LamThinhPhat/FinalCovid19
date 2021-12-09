@@ -77,17 +77,6 @@ public class AddNewSupplyPanel extends JPanel {
         LimitMonthPane.add(LimitMonthField);
 
 
-        JPanel LimitPersonPane = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        LimitPersonPane.setBackground(Constant.my_gray);
-        AddSupplyPanel.add(LimitPersonPane);
-        JLabel LitmitPersonLabel = new JLabel("Limit person:  ");
-        LitmitPersonLabel.setFont(Constant.LABEL_FONT);
-        LitmitPersonLabel.setForeground(Constant.my_white);
-        JTextField LimitPersonField = new JTextField();
-        LimitPersonField.setColumns(30);
-        LimitPersonPane.add(LitmitPersonLabel);
-        LimitPersonPane.add(LimitPersonField);
-
         JPanel PricePane = new JPanel(new FlowLayout(FlowLayout.LEFT));
         PricePane.setBackground(Constant.my_gray);
         AddSupplyPanel.add(PricePane);
@@ -104,6 +93,9 @@ public class AddNewSupplyPanel extends JPanel {
         AddSupplyPanel.add(AddSupplyButtonSouth);
 
         JButton AddSupplyCancelButton = new JButton("Cancel");
+        AddSupplyCancelButton.setForeground(Constant.my_white);
+        AddSupplyCancelButton.setBackground(new Color(77,82,77));
+
         AddSupplyCancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -120,10 +112,13 @@ public class AddNewSupplyPanel extends JPanel {
         AddSupplyButtonSouth.add(AddSupplyCancelButton);
 
         JButton AddSupplyConfirmButton = new JButton("Confirm");
+        AddSupplyConfirmButton.setForeground(Constant.my_white);
+        AddSupplyConfirmButton.setBackground(new Color(77,82,77));
+
         AddSupplyConfirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(SupplyIdField.getText().isEmpty() || SupplyNameField.getText().isEmpty() || LimitDayField.getText().isEmpty() || LimitPersonField.getText().isEmpty()
+                if(SupplyIdField.getText().isEmpty() || SupplyNameField.getText().isEmpty() || LimitDayField.getText().isEmpty()
                     || LimitWeekField.getText().isEmpty() || LimitMonthField.getText().isEmpty() || PriceField.getText().isEmpty())
                 {
                     JOptionPane.showMessageDialog(AddNewSupplyPanel.this, "Please fill correcly information","error",JOptionPane.ERROR_MESSAGE);

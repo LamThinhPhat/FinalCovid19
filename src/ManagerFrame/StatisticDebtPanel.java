@@ -58,6 +58,8 @@ public class StatisticDebtPanel extends JPanel {
         ListUserDebt.setViewportView(DebtTable);
 
         JButton RefreshButton = new JButton("Refresh");
+        RefreshButton.setForeground(Constant.my_white);
+        RefreshButton.setBackground(new Color(77,82,77));
         RefreshButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

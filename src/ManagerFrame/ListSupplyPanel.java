@@ -58,6 +58,9 @@ public class ListSupplyPanel extends JPanel {
         ListSupplyCenter.setViewportView(SupplyTable);
 
         JButton RefreshSupplyButton = new JButton("Refresh");
+        RefreshSupplyButton.setForeground(Constant.my_white);
+        RefreshSupplyButton.setBackground(new Color(77,82,77));
+
         RefreshSupplyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -77,6 +80,8 @@ public class ListSupplyPanel extends JPanel {
         SearchSupplyField.setColumns(15);
 
         JButton SearchSupplyNameButton = new JButton("Search by supply");
+        SearchSupplyNameButton.setForeground(Constant.my_white);
+        SearchSupplyNameButton.setBackground(new Color(77,82,77));
 
         SearchSupplyNameButton.addActionListener(new ActionListener() {
             @Override
@@ -123,8 +128,17 @@ public class ListSupplyPanel extends JPanel {
         ListSupplycontentPane.add(EastPanelListSupply,BorderLayout.EAST);
 
         JButton AddSupply = new JButton("Add new supply");
+        AddSupply.setForeground(Constant.my_white);
+        AddSupply.setBackground(new Color(77,82,77));
+
         JButton EditSupply = new JButton("Edit supply");
+        EditSupply.setForeground(Constant.my_white);
+        EditSupply.setBackground(new Color(77,82,77));
+
         JButton DeleteSupply = new JButton("Delete supply");
+        DeleteSupply.setForeground(Constant.my_white);
+        DeleteSupply.setBackground(new Color(77,82,77));
+
 
         EastPanelListSupply.add(AddSupply);
         EastPanelListSupply.add(EditSupply);
@@ -194,12 +208,28 @@ public class ListSupplyPanel extends JPanel {
         ListSupplycontentPane.add(WestPanelSortSupply,BorderLayout.WEST);
 
         JButton SortById = new JButton("Sort ID");
+        SortById.setForeground(Constant.my_white);
+        SortById.setBackground(new Color(77,82,77));
+
         JButton SortBySupplyName = new JButton("Sort Name");
+        SortBySupplyName.setForeground(Constant.my_white);
+        SortBySupplyName.setBackground(new Color(77,82,77));
+
         JButton SortByLimitDay = new JButton("Sort Limit Day");
+        SortByLimitDay.setForeground(Constant.my_white);
+        SortByLimitDay.setBackground(new Color(77,82,77));
+
         JButton SortByLimitWeek = new JButton("Sort Limit Week");
+        SortByLimitWeek.setForeground(Constant.my_white);
+        SortByLimitWeek.setBackground(new Color(77,82,77));
+
         JButton SortByLimitMonth = new JButton("Sort Limit Month");
-        JButton SortByLimitPerPerson= new JButton("Sort Limit Person");
+        SortByLimitMonth.setForeground(Constant.my_white);
+        SortByLimitMonth.setBackground(new Color(77,82,77));
+
         JButton SortByPrice = new JButton("Sort Price");
+        SortByPrice.setForeground(Constant.my_white);
+        SortByPrice.setBackground(new Color(77,82,77));
 
 
         SortById.addActionListener(new ActionListener() {
@@ -277,20 +307,6 @@ public class ListSupplyPanel extends JPanel {
             }
         });
 
-        SortByLimitPerPerson.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Productdef.setRowCount(0);
-                ArrayList<supply> SupplyList = getDB.Supply.FunctionSupply.GetAllSupplyLimitPersonSort();
-                for (supply i: SupplyList)
-                {
-                    Productdef.addRow(new Object[]{
-                            i.getSupply_id(), i.getSupply_name(), i.getLimit_day(), i.getLimit_week(),
-                            i.getLimit_month(), i.getPrice()
-                    });
-                }
-            }
-        });
 
         SortByPrice.addActionListener(new ActionListener() {
             @Override
@@ -315,7 +331,6 @@ public class ListSupplyPanel extends JPanel {
         WestPanelSortSupply.add(SortByLimitDay);
         WestPanelSortSupply.add(SortByLimitWeek);
         WestPanelSortSupply.add(SortByLimitMonth);
-        WestPanelSortSupply.add(SortByLimitPerPerson);
         WestPanelSortSupply.add(SortByPrice);
 
 
