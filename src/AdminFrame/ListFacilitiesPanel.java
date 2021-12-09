@@ -12,7 +12,6 @@ public class ListFacilitiesPanel extends JPanel {
     public ListFacilitiesPanel() {
         setBackground(Constant.my_gray);
 
-
         JPanel ListUsercontentPane = new JPanel(new BorderLayout());
         add(ListUsercontentPane);
         JPanel ListUserbuttonPaneNorth = new JPanel(new FlowLayout(FlowLayout.LEFT));

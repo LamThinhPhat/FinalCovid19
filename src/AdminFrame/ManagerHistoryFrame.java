@@ -22,7 +22,6 @@ public class ManagerHistoryFrame extends JFrame {
             e.printStackTrace();
         }
         setIconImage(covid_icon.getImage());
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(700, 500);
         setResizable(false);
         setLocationRelativeTo(null);
