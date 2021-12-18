@@ -22,8 +22,14 @@ public class LogInFrame extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    LogInFrame frame = new LogInFrame();
-                    frame.setVisible(true);
+                    if (getDB.Account.FunctionAccount.CheckDB())
+                    {
+                        new RegisterAdmin().setVisible(true);
+                    }
+                    else {
+                        LogInFrame frame = new LogInFrame();
+                        frame.setVisible(true);
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -98,7 +104,6 @@ public class LogInFrame extends JFrame {
         ButtonPanel.add(Login);
         ButtonPanel.setBackground(Constant.my_gray);
         contentPane.add(ButtonPanel);
-
 
         Login.addActionListener(new ActionListener() {
             @Override

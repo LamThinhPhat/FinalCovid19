@@ -30,6 +30,39 @@ public class FunctionAccount {
         return RealatedUserList;
     }
 
+    static public void registerAdmin(String username, String password)
+    {
+        Connection conn = jdbc_connector.getConnection();
+        String sql = "INSERT INTO account_table (username, pass, user_role, ban_unban)"
+                + "VALUE(?, ?, ?, ? )";
+        try {
+            PreparedStatement PrSt = conn.prepareStatement(sql);
+
+            PrSt.setString(1, username);
+            PrSt.setString(2, password);
+            PrSt.setInt(3, 2);
+            PrSt.setInt(4, 0);
+            PrSt.executeUpdate();
+        } catch (SQLException err) {
+            err.printStackTrace();
+        }
+    }
+
+    static public boolean CheckDB() {
+        Connection conn = jdbc_connector.getConnection();
+        String sql = "SELECT * FROM account_table";
+        try {
+            PreparedStatement PrSt = conn.prepareStatement(sql);
+            ResultSet rs = PrSt.executeQuery();
+            while (rs.next()) {
+                return false;
+            }
+        } catch (SQLException err) {
+            err.printStackTrace();
+        }
+        return true;
+    }
+
     static public boolean CheckExisted(String username) {
         Connection conn = jdbc_connector.getConnection();
         String sql = "SELECT * FROM account_table WHERE username = ?";
@@ -394,4 +427,55 @@ public class FunctionAccount {
             e.printStackTrace();
         }
     }
+
+    static public void DeleteRelated(String username, String relatedUsername)
+    {
+        Connection conn = jdbc_connector.getConnection();
+        String sql  = "DELETE FROM related_user WHERE username =? and related_username =?";
+        try {
+            PreparedStatement PrSt = conn.prepareStatement(sql);
+            PrSt.setString(1, username);
+            PrSt.setString(2, relatedUsername);
+            PrSt.executeUpdate();
+        }catch(SQLException err)
+        {
+            err.printStackTrace();
+        }
+    }
+
+    static public void AddRelatedAccount(String username, String relatedUsername) {
+        Connection conn = jdbc_connector.getConnection();
+        String sql = "INSERT INTO related_user (username, related_username)"
+                + "VALUE(?, ?)";
+        try {
+            PreparedStatement PrSt = conn.prepareStatement(sql);
+
+            PrSt.setString(1, username);
+            PrSt.setString(2, relatedUsername);
+            PrSt.executeUpdate();
+        } catch (SQLException err) {
+            err.printStackTrace();
+        }
+    }
+
+    static public ArrayList<String> GetUserNameNotInRelated() {
+        ArrayList<String> RealatedUserList = new ArrayList<String>();
+        Connection conn = jdbc_connector.getConnection();
+        String sql = "SELECT cu.username FROM covid_user cu join account_table ac on (cu.username=ac.username)\n" +
+                " where ac.user_role = 3" +
+                " AND NOT EXISTS (SELECT * from related_user rl " +
+                " Where rl.related_username = cu.username)";
+        try {
+            PreparedStatement PrSt = conn.prepareStatement(sql);
+            ResultSet rs = PrSt.executeQuery();
+            while (rs.next()) {
+                String user = rs.getString(1);
+                RealatedUserList.add(user);
+            }
+        } catch (SQLException err) {
+            err.printStackTrace();
+        }
+        return RealatedUserList;
+    }
+
 }

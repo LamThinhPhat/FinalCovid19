@@ -14,51 +14,107 @@ import java.util.ArrayList;
 public class ListRelatedPanel extends JPanel{
     public ListRelatedPanel(String username)
     {
+        setLayout(new FlowLayout(FlowLayout.LEFT));
         setBackground(Constant.my_gray);
-        JPanel ListRelatedPanel = new JPanel(new BorderLayout());
-        add(ListRelatedPanel);
+        JPanel ListRelatedPanelLeft = new JPanel(new BorderLayout());
+        JPanel ListRelatedPanelRight = new JPanel(new BorderLayout());
+        add(ListRelatedPanelLeft);
+        add(ListRelatedPanelRight);
 
-        JScrollPane ShowListCenter = new JScrollPane();
-        ListRelatedPanel.add(ShowListCenter, BorderLayout.CENTER);
-        ListRelatedPanel.setBackground(Constant.my_gray);
+        JScrollPane ShowListLeft = new JScrollPane();
+        ListRelatedPanelLeft.add(ShowListLeft, BorderLayout.CENTER);
+        ListRelatedPanelLeft.setBackground(Constant.my_gray);
 
-        JTable RelatedTable = new JTable();
-        RelatedTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        DefaultTableModel RelatedDef = new DefaultTableModel() {
+        JScrollPane ShowListRight = new JScrollPane();
+        ListRelatedPanelRight.add(ShowListRight, BorderLayout.CENTER);
+        ListRelatedPanelRight.setBackground(Constant.my_gray);
+
+        JTable RelatedTableLeft = new JTable();
+        RelatedTableLeft.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        DefaultTableModel RelatedDefLeft = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
-        RelatedTable.setModel(RelatedDef);
-        RelatedDef.addColumn("Username");
-        RelatedDef.addColumn("Related username");
+        RelatedTableLeft.setModel(RelatedDefLeft);
+        RelatedDefLeft.addColumn("Username");
+
+
+
+        JTable RelatedTableRight = new JTable();
+        RelatedTableRight.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        DefaultTableModel RelatedDefRight = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        RelatedTableRight.setModel(RelatedDefRight);
+        RelatedDefRight.addColumn("Username");
+        RelatedDefRight.addColumn("Related username");
 
         ArrayList<related_user> relateduserlist = getDB.Account.FunctionAccount.GetRealatedUser(username);
 
+        ArrayList<String> userlisttoadd = getDB.Account.FunctionAccount.GetUserNameNotInRelated();
+
+        for(String i : userlisttoadd)
+        {
+            if (!i.equals(username))
+            {
+                RelatedDefLeft.addRow(new Object[] {
+                        i
+                });
+            }
+        }
+
         for(related_user i : relateduserlist)
         {
-            RelatedDef.addRow(new Object[] {
+            RelatedDefRight.addRow(new Object[] {
                     i.getUsername(), i.getRelated_username()
             });
         }
 
-        ShowListCenter.setViewportView(RelatedTable);
+        ShowListRight.setViewportView(RelatedTableRight);
+        ShowListLeft.setViewportView(RelatedTableLeft);
 
-        JButton RefreshRelatedListButton = new JButton("Refresh list");
-        RefreshRelatedListButton.setForeground(Constant.my_white);
-        RefreshRelatedListButton.setBackground(new Color(77,82,77));
+        JButton DeleteRelatedListButton = new JButton("Delete");
+        DeleteRelatedListButton.setForeground(Constant.my_white);
+        DeleteRelatedListButton.setBackground(new Color(77,82,77));
 
-        RefreshRelatedListButton.addActionListener(new ActionListener() {
+        DeleteRelatedListButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                RelatedDef.setRowCount(0);
-                ArrayList<related_user> userlist = getDB.Account.FunctionAccount.GetRealatedUser(username);
-                for(related_user i : userlist)
+                int row = RelatedTableRight.getSelectedRow();
+                if (row == -1)
                 {
-                    RelatedDef.addRow(new Object[] {
-                            i.getUsername(), i.getRelated_username()
-                    });
+                    JOptionPane.showMessageDialog(ListRelatedPanel.this, "Please pick a row to delete", "Error",JOptionPane.ERROR_MESSAGE);
+                }
+                else
+                {
+                    String related_username = String.valueOf(RelatedDefRight.getValueAt(row,1));
+                    getDB.Account.FunctionAccount.DeleteRelated(username, related_username);
+
+                    RelatedDefLeft.setRowCount(0);
+                    ArrayList<String> userlisttoadd = getDB.Account.FunctionAccount.GetUserNameNotInRelated();
+                    for(String i : userlisttoadd)
+                    {
+                        if (!i.equals(username))
+                        {
+                            RelatedDefLeft.addRow(new Object[] {
+                                    i
+                            });
+                        }
+                    }
+
+                    RelatedDefRight.setRowCount(0);
+                    ArrayList<related_user> userlist = getDB.Account.FunctionAccount.GetRealatedUser(username);
+                    for(related_user i : userlist)
+                    {
+                        RelatedDefRight.addRow(new Object[] {
+                                i.getUsername(), i.getRelated_username()
+                        });
+                    }
                 }
             }
         });
@@ -79,9 +135,56 @@ public class ListRelatedPanel extends JPanel{
         });
 
         JPanel ListRelatedPaneSouth = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        ListRelatedPanel.add(ListRelatedPaneSouth, BorderLayout.SOUTH);
+        ListRelatedPanelRight.add(ListRelatedPaneSouth, BorderLayout.SOUTH);
         ListRelatedPaneSouth.add(CancelRelatedListButton);
-        ListRelatedPaneSouth.add(RefreshRelatedListButton);
+        ListRelatedPaneSouth.add(DeleteRelatedListButton);
         ListRelatedPaneSouth.setBackground(Constant.my_gray);
+
+        JButton AddRelatedButton = new JButton("Add related");
+        AddRelatedButton.setForeground(Constant.my_white);
+        AddRelatedButton.setBackground(new Color(77,82,77));
+
+        AddRelatedButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int row = RelatedTableLeft.getSelectedRow();
+                if (row == -1)
+                {
+                    JOptionPane.showMessageDialog(ListRelatedPanel.this, "Please pick a user to add", "Error",JOptionPane.ERROR_MESSAGE);
+                }
+                else
+                {
+                    String related_username = String.valueOf(RelatedTableLeft.getValueAt(row,0));
+                    getDB.Account.FunctionAccount.AddRelatedAccount(username, related_username);
+
+                    RelatedDefLeft.setRowCount(0);
+                    ArrayList<String> userlisttoadd = getDB.Account.FunctionAccount.GetUserNameNotInRelated();
+                    for(String i : userlisttoadd)
+                    {
+                        if (!i.equals(username))
+                        {
+                            RelatedDefLeft.addRow(new Object[] {
+                                    i
+                            });
+                        }
+                    }
+
+                    RelatedDefRight.setRowCount(0);
+                    ArrayList<related_user> userlist = getDB.Account.FunctionAccount.GetRealatedUser(username);
+                    for(related_user i : userlist)
+                    {
+                        RelatedDefRight.addRow(new Object[] {
+                                i.getUsername(), i.getRelated_username()
+                        });
+                    }
+
+
+                }
+            }
+        });
+        JPanel ListRelatedPaneLeftSouth = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        ListRelatedPaneLeftSouth.setBackground(Constant.my_gray);
+        ListRelatedPanelLeft.add(ListRelatedPaneLeftSouth,BorderLayout.SOUTH);
+        ListRelatedPaneLeftSouth.add(AddRelatedButton);
     }
 }
