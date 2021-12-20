@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import table.payment_user;
 import javax.swing.*;
 
 import java.text.ParseException;
@@ -295,6 +296,11 @@ public class AddUserByManager extends JFrame {
                                 getDB.Facility.FunctionFacility.SetCurrentQuantity(coviduser.getFacility_id(), CQuantity + 1);
                                 FunctionAccount.AddAccount(acc);
                                 FunctionAccount.AddInfoAccount(coviduser);
+                                payment_user paymentUser = new payment_user();
+                                paymentUser.setUsername(acc.getUsername());
+                                paymentUser.setBalance(50000);
+                                paymentUser.setDebt(0);
+                                getDB.PaymentUser.FunctionPaymentUser.AddPaymentAccount(paymentUser);
                                 JOptionPane.showMessageDialog(AddUserByManager.this, "Create successfully", "success", JOptionPane.ERROR_MESSAGE);
                                 new ManagerFrame(LogInFrame.ManagerUsername).setVisible(true);
                                 AddUserByManager.this.dispose();
