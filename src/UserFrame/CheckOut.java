@@ -1,10 +1,7 @@
 package UserFrame;
 
 import ColorFont.Constant;
-<<<<<<< HEAD
 import table.payment_history;
-=======
->>>>>>> 24879b15db05d8cbfded70b5c223825da3b6693c
 import table.payment_user;
 
 import javax.swing.*;
@@ -79,7 +76,6 @@ public class CheckOut extends JPanel{
         ButtonPanel.add(CheckoutButton);
         if(connected)CheckoutButton.setEnabled(true);
         else CheckoutButton.setEnabled(false);
-<<<<<<< HEAD
 
         CheckoutButton.addActionListener(new ActionListener() {
             @Override
@@ -124,7 +120,5 @@ public class CheckOut extends JPanel{
                 }
             }
         });
-=======
->>>>>>> 24879b15db05d8cbfded70b5c223825da3b6693c
     }
 }
