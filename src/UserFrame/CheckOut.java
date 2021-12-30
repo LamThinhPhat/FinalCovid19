@@ -1,6 +1,7 @@
 package UserFrame;
 
 import ColorFont.Constant;
+import table.payment_user;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,9 +9,9 @@ import java.awt.*;
 public class CheckOut extends JPanel{
     private JLabel lbHeader;
     private JPanel headerPanel;
-
-    CheckOut() {
+    CheckOut(boolean connected, String username) {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        payment_user user=getDB.PaymentUser.FunctionPaymentUser.GetPaymentAccount(username);
         JPanel headerPane=new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel lbHeader = new JLabel("Checkout");
         lbHeader.setFont(Constant.HEADER_FONT);
@@ -32,6 +33,7 @@ public class CheckOut extends JPanel{
         JTextField DebtField = new JTextField();
         DebtField.setColumns(30);
         DebtField.setEditable(false);
+        DebtField.setText(Integer.toString(user.getDebt()));
         DebtPanel.add(DebtLabel);
         DebtPanel.add(DebtField);
 
@@ -42,6 +44,7 @@ public class CheckOut extends JPanel{
         JTextField BalanceField = new JTextField();
         BalanceField.setColumns(30);
         BalanceField.setEditable(false);
+        BalanceField.setText(Integer.toString(user.getBalance()));
         BalancePanel.add(BalanceLabel);
         BalancePanel.add(BalanceField);
 
@@ -57,10 +60,16 @@ public class CheckOut extends JPanel{
         JPanel ButtonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         ContentPanel.add(ButtonPanel);
 
+        JLabel check_connection=new JLabel();
+        if(connected) check_connection.setText("Connected");
+        else check_connection.setText("Disconnected");
+
+        ButtonPanel.add(check_connection);
         JButton CheckoutButton = new JButton("Checkout");
         CheckoutButton.setForeground(Constant.my_white);
         CheckoutButton.setBackground(new Color(77,82,77));
         ButtonPanel.add(CheckoutButton);
-
+        if(connected)CheckoutButton.setEnabled(true);
+        else CheckoutButton.setEnabled(false);
     }
 }
