@@ -99,4 +99,23 @@ public class FunctionPaymentUser {
             err.printStackTrace();
         }
     }
+
+    static public void UpdateDebtBalance(payment_user user)
+    {
+        Connection conn = jdbc_connector.getConnection();
+        String sql = "UPDATE payment_user SET" +
+                " balance=?, debt=?"+"  WHERE username = ?";
+        try {
+            PreparedStatement PrSt = conn.prepareStatement(sql);
+
+            PrSt.setInt(1,user.getBalance());
+            PrSt.setInt(2, user.getDebt());
+            PrSt.setString(3, user.getUsername());
+
+            PrSt.executeUpdate();
+        }catch(SQLException err)
+        {
+            err.printStackTrace();
+        }
+    }
 }
