@@ -3,13 +3,10 @@ package UserFrame;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
+import java.text.SimpleDateFormat;
 import ColorFont.Constant;
-import jdbc.connect.*;
+import getDB.Account.FunctionAccount;
+import table.covid_user;
 
 public class Information  extends JPanel{
     private JLabel lbHeader;
@@ -17,15 +14,14 @@ public class Information  extends JPanel{
     private JLabel name, id, doB, address, province,status, facility;
 
     Information(String username) {
-        setLayout(new BorderLayout());
-        setBorder(new EmptyBorder(10,10,10,10));
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         JPanel headerPanel = new JPanel();
-        headerPanel.setLayout(new FlowLayout());
+        headerPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         JPanel infoPanel = new JPanel();
         infoPanel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
-        lbHeader = new JLabel("USER INFORMATION");
+        JLabel lbHeader = new JLabel("USER INFORMATION");
         lbHeader.setFont(Constant.HEADER_FONT);
         lbHeader.setForeground(Constant.my_white);
         headerPanel.add(lbHeader);
@@ -46,28 +42,20 @@ public class Information  extends JPanel{
         facility = new JLabel("null");
         province = new JLabel();
 
+        covid_user user = FunctionAccount.GetCovidUserInfoByUserName(username);
+        String fullAddress = FunctionAccount.getUserAddress(user.getHouse_number(), user.getAddress_id());
+        String firstAddress = fullAddress.substring(0, fullAddress.lastIndexOf(","));
+        String lastAddress = fullAddress.substring(fullAddress.lastIndexOf(",") + 1, fullAddress.length());
+        String facilityName = FunctionAccount.getFacilityName(user.getFacility_id());
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
-        Connection conn = jdbc_connector.getConnection();
-        try {
-            Statement sta = conn.createStatement();
-            String sql = "select * from covid_user left join facility on covid_user.facility_id = facility.facility_id"
-                    + " left join address on covid_user.address_id = address.address_id"
-                    + " where username = '" + username + "';";
-            ResultSet re = sta.executeQuery(sql);
-
-            while(re.next()) {
-                name.setText(re.getString("full_name"));
-                id.setText(re.getString("id"));
-                doB.setText(re.getString("dob"));
-                address.setText(re.getString("house_number") +", " + re.getString("ward")
-                        + ", " + re.getString("district") + ',');
-                province.setText(re.getString("province"));
-                status.setText(re.getString("patient_status"));
-                facility.setText(re.getString("facility_name"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        name.setText(user.getFull_name());
+        id.setText(user.getId());
+        doB.setText(format.format(user.getDob()));
+        address.setText(firstAddress);
+        province.setText(lastAddress);
+        status.setText(user.getPatient_status());
+        facility.setText(facilityName);
 
 
         gbc.insets = new Insets(0, 10,10,0);
@@ -138,7 +126,7 @@ public class Information  extends JPanel{
         facility.setFont(Constant.INFO_FONT);
         infoPanel.add(facility, gbc);
 
-        add(headerPanel, BorderLayout.NORTH);
-        add(infoPanel, BorderLayout.WEST);
+        add(headerPanel);
+        add(infoPanel);
     }
 }

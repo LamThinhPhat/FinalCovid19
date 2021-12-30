@@ -1,24 +1,19 @@
 package UserFrame;
 
 import ColorFont.Constant;
-import table.payment_history;
 import table.payment_user;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Timestamp;
-import java.text.ParseException;
+
 
 public class CheckOut extends JPanel{
-    private JLabel lbHeader;
-    private JPanel headerPanel;
     CheckOut(boolean connected, String username) {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         payment_user user=getDB.PaymentUser.FunctionPaymentUser.GetPaymentAccount(username);
         JPanel headerPane=new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JLabel lbHeader = new JLabel("Checkout");
+        JLabel lbHeader = new JLabel("CHECKOUT");
         lbHeader.setFont(Constant.HEADER_FONT);
         lbHeader.setForeground(Constant.my_white);
         headerPane.add(lbHeader);

@@ -10,9 +10,8 @@ import java.util.ArrayList;
 
 public class SupplyHistory extends JPanel {
     SupplyHistory(String username) {
-
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        JLabel lbHeader = new JLabel("Supply History");
+        JLabel lbHeader = new JLabel("SUPPLY HISTORY");
         lbHeader.setFont(Constant.HEADER_FONT);
         lbHeader.setForeground(Constant.my_white);
         add(lbHeader);

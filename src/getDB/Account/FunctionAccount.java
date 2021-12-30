@@ -290,6 +290,42 @@ public class FunctionAccount {
         return CovidUser;
     }
 
+    public static String getUserAddress(String houseNumber, String addressId) {
+        String address = "";
+        Connection conn = jdbc_connector.getConnection();
+        try {
+            Statement sta = conn.createStatement();
+            String sql = "select * from address where address_id =" + addressId;
+            ResultSet rs = sta.executeQuery(sql);
+
+            while(rs.next()) {
+                address = houseNumber + ", " + rs.getString("ward") + ", " + rs.getString("district") + "," + rs.getString("province");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return address;
+    }
+
+    public static String getFacilityName(String facilityID) {
+        String name = "";
+        Connection conn = jdbc_connector.getConnection();
+        try {
+            Statement sta = conn.createStatement();
+            String sql = "select * from facility where facility_id =" + facilityID;
+            ResultSet rs = sta.executeQuery(sql);
+
+            while(rs.next()) {
+                name =  rs.getString("facility_name");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return name;
+    }
+
     static public ArrayList<covid_user> GetAllCovidUserIDSort() {
         ArrayList<covid_user> CovidUser = new ArrayList<covid_user>();
         Connection conn = jdbc_connector.getConnection();
@@ -477,5 +513,6 @@ public class FunctionAccount {
         }
         return RealatedUserList;
     }
+
 
 }

@@ -12,7 +12,7 @@ public class ManagedHistory extends JPanel {
     ManagedHistory(String username) {
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        JLabel lbHeader = new JLabel("Manage History");
+        JLabel lbHeader = new JLabel("MANAGE HISTORY");
         lbHeader.setFont(Constant.HEADER_FONT);
         lbHeader.setForeground(Constant.my_white);
         add(lbHeader);

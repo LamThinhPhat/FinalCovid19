@@ -17,11 +17,9 @@ public class ChangePassword extends JPanel {
 
 
     ChangePassword(String username) {
-        setLayout(new BorderLayout());
-        setBorder(new EmptyBorder(10,10,10,10));
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         JPanel headerPanel = new JPanel();
-        headerPanel.setLayout(new FlowLayout());
-
+        headerPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 
         lbHeader = new JLabel("CHANGE PASSWORD");
         lbHeader.setFont(Constant.HEADER_FONT);
@@ -88,7 +86,7 @@ public class ChangePassword extends JPanel {
         gbc.gridy = 3;
         passPanel.add(btnChange, gbc);
 
-        add(passPanel, BorderLayout.CENTER);
+        add(passPanel);
 
         btnChange.addActionListener(new ActionListener() {
             @Override

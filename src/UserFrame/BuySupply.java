@@ -17,7 +17,7 @@ public class BuySupply extends JPanel {
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         JPanel HeaderPane= new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JLabel lbHeader = new JLabel("   Supply");
+        JLabel lbHeader = new JLabel("SUPPLY");
         lbHeader.setFont(Constant.HEADER_FONT);
         lbHeader.setForeground(Constant.my_white);
         HeaderPane.add(lbHeader);

@@ -36,7 +36,6 @@ public class FunctionSupplyHistory {
     }
 
     static public int GetPrice(String id, String username, int sh_id) {
-        System.out.println(username);
         ArrayList<supply_history> SupplyHistoryList = new ArrayList<supply_history>();
         Connection conn = jdbc_connector.getConnection();
         int result=0;
