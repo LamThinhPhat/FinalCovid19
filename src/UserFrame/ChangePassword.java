@@ -82,6 +82,8 @@ public class ChangePassword extends JPanel {
         gbc.anchor = GridBagConstraints.EAST;
         btnChange = new JButton("Change");
         btnChange.setFont(Constant.LABEL_FONT);
+        btnChange.setForeground(Constant.my_white);
+        btnChange.setBackground(new Color(77,82,77));
         gbc.gridx = 1;
         gbc.gridy = 3;
         passPanel.add(btnChange, gbc);

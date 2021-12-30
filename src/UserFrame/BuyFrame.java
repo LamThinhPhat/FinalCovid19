@@ -27,7 +27,7 @@ public class BuyFrame extends JFrame {
             e.printStackTrace();
         }
         setIconImage(covid_icon.getImage());
-        setSize(720, 800);
+        setSize(600, 700);
         setResizable(true);
         setLocationRelativeTo(null);
 
@@ -72,122 +72,93 @@ public class BuyFrame extends JFrame {
             quantity.clear();
             quantity.add("0");
         }
-
         setBackground(Constant.my_gray);
 
         JPanel BuySupplyPanel = new JPanel();
-        BuySupplyPanel.setLayout(new BoxLayout(BuySupplyPanel,BoxLayout.Y_AXIS));
+        BuySupplyPanel.setLayout(new GridBagLayout());
         BuySupplyPanel.setBackground(Constant.my_gray);
-        add(BuySupplyPanel);
 
-        JPanel SupplyIdPane = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        SupplyIdPane.setBackground(Constant.my_gray);
-        BuySupplyPanel.add(SupplyIdPane);
-        JLabel SupplyIdLabel = new JLabel("Supply ID:      ");
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10,10,10,10);
+        gbc.anchor = GridBagConstraints.WEST;
+
+
+        JLabel SupplyIdLabel = new JLabel("Supply ID:");
         SupplyIdLabel.setFont(Constant.LABEL_FONT);
         SupplyIdLabel.setForeground(Constant.my_white);
         JTextField SupplyIdField = new JTextField();
-        SupplyIdField.setColumns(30);
+        SupplyIdField.setFont(Constant.LABEL_FONT);
+        SupplyIdField.setColumns(15);
         SupplyIdField.setText(new_limit.getSupply_id());
         SupplyIdField.setEditable(false);
-        SupplyIdPane.add(SupplyIdLabel);
-        SupplyIdPane.add(SupplyIdField);
 
-        JPanel SupplyNamePane = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        SupplyNamePane.setBackground(Constant.my_gray);
-        BuySupplyPanel.add(SupplyNamePane);
-        JLabel SupplyNameLabel = new JLabel("Supply name: ");
+
+
+        JLabel SupplyNameLabel = new JLabel("Supply name:");
         SupplyNameLabel.setFont(Constant.LABEL_FONT);
         SupplyNameLabel.setForeground(Constant.my_white);
         JTextField SupplyNameField = new JTextField();
+        SupplyNameField.setFont(Constant.LABEL_FONT);
         SupplyNameField.setText(chosen.getSupply_name());
-        SupplyNameField.setColumns(30);
+        SupplyNameField.setColumns(15);
         SupplyNameField.setEditable(false);
-        SupplyNamePane.add(SupplyNameLabel);
-        SupplyNamePane.add(SupplyNameField);
 
-        JPanel LimitDayPane = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        LimitDayPane.setBackground(Constant.my_gray);
-        BuySupplyPanel.add(LimitDayPane);
-        JLabel LimitDayLabel = new JLabel("Limit day:       ");
+        JLabel LimitDayLabel = new JLabel("Limit day:");
         LimitDayLabel.setFont(Constant.LABEL_FONT);
         LimitDayLabel.setForeground(Constant.my_white);
         JTextField LimitDayField = new JTextField();
+        LimitDayField.setFont(Constant.LABEL_FONT);
         LimitDayField.setText(String.valueOf(chosen.getLimit_day()));
-        LimitDayField.setColumns(30);
+        LimitDayField.setColumns(15);
         LimitDayField.setEditable(false);
-        LimitDayPane.add(LimitDayLabel);
-        LimitDayPane.add(LimitDayField);
 
-        JPanel CurrentDay = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        CurrentDay.setBackground(Constant.my_gray);
-        BuySupplyPanel.add(CurrentDay);
-        JLabel CurrentDayLabel = new JLabel("Bought today:       ");
+        JLabel CurrentDayLabel = new JLabel("Bought today:");
         CurrentDayLabel.setFont(Constant.LABEL_FONT);
         CurrentDayLabel.setForeground(Constant.my_white);
         JTextField CurrentDayField = new JTextField();
+        CurrentDayField.setFont(Constant.LABEL_FONT);
         CurrentDayField.setText(String.valueOf(new_limit.getUse_day()));
-        CurrentDayField.setColumns(30);
+        CurrentDayField.setColumns(15);
         CurrentDayField.setEditable(false);
-        CurrentDay.add(CurrentDayLabel);
-        CurrentDay.add(CurrentDayField);
 
-        JPanel LimitWeekPane = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        LimitWeekPane.setBackground(Constant.my_gray);
-        BuySupplyPanel.add(LimitWeekPane);
-        JLabel LimitWeekLabel = new JLabel("Limit week:     ");
+        JLabel LimitWeekLabel = new JLabel("Limit week:");
         LimitWeekLabel.setFont(Constant.LABEL_FONT);
         LimitWeekLabel.setForeground(Constant.my_white);
         JTextField LimitWeekField = new JTextField();
+        LimitWeekField.setFont(Constant.LABEL_FONT);
         LimitWeekField.setText(String.valueOf(chosen.getLimit_week()));
-        LimitWeekField.setColumns(30);
+        LimitWeekField.setColumns(15);
         LimitWeekField.setEditable(false);
-        LimitWeekPane.add(LimitWeekLabel);
-        LimitWeekPane.add(LimitWeekField);
 
-        JPanel CurrentWeek = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        CurrentWeek.setBackground(Constant.my_gray);
-        BuySupplyPanel.add(CurrentWeek);
-        JLabel CurrentWeekLabel = new JLabel("Bought this week:       ");
+        JLabel CurrentWeekLabel = new JLabel("Bought this week:");
         CurrentWeekLabel.setFont(Constant.LABEL_FONT);
         CurrentWeekLabel.setForeground(Constant.my_white);
         JTextField CurrentWeekField = new JTextField();
+        CurrentWeekField.setFont(Constant.LABEL_FONT);
         CurrentWeekField.setText(String.valueOf(new_limit.getUse_week()));
-        CurrentWeekField.setColumns(30);
+        CurrentWeekField.setColumns(15);
         CurrentWeekField.setEditable(false);
-        CurrentWeek.add(CurrentWeekLabel);
-        CurrentWeek.add(CurrentWeekField);
 
-        JPanel LimitMonthPane = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        LimitMonthPane.setBackground(Constant.my_gray);
-        BuySupplyPanel.add(LimitMonthPane);
-        JLabel LimitMonthLabel = new JLabel("Limit month:  ");
+        JLabel LimitMonthLabel = new JLabel("Limit month:");
         LimitMonthLabel.setFont(Constant.LABEL_FONT);
         LimitMonthLabel.setForeground(Constant.my_white);
         JTextField LimitMonthField = new JTextField();
+        LimitMonthField.setFont(Constant.LABEL_FONT);
         LimitMonthField.setText(String.valueOf(chosen.getLimit_month()));
-        LimitMonthField.setColumns(30);
+        LimitMonthField.setColumns(15);
         LimitMonthField.setEditable(false);
-        LimitMonthPane.add(LimitMonthLabel);
-        LimitMonthPane.add(LimitMonthField);
 
-        JPanel CurrentMonth = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        CurrentMonth.setBackground(Constant.my_gray);
-        BuySupplyPanel.add(CurrentMonth);
-        JLabel CurrentMonthLabel = new JLabel("Bought this month:       ");
+        JLabel CurrentMonthLabel = new JLabel("Bought this month:");
         CurrentMonthLabel.setFont(Constant.LABEL_FONT);
         CurrentMonthLabel.setForeground(Constant.my_white);
         JTextField CurrentMonthField = new JTextField();
+        CurrentMonthField.setFont(Constant.LABEL_FONT);
         CurrentMonthField.setText(String.valueOf(new_limit.getUse_week()));
-        CurrentMonthField.setColumns(30);
+        CurrentMonthField.setColumns(15);
         CurrentMonthField.setEditable(false);
-        CurrentMonth.add(CurrentMonthLabel);
-        CurrentMonth.add(CurrentMonthField);
 
-        JPanel Quantity = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        Quantity.setBackground(Constant.my_gray);
-        BuySupplyPanel.add(Quantity);
-        JLabel QuantityLabel = new JLabel("Quantity:       ");
+
+        JLabel QuantityLabel = new JLabel("Quantity:");
         QuantityLabel.setFont(Constant.LABEL_FONT);
         QuantityLabel.setForeground(Constant.my_white);
         String[] array = new String[quantity.size()];
@@ -198,35 +169,87 @@ public class BuyFrame extends JFrame {
         JComboBox<String> QuantityBox = new JComboBox<>(array);
         QuantityBox.setForeground(Constant.my_white);
         QuantityBox.setBackground(new Color(77,82,77));
-        Quantity.add(QuantityLabel);
-        Quantity.add(QuantityBox);
-        QuantityBox.addActionListener( new ActionListener(){
-                public void actionPerformed(ActionEvent e){
-                    if (QuantityBox.getSelectedIndex() != -1) {
-                        Integer temp=Integer.parseInt(QuantityBox.getSelectedItem().toString())*chosen.getPrice();
-                        PriceField.setText(String.valueOf(temp));
-                    }
-                }});
+        QuantityBox.setFont(Constant.LABEL_FONT);
+        QuantityBox.setPrototypeDisplayValue("Quantity");
 
-        JPanel PricePane = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        PricePane.setBackground(Constant.my_gray);
-        BuySupplyPanel.add(PricePane);
-        JLabel PriceLabel = new JLabel("Price:               ");
+        JLabel PriceLabel = new JLabel("Price:");
         PriceLabel.setFont(Constant.LABEL_FONT);
         PriceLabel.setForeground(Constant.my_white);
         PriceField.setText(String.valueOf(chosen.getPrice()));
         PriceField.setEditable(false);
-        PriceField.setColumns(30);
-        PricePane.add(PriceLabel);
-        PricePane.add(PriceField);
+        PriceField.setColumns(15);
+        PriceField.setFont(Constant.LABEL_FONT);
 
         JPanel EditSupplyButtonSouth = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         EditSupplyButtonSouth.setBackground(Constant.my_gray);
-        BuySupplyPanel.add(EditSupplyButtonSouth);
 
         JButton EditSupplyCancelButton = new JButton("Cancel");
+        EditSupplyCancelButton.setFont(Constant.LABEL_FONT);
         EditSupplyCancelButton.setForeground(Constant.my_white);
         EditSupplyCancelButton.setBackground(new Color(77,82,77));
+
+        JButton EditSupplyConfirmButton = new JButton("Confirm");
+        EditSupplyConfirmButton.setFont(Constant.LABEL_FONT);
+        EditSupplyConfirmButton.setForeground(Constant.my_white);
+        EditSupplyConfirmButton.setBackground(new Color(77,82,77));
+        boolean finalIsNew = isNew;
+        EditSupplyButtonSouth.add(EditSupplyCancelButton);
+        EditSupplyButtonSouth.add(EditSupplyConfirmButton);
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        BuySupplyPanel.add(SupplyIdLabel, gbc);
+
+        gbc.gridy++;
+        BuySupplyPanel.add(SupplyNameLabel, gbc);gbc.gridy++;
+        BuySupplyPanel.add(LimitDayLabel, gbc);gbc.gridy++;
+        BuySupplyPanel.add(CurrentDayLabel, gbc);gbc.gridy++;
+        BuySupplyPanel.add(LimitWeekLabel, gbc);gbc.gridy++;
+        BuySupplyPanel.add(CurrentWeekLabel, gbc);gbc.gridy++;
+        BuySupplyPanel.add(LimitMonthLabel, gbc);gbc.gridy++;
+        BuySupplyPanel.add(CurrentMonthLabel, gbc);gbc.gridy++;
+        BuySupplyPanel.add(QuantityLabel, gbc);gbc.gridy++;
+        BuySupplyPanel.add(PriceLabel, gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        BuySupplyPanel.add(SupplyIdField, gbc);
+
+        gbc.gridy++;
+        BuySupplyPanel.add(SupplyNameField, gbc);gbc.gridy++;
+        BuySupplyPanel.add(LimitDayField, gbc);gbc.gridy++;
+        BuySupplyPanel.add(CurrentDayField, gbc);gbc.gridy++;
+        BuySupplyPanel.add(LimitWeekField, gbc);gbc.gridy++;
+        BuySupplyPanel.add(CurrentWeekField, gbc);gbc.gridy++;
+        BuySupplyPanel.add(LimitMonthField, gbc);gbc.gridy++;
+        BuySupplyPanel.add(CurrentMonthField, gbc);gbc.gridy++;
+        BuySupplyPanel.add(QuantityBox, gbc);gbc.gridy++;
+        BuySupplyPanel.add(PriceField, gbc);
+
+        if(reachLimit) {
+            JLabel ReachLimit = new JLabel("Reach purchase limit");
+            ReachLimit.setFont(Constant.LABEL_FONT);
+            ReachLimit.setForeground(Constant.my_white);
+            gbc.anchor = GridBagConstraints.EAST;
+            gbc.gridx = 1;
+            gbc.gridy++;
+            BuySupplyPanel.add(ReachLimit, gbc);
+            EditSupplyConfirmButton.setEnabled(false);
+        }
+
+        gbc.anchor = GridBagConstraints.EAST;
+        gbc.gridy++;
+        BuySupplyPanel.add(EditSupplyButtonSouth, gbc);
+
+        add(BuySupplyPanel);
+        QuantityBox.addActionListener( new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                if (QuantityBox.getSelectedIndex() != -1) {
+                    Integer temp=Integer.parseInt(QuantityBox.getSelectedItem().toString())*chosen.getPrice();
+                    PriceField.setText(String.valueOf(temp));
+                }
+            }});
+
         EditSupplyCancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -234,11 +257,6 @@ public class BuyFrame extends JFrame {
             }
         });
 
-
-        JButton EditSupplyConfirmButton = new JButton("Confirm");
-        EditSupplyConfirmButton.setForeground(Constant.my_white);
-        EditSupplyConfirmButton.setBackground(new Color(77,82,77));
-        boolean finalIsNew = isNew;
         EditSupplyConfirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -246,38 +264,25 @@ public class BuyFrame extends JFrame {
                     new_limit.setUse_day(new_limit.getUse_day()+Integer.parseInt(QuantityBox.getSelectedItem().toString()));
                     new_limit.setUse_week(new_limit.getUse_week()+Integer.parseInt(QuantityBox.getSelectedItem().toString()));
                     new_limit.setUse_month(new_limit.getUse_month()+Integer.parseInt(QuantityBox.getSelectedItem().toString()));
-            if(finalIsNew){
-                getDB.SupplyLimit.FunctionSupplyLimit.AddNewSupplyLimit(new_limit);
-            }
-            else getDB.SupplyLimit.FunctionSupplyLimit.UpdateSupplyLimit(new_limit);
-                supply_history newSH=new supply_history();
-                newSH.setUsername(new_limit.getUsername());
-                newSH.setSupply_id(new_limit.getSupply_id());
-                newSH.setCreate_date(new_limit.getUpdate_date());
-                newSH.setQuantity(Integer.parseInt(QuantityBox.getSelectedItem().toString()));
-                newSH.setSHId(getDB.SupplyHistory.FunctionSupplyHistory.GetNewID(newSH));
-                getDB.SupplyHistory.FunctionSupplyHistory.AddNewSupplyHistory(newSH);
-                payment_user update_user = getDB.PaymentUser.FunctionPaymentUser.GetPaymentAccount(user);
-                update_user.setDebt(update_user.getDebt()+Integer.parseInt(QuantityBox.getSelectedItem().toString())*chosen.getPrice());
-                getDB.PaymentUser.FunctionPaymentUser.UpdateDebt(update_user);
-                BuyFrame.this.dispose();
+                    if(finalIsNew){
+                        getDB.SupplyLimit.FunctionSupplyLimit.AddNewSupplyLimit(new_limit);
+                    }
+                    else getDB.SupplyLimit.FunctionSupplyLimit.UpdateSupplyLimit(new_limit);
+                    supply_history newSH=new supply_history();
+                    newSH.setUsername(new_limit.getUsername());
+                    newSH.setSupply_id(new_limit.getSupply_id());
+                    newSH.setCreate_date(new_limit.getUpdate_date());
+                    newSH.setQuantity(Integer.parseInt(QuantityBox.getSelectedItem().toString()));
+                    newSH.setSHId(getDB.SupplyHistory.FunctionSupplyHistory.GetNewID(newSH));
+                    getDB.SupplyHistory.FunctionSupplyHistory.AddNewSupplyHistory(newSH);
+                    payment_user update_user = getDB.PaymentUser.FunctionPaymentUser.GetPaymentAccount(user);
+                    update_user.setDebt(update_user.getDebt()+Integer.parseInt(QuantityBox.getSelectedItem().toString())*chosen.getPrice());
+                    getDB.PaymentUser.FunctionPaymentUser.UpdateDebt(update_user);
+                    BuyFrame.this.dispose();
 
                 }
                 else JOptionPane.showMessageDialog(BuyFrame.this, "Please select quantity", "Error",JOptionPane.ERROR_MESSAGE);
             }
         });
-
-        if(reachLimit) {
-            JLabel ReachLimit=new JLabel("Reach purchase limit");
-            ReachLimit.setFont(Constant.LABEL_FONT);
-            ReachLimit.setForeground(Constant.my_white);
-            EditSupplyButtonSouth.add(ReachLimit);
-            EditSupplyConfirmButton.setEnabled(false);
-        }
-        EditSupplyButtonSouth.add(EditSupplyCancelButton);
-        EditSupplyButtonSouth.add(EditSupplyConfirmButton);
-
-
-
     }
 }

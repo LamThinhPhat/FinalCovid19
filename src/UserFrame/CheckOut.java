@@ -12,6 +12,7 @@ public class CheckOut extends JPanel{
     CheckOut(boolean connected, String username) {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         payment_user user=getDB.PaymentUser.FunctionPaymentUser.GetPaymentAccount(username);
+
         JPanel headerPane=new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel lbHeader = new JLabel("CHECKOUT");
         lbHeader.setFont(Constant.HEADER_FONT);
@@ -20,43 +21,62 @@ public class CheckOut extends JPanel{
         headerPane.setBackground(Constant.my_gray);
         add(headerPane);
 
-
         JPanel ContentPanel = new JPanel();
         ContentPanel.setLayout(new BoxLayout(ContentPanel,BoxLayout.Y_AXIS));
         ContentPanel.setBackground(Constant.my_gray);
         add(ContentPanel);
 
-        JPanel DebtPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        ContentPanel.add(DebtPanel);
-        JLabel DebtLabel = new JLabel("Debt:      ");
+        JPanel midPanel = new JPanel();
+        midPanel.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.insets = new Insets(10, 10,10,10);
+
+
+        JLabel DebtLabel = new JLabel("Debt:");
         DebtLabel.setFont(Constant.LABEL_FONT);
         JTextField DebtField = new JTextField();
-        DebtField.setColumns(30);
+        DebtField.setFont(Constant.LABEL_FONT);
+
+        DebtField.setColumns(15);
         DebtField.setEditable(false);
         DebtField.setText(Integer.toString(user.getDebt()));
-        DebtPanel.add(DebtLabel);
-        DebtPanel.add(DebtField);
 
-        JPanel BalancePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        ContentPanel.add(BalancePanel);
-        JLabel BalanceLabel = new JLabel("Balance:      ");
+        JLabel BalanceLabel = new JLabel("Balance:");
         BalanceLabel.setFont(Constant.LABEL_FONT);
         JTextField BalanceField = new JTextField();
-        BalanceField.setColumns(30);
+        BalanceField.setFont(Constant.LABEL_FONT);
+        BalanceField.setColumns(15);
         BalanceField.setEditable(false);
         BalanceField.setText(Integer.toString(user.getBalance()));
-        BalancePanel.add(BalanceLabel);
-        BalancePanel.add(BalanceField);
 
-        JPanel CheckoutPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        ContentPanel.add(CheckoutPanel);
-        JLabel CheckoutLabel = new JLabel("Checkout:      ");
+        JLabel CheckoutLabel = new JLabel("Checkout:");
         CheckoutLabel.setFont(Constant.LABEL_FONT);
         JTextField CheckoutField = new JTextField();
-        CheckoutField.setColumns(30);
-        CheckoutPanel.add(CheckoutLabel);
-        CheckoutPanel.add(CheckoutField);
+        CheckoutField.setFont(Constant.LABEL_FONT);
+        CheckoutField.setColumns(15);
 
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        midPanel.add(DebtLabel, gbc);
+
+        gbc.gridy++;
+        midPanel.add(BalanceLabel, gbc);
+
+        gbc.gridy++;
+        midPanel.add(CheckoutLabel, gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        midPanel.add(DebtField, gbc);
+
+        gbc.gridy++;
+        midPanel.add(BalanceField, gbc);
+
+        gbc.gridy++;
+        midPanel.add(CheckoutField, gbc);
+
+        ContentPanel.add(midPanel);
         JPanel ButtonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         ContentPanel.add(ButtonPanel);
 
@@ -68,6 +88,7 @@ public class CheckOut extends JPanel{
         JButton CheckoutButton = new JButton("Checkout");
         CheckoutButton.setForeground(Constant.my_white);
         CheckoutButton.setBackground(new Color(77,82,77));
+        CheckoutButton.setFont(Constant.LABEL_FONT);
         ButtonPanel.add(CheckoutButton);
         if(connected)CheckoutButton.setEnabled(true);
         else CheckoutButton.setEnabled(false);

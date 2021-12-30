@@ -102,8 +102,10 @@ public class LogInFrame extends JFrame {
         Login.setForeground(Constant.my_white);
         Login.setBackground(new Color(77,82,77));
         Login.setFont(Constant.LABEL_FONT);
+        ButtonPanel.add(Box.createRigidArea(new Dimension(250,0)));
         ButtonPanel.add(Login);
         ButtonPanel.setBackground(Constant.my_gray);
+
         contentPane.add(ButtonPanel);
 
         Login.addActionListener(new ActionListener() {
