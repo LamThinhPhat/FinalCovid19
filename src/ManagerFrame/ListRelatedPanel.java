@@ -10,6 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import static ManagerFrame.ManagerFrame.ShowPanel;
+
 
 public class ListRelatedPanel extends JPanel{
     public ListRelatedPanel(String username)
@@ -126,11 +128,11 @@ public class ListRelatedPanel extends JPanel{
         CancelRelatedListButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                removeAll();
-                add(new ListUserPanel());
-                revalidate();
-                setVisible(true);
+                ShowPanel.setVisible(false);
+                ShowPanel.removeAll();
+                ShowPanel.add(new ListUserPanel());
+                ShowPanel.revalidate();
+                ShowPanel.setVisible(true);
             }
         });
 

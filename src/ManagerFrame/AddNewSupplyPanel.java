@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import static ManagerFrame.ManagerFrame.ShowPanel;
 
 public class AddNewSupplyPanel extends JPanel {
     public AddNewSupplyPanel() {
@@ -114,13 +115,13 @@ public class AddNewSupplyPanel extends JPanel {
         AddSupplyCancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setVisible(false);
+                ShowPanel.setVisible(false);
 
-                removeAll();
-                add(new ListSupplyPanel());
-                revalidate();
-                repaint();
-                setVisible(true);
+                ShowPanel.removeAll();
+                ShowPanel.add(new ListSupplyPanel());
+                ShowPanel.revalidate();
+                ShowPanel.repaint();
+                ShowPanel.setVisible(true);
             }
         });
 
@@ -152,12 +153,12 @@ public class AddNewSupplyPanel extends JPanel {
                             getDB.Supply.FunctionSupply.AddNewSupply(newsupply);
                             JOptionPane.showMessageDialog(AddNewSupplyPanel.this, "Add successfully", "success", JOptionPane.ERROR_MESSAGE);
 
-                            setVisible(false);
-                            removeAll();
-                            add(new ListSupplyPanel());
-                            revalidate();
-                            repaint();
-                            setVisible(true);
+                            ShowPanel.setVisible(false);
+                            ShowPanel.removeAll();
+                            ShowPanel.add(new ListSupplyPanel());
+                            ShowPanel.revalidate();
+                            ShowPanel.repaint();
+                            ShowPanel.setVisible(true);
                         }
                     }
                     catch (NumberFormatException err)

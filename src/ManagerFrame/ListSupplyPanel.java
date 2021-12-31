@@ -239,6 +239,7 @@ public class ListSupplyPanel extends JPanel {
                 ShowPanel.removeAll();
                 ShowPanel.add(new AddNewSupplyPanel());
                 ShowPanel.revalidate();
+                ShowPanel.repaint();
                 ShowPanel.setVisible(true);
             }
         });
@@ -258,6 +259,7 @@ public class ListSupplyPanel extends JPanel {
                     ShowPanel.removeAll();
                     ShowPanel.add(new EditSupplyPanel(supplyId));
                     ShowPanel.revalidate();
+                    ShowPanel.repaint();
                     ShowPanel.setVisible(true);
                 }
             }

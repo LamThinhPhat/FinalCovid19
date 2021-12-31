@@ -12,11 +12,13 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Set;
 
+import static ManagerFrame.ManagerFrame.ShowPanel;
+
+
 public class ChangeStatusPatient extends JPanel {
     public ChangeStatusPatient(String username, String patient_status, String ManagerUsername)
     {
         setBackground(Constant.my_gray);
-
         covid_user user = getDB.Account.FunctionAccount.GetCovidUserInfoByUserName(username);
         ArrayList<String> PDW = getDB.Address.FunctionAddress.GetPDW(user.getAddress_id());
 
@@ -191,13 +193,12 @@ public class ChangeStatusPatient extends JPanel {
         ChangeStatusCancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-
-                removeAll();
-                add(new ListUserPanel());
-                revalidate();
-                repaint();
-                setVisible(true);
+                ShowPanel.setVisible(false);
+                ShowPanel.removeAll();
+                ShowPanel.add(new ListUserPanel());
+                ShowPanel.revalidate();
+                ShowPanel.repaint();
+                ShowPanel.setVisible(true);
             }
         });
         ChangeStatusButtonPaneSouth.add(ChangeStatusCancelButton);
@@ -266,11 +267,12 @@ public class ChangeStatusPatient extends JPanel {
                         }
 
                     }
-                    setVisible(false);
-                    removeAll();
-                    add(new ListUserPanel());
-                    revalidate();
-                    setVisible(true);
+                    ShowPanel.setVisible(false);
+                    ShowPanel.removeAll();
+                    ShowPanel.add(new ListUserPanel());
+                    ShowPanel.revalidate();
+                    ShowPanel.repaint();
+                    ShowPanel.setVisible(true);
                 }
             }
         });

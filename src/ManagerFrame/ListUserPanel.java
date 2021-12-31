@@ -335,6 +335,7 @@ public class ListUserPanel extends JPanel {
                     ShowPanel.removeAll();
                     ShowPanel.add(new ChangeStatusPatient(username, patient_status, LogInFrame.ManagerUsername));
                     ShowPanel.revalidate();
+                    ShowPanel.repaint();
                     ShowPanel.setVisible(true);
                 }
             }
@@ -356,6 +357,7 @@ public class ListUserPanel extends JPanel {
                     ShowPanel.removeAll();
                     ShowPanel.add(new ListRelatedPanel(username));
                     ShowPanel.revalidate();
+                    ShowPanel.repaint();
                     ShowPanel.setVisible(true);
                 }
             }
@@ -376,6 +378,7 @@ public class ListUserPanel extends JPanel {
                     ShowPanel.removeAll();
                     ShowPanel.add(new UpdateHistoryPanel(username));
                     ShowPanel.revalidate();
+                    ShowPanel.repaint();
                     ShowPanel.setVisible(true);
                 }
             }

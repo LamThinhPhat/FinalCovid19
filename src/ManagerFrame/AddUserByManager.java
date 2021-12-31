@@ -23,6 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.Set;
 
 
+
 public class AddUserByManager extends JFrame {
     public AddUserByManager() {
         setTitle("Covid Management System");

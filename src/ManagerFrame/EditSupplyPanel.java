@@ -8,6 +8,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static ManagerFrame.ManagerFrame.ShowPanel;
+
 public class EditSupplyPanel extends JPanel {
     public EditSupplyPanel(String supplyID) {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -126,13 +128,13 @@ public class EditSupplyPanel extends JPanel {
         EditSupplyCancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setVisible(false);
+                ShowPanel.setVisible(false);
 
-                removeAll();
-                add(new ListSupplyPanel());
-                revalidate();
-                repaint();
-                setVisible(true);
+                ShowPanel.removeAll();
+                ShowPanel.add(new ListSupplyPanel());
+                ShowPanel.revalidate();
+                ShowPanel.repaint();
+                ShowPanel.setVisible(true);
             }
         });
 
@@ -159,12 +161,12 @@ public class EditSupplyPanel extends JPanel {
                         getDB.Supply.FunctionSupply.UpdateSupply(newinfosupply);
 
                         JOptionPane.showMessageDialog(EditSupplyPanel.this, "Edit successfully", "success", JOptionPane.ERROR_MESSAGE);
-                        setVisible(false);
-                        removeAll();
-                        add(new ListSupplyPanel());
-                        revalidate();
-                        repaint();
-                        setVisible(true);
+                        ShowPanel.setVisible(false);
+                        ShowPanel.removeAll();
+                        ShowPanel.add(new ListSupplyPanel());
+                        ShowPanel.revalidate();
+                        ShowPanel.repaint();
+                        ShowPanel.setVisible(true);
                     }
                     catch (NumberFormatException err)
                     {

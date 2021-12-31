@@ -10,6 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import static ManagerFrame.ManagerFrame.ShowPanel;
+
 public class UpdateHistoryPanel extends JPanel {
     public UpdateHistoryPanel(String username) {
         setBackground(Constant.my_gray);
@@ -77,12 +79,12 @@ public class UpdateHistoryPanel extends JPanel {
         CancelHistoryListButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                removeAll();
+                ShowPanel.setVisible(false);
+                ShowPanel.removeAll();
                 JPanel listUserPanel = new ListUserPanel();
-                add(listUserPanel);
-                revalidate();
-                setVisible(true);
+                ShowPanel.add(listUserPanel);
+                ShowPanel.revalidate();
+                ShowPanel.setVisible(true);
             }
         });
 
