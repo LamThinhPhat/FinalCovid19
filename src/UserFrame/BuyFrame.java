@@ -87,7 +87,7 @@ public class BuyFrame extends JFrame {
         SupplyIdLabel.setFont(Constant.LABEL_FONT);
         SupplyIdLabel.setForeground(Constant.my_white);
         JTextField SupplyIdField = new JTextField();
-        SupplyIdField.setFont(Constant.LABEL_FONT);
+        SupplyIdField.setFont(Constant.INFO_FONT);
         SupplyIdField.setColumns(15);
         SupplyIdField.setText(new_limit.getSupply_id());
         SupplyIdField.setEditable(false);
@@ -98,7 +98,7 @@ public class BuyFrame extends JFrame {
         SupplyNameLabel.setFont(Constant.LABEL_FONT);
         SupplyNameLabel.setForeground(Constant.my_white);
         JTextField SupplyNameField = new JTextField();
-        SupplyNameField.setFont(Constant.LABEL_FONT);
+        SupplyNameField.setFont(Constant.INFO_FONT);
         SupplyNameField.setText(chosen.getSupply_name());
         SupplyNameField.setColumns(15);
         SupplyNameField.setEditable(false);
@@ -107,7 +107,7 @@ public class BuyFrame extends JFrame {
         LimitDayLabel.setFont(Constant.LABEL_FONT);
         LimitDayLabel.setForeground(Constant.my_white);
         JTextField LimitDayField = new JTextField();
-        LimitDayField.setFont(Constant.LABEL_FONT);
+        LimitDayField.setFont(Constant.INFO_FONT);
         LimitDayField.setText(String.valueOf(chosen.getLimit_day()));
         LimitDayField.setColumns(15);
         LimitDayField.setEditable(false);
@@ -116,7 +116,7 @@ public class BuyFrame extends JFrame {
         CurrentDayLabel.setFont(Constant.LABEL_FONT);
         CurrentDayLabel.setForeground(Constant.my_white);
         JTextField CurrentDayField = new JTextField();
-        CurrentDayField.setFont(Constant.LABEL_FONT);
+        CurrentDayField.setFont(Constant.INFO_FONT);
         CurrentDayField.setText(String.valueOf(new_limit.getUse_day()));
         CurrentDayField.setColumns(15);
         CurrentDayField.setEditable(false);
@@ -125,7 +125,7 @@ public class BuyFrame extends JFrame {
         LimitWeekLabel.setFont(Constant.LABEL_FONT);
         LimitWeekLabel.setForeground(Constant.my_white);
         JTextField LimitWeekField = new JTextField();
-        LimitWeekField.setFont(Constant.LABEL_FONT);
+        LimitWeekField.setFont(Constant.INFO_FONT);
         LimitWeekField.setText(String.valueOf(chosen.getLimit_week()));
         LimitWeekField.setColumns(15);
         LimitWeekField.setEditable(false);
@@ -134,7 +134,7 @@ public class BuyFrame extends JFrame {
         CurrentWeekLabel.setFont(Constant.LABEL_FONT);
         CurrentWeekLabel.setForeground(Constant.my_white);
         JTextField CurrentWeekField = new JTextField();
-        CurrentWeekField.setFont(Constant.LABEL_FONT);
+        CurrentWeekField.setFont(Constant.INFO_FONT);
         CurrentWeekField.setText(String.valueOf(new_limit.getUse_week()));
         CurrentWeekField.setColumns(15);
         CurrentWeekField.setEditable(false);
@@ -143,7 +143,7 @@ public class BuyFrame extends JFrame {
         LimitMonthLabel.setFont(Constant.LABEL_FONT);
         LimitMonthLabel.setForeground(Constant.my_white);
         JTextField LimitMonthField = new JTextField();
-        LimitMonthField.setFont(Constant.LABEL_FONT);
+        LimitMonthField.setFont(Constant.INFO_FONT);
         LimitMonthField.setText(String.valueOf(chosen.getLimit_month()));
         LimitMonthField.setColumns(15);
         LimitMonthField.setEditable(false);
@@ -152,7 +152,7 @@ public class BuyFrame extends JFrame {
         CurrentMonthLabel.setFont(Constant.LABEL_FONT);
         CurrentMonthLabel.setForeground(Constant.my_white);
         JTextField CurrentMonthField = new JTextField();
-        CurrentMonthField.setFont(Constant.LABEL_FONT);
+        CurrentMonthField.setFont(Constant.INFO_FONT);
         CurrentMonthField.setText(String.valueOf(new_limit.getUse_week()));
         CurrentMonthField.setColumns(15);
         CurrentMonthField.setEditable(false);
@@ -169,7 +169,7 @@ public class BuyFrame extends JFrame {
         JComboBox<String> QuantityBox = new JComboBox<>(array);
         QuantityBox.setForeground(Constant.my_white);
         QuantityBox.setBackground(new Color(77,82,77));
-        QuantityBox.setFont(Constant.LABEL_FONT);
+        QuantityBox.setFont(Constant.INFO_FONT);
         QuantityBox.setPrototypeDisplayValue("Quantity");
 
         JLabel PriceLabel = new JLabel("Price:");
@@ -178,18 +178,18 @@ public class BuyFrame extends JFrame {
         PriceField.setText(String.valueOf(chosen.getPrice()));
         PriceField.setEditable(false);
         PriceField.setColumns(15);
-        PriceField.setFont(Constant.LABEL_FONT);
+        PriceField.setFont(Constant.INFO_FONT);
 
         JPanel EditSupplyButtonSouth = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         EditSupplyButtonSouth.setBackground(Constant.my_gray);
 
         JButton EditSupplyCancelButton = new JButton("Cancel");
-        EditSupplyCancelButton.setFont(Constant.LABEL_FONT);
+        EditSupplyCancelButton.setFont(Constant.INFO_FONT);
         EditSupplyCancelButton.setForeground(Constant.my_white);
         EditSupplyCancelButton.setBackground(new Color(77,82,77));
 
         JButton EditSupplyConfirmButton = new JButton("Confirm");
-        EditSupplyConfirmButton.setFont(Constant.LABEL_FONT);
+        EditSupplyConfirmButton.setFont(Constant.INFO_FONT);
         EditSupplyConfirmButton.setForeground(Constant.my_white);
         EditSupplyConfirmButton.setBackground(new Color(77,82,77));
         boolean finalIsNew = isNew;
@@ -233,6 +233,7 @@ public class BuyFrame extends JFrame {
             gbc.anchor = GridBagConstraints.EAST;
             gbc.gridx = 1;
             gbc.gridy++;
+            gbc.insets = new Insets(10,0,0,0);
             BuySupplyPanel.add(ReachLimit, gbc);
             EditSupplyConfirmButton.setEnabled(false);
         }

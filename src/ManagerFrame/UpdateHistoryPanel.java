@@ -79,7 +79,8 @@ public class UpdateHistoryPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
                 removeAll();
-                add(new ListUserPanel());
+                JPanel listUserPanel = new ListUserPanel();
+                add(listUserPanel);
                 revalidate();
                 setVisible(true);
             }

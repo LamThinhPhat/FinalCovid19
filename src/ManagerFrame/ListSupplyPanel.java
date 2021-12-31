@@ -5,10 +5,13 @@ import getDB.Supply.FunctionSupply;
 import table.supply;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.ArrayList;
 
 import static ManagerFrame.ManagerFrame.ShowPanel;
@@ -17,18 +20,9 @@ public class ListSupplyPanel extends JPanel {
     public ListSupplyPanel()
     {
         setBackground(Constant.my_gray);
-        JPanel ListSupplycontentPane = new JPanel(new BorderLayout());
-        add(ListSupplycontentPane);
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-
-        JPanel ListSupplybuttonPaneSouth = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        ListSupplycontentPane.add(ListSupplybuttonPaneSouth, BorderLayout.SOUTH);
-        ListSupplybuttonPaneSouth.setBackground(Constant.my_gray);
-
-        JScrollPane ListSupplyCenter = new JScrollPane();
-        ListSupplyCenter.setPreferredSize(new Dimension(750, 600));
-        ListSupplycontentPane.add(ListSupplyCenter, BorderLayout.CENTER);
-
+        JPanel tablePanel = new JPanel();
         JTable SupplyTable = new JTable();
         SupplyTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         DefaultTableModel Productdef = new DefaultTableModel() {
@@ -37,6 +31,9 @@ public class ListSupplyPanel extends JPanel {
                 return false;
             }
         };
+
+        JScrollPane ListSupplyCenter = new JScrollPane(SupplyTable);
+        ListSupplyCenter.setPreferredSize(new Dimension(1230, 460));
 
         SupplyTable.setModel(Productdef);
         Productdef.addColumn("Supply ID");
@@ -55,11 +52,109 @@ public class ListSupplyPanel extends JPanel {
             });
         }
 
-        ListSupplyCenter.setViewportView(SupplyTable);
+        SupplyTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        SupplyTable.getTableHeader().setFont(Constant.TABLE_HEADER);
+        SupplyTable.setFont(Constant.TABLE_FONT);
+
+        SupplyTable.getColumnModel().getColumn(0).setPreferredWidth(205);
+        SupplyTable.getColumnModel().getColumn(1).setPreferredWidth(205);
+        SupplyTable.getColumnModel().getColumn(2).setPreferredWidth(205);
+        SupplyTable.getColumnModel().getColumn(3).setPreferredWidth(205);
+        SupplyTable.getColumnModel().getColumn(4).setPreferredWidth(205);
+        SupplyTable.getColumnModel().getColumn(5).setPreferredWidth(205);
+
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment( JLabel.CENTER );
+        SupplyTable.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
+        SupplyTable.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
+        SupplyTable.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
+
+        tablePanel.add(ListSupplyCenter);
+
+
+        JPanel topPanel = new JPanel();
+        topPanel.setBackground(Constant.my_gray);
+        topPanel.setForeground(Constant.my_white);
+        topPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 
         JButton RefreshSupplyButton = new JButton("Refresh");
         RefreshSupplyButton.setForeground(Constant.my_white);
         RefreshSupplyButton.setBackground(new Color(77,82,77));
+        RefreshSupplyButton.setFont(Constant.INFO_FONT);
+
+        JTextField SearchSupplyField = new JTextField();
+        SearchSupplyField.setFont(Constant.INFO_FONT);
+        SearchSupplyField.setColumns(20);
+        SearchSupplyField.setForeground(Color.GRAY);
+        SearchSupplyField.setText("Supply name");
+
+        SearchSupplyField.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (SearchSupplyField.getText().equals("Supply name")) {
+                    SearchSupplyField.setText("");
+                    SearchSupplyField.setForeground(Color.BLACK);
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (SearchSupplyField.getText().isEmpty()) {
+                    SearchSupplyField.setForeground(Color.GRAY);
+                    SearchSupplyField.setText("Supply name");
+                }
+            }
+        });
+
+        JButton SearchSupplyNameButton = new JButton("Search");
+        SearchSupplyNameButton.setForeground(Constant.my_white);
+        SearchSupplyNameButton.setBackground(new Color(77,82,77));
+        SearchSupplyNameButton.setFont(Constant.INFO_FONT);
+
+        topPanel.add(SearchSupplyField);
+        topPanel.add(SearchSupplyNameButton);
+        topPanel.add(RefreshSupplyButton);
+        topPanel.add(Box.createRigidArea(new Dimension(450,0)));
+
+        JLabel sortLabel = new JLabel("Sort by:");
+        sortLabel.setFont(Constant.INFO_FONT);
+        sortLabel.setForeground(Constant.my_white);
+
+        String[] sort = {"ID", "Name", "Limit day", "Limit week", "Limit month", "Price"};
+        JComboBox comboBox = new JComboBox(sort);
+        comboBox.setFont(Constant.INFO_FONT);
+        comboBox.setBackground(Constant.my_gray);
+        comboBox.setForeground(Constant.my_white);
+
+        topPanel.add(sortLabel);
+        topPanel.add(comboBox);
+
+        //Option panel
+        JPanel OptionPanel = new JPanel();
+        OptionPanel.setBackground(Constant.my_gray);
+        OptionPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+
+        JButton AddSupply = new JButton("Add new supply");
+        AddSupply.setForeground(Constant.my_white);
+        AddSupply.setBackground(new Color(77,82,77));
+        AddSupply.setFont(Constant.INFO_FONT);
+
+        JButton EditSupply = new JButton("Edit supply");
+        EditSupply.setForeground(Constant.my_white);
+        EditSupply.setBackground(new Color(77,82,77));
+        EditSupply.setFont(Constant.INFO_FONT);
+
+        JButton DeleteSupply = new JButton("Delete supply");
+        DeleteSupply.setForeground(Constant.my_white);
+        DeleteSupply.setBackground(new Color(77,82,77));
+        DeleteSupply.setFont(Constant.INFO_FONT);
+
+        OptionPanel.add(AddSupply);
+        OptionPanel.add(EditSupply);
+        OptionPanel.add(DeleteSupply);
+
+        add(topPanel);
+        add(tablePanel);
+        add(OptionPanel);
 
         RefreshSupplyButton.addActionListener(new ActionListener() {
             @Override
@@ -75,13 +170,6 @@ public class ListSupplyPanel extends JPanel {
                 }
             }
         });
-
-        JTextField SearchSupplyField = new JTextField();
-        SearchSupplyField.setColumns(15);
-
-        JButton SearchSupplyNameButton = new JButton("Search by supply");
-        SearchSupplyNameButton.setForeground(Constant.my_white);
-        SearchSupplyNameButton.setBackground(new Color(77,82,77));
 
         SearchSupplyNameButton.addActionListener(new ActionListener() {
             @Override
@@ -118,32 +206,6 @@ public class ListSupplyPanel extends JPanel {
             }
         });
 
-        ListSupplybuttonPaneSouth.add(RefreshSupplyButton);
-        ListSupplybuttonPaneSouth.add(SearchSupplyField);
-        ListSupplybuttonPaneSouth.add(SearchSupplyNameButton);
-
-        JPanel EastPanelListSupply = new JPanel();
-        EastPanelListSupply.setBackground(Constant.my_gray);
-        EastPanelListSupply.setLayout(new BoxLayout(EastPanelListSupply, BoxLayout.Y_AXIS));
-        ListSupplycontentPane.add(EastPanelListSupply,BorderLayout.EAST);
-
-        JButton AddSupply = new JButton("Add new supply");
-        AddSupply.setForeground(Constant.my_white);
-        AddSupply.setBackground(new Color(77,82,77));
-
-        JButton EditSupply = new JButton("Edit supply");
-        EditSupply.setForeground(Constant.my_white);
-        EditSupply.setBackground(new Color(77,82,77));
-
-        JButton DeleteSupply = new JButton("Delete supply");
-        DeleteSupply.setForeground(Constant.my_white);
-        DeleteSupply.setBackground(new Color(77,82,77));
-
-
-        EastPanelListSupply.add(AddSupply);
-        EastPanelListSupply.add(EditSupply);
-        EastPanelListSupply.add(DeleteSupply);
-
         DeleteSupply.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -169,7 +231,6 @@ public class ListSupplyPanel extends JPanel {
                 }
             }
         });
-
 
         AddSupply.addActionListener(new ActionListener() {
             @Override
@@ -202,137 +263,72 @@ public class ListSupplyPanel extends JPanel {
             }
         });
 
-        JPanel WestPanelSortSupply = new JPanel();
-        WestPanelSortSupply.setBackground(Constant.my_gray);
-        WestPanelSortSupply.setLayout(new BoxLayout(WestPanelSortSupply, BoxLayout.Y_AXIS));
-        ListSupplycontentPane.add(WestPanelSortSupply,BorderLayout.WEST);
-
-        JButton SortById = new JButton("Sort ID");
-        SortById.setForeground(Constant.my_white);
-        SortById.setBackground(new Color(77,82,77));
-
-        JButton SortBySupplyName = new JButton("Sort Name");
-        SortBySupplyName.setForeground(Constant.my_white);
-        SortBySupplyName.setBackground(new Color(77,82,77));
-
-        JButton SortByLimitDay = new JButton("Sort Limit Day");
-        SortByLimitDay.setForeground(Constant.my_white);
-        SortByLimitDay.setBackground(new Color(77,82,77));
-
-        JButton SortByLimitWeek = new JButton("Sort Limit Week");
-        SortByLimitWeek.setForeground(Constant.my_white);
-        SortByLimitWeek.setBackground(new Color(77,82,77));
-
-        JButton SortByLimitMonth = new JButton("Sort Limit Month");
-        SortByLimitMonth.setForeground(Constant.my_white);
-        SortByLimitMonth.setBackground(new Color(77,82,77));
-
-        JButton SortByPrice = new JButton("Sort Price");
-        SortByPrice.setForeground(Constant.my_white);
-        SortByPrice.setBackground(new Color(77,82,77));
-
-
-        SortById.addActionListener(new ActionListener() {
+        comboBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Productdef.setRowCount(0);
-                ArrayList<supply> SupplyList = getDB.Supply.FunctionSupply.GetAllSupplyIDSort();
-                for (supply i: SupplyList)
-                {
-                    Productdef.addRow(new Object[]{
-                            i.getSupply_id(), i.getSupply_name(), i.getLimit_day(), i.getLimit_week(),
-                            i.getLimit_month(),i.getPrice()
-                    });
+                String sortChoose = (String) comboBox.getSelectedItem();
+                if(sortChoose.equals("ID")) {
+                    Productdef.setRowCount(0);
+                    ArrayList<supply> SupplyList = getDB.Supply.FunctionSupply.GetAllSupplyIDSort();
+                    for (supply i: SupplyList)
+                    {
+                        Productdef.addRow(new Object[]{
+                                i.getSupply_id(), i.getSupply_name(), i.getLimit_day(), i.getLimit_week(),
+                                i.getLimit_month(),i.getPrice()
+                        });
+                    }
+                } else if(sortChoose.equals("Name")) {
+                    Productdef.setRowCount(0);
+                    ArrayList<supply> SupplyList = getDB.Supply.FunctionSupply.GetAllSupplySupplyNameSort();
+                    for (supply i: SupplyList)
+                    {
+                        Productdef.addRow(new Object[]{
+                                i.getSupply_id(), i.getSupply_name(), i.getLimit_day(), i.getLimit_week(),
+                                i.getLimit_month(), i.getPrice()
+                        });
+                    }
+                } else if(sortChoose.equals("Limit day")) {
+                    Productdef.setRowCount(0);
+                    ArrayList<supply> SupplyList = getDB.Supply.FunctionSupply.GetAllSupplyLimitDaySort();
+                    for (supply i: SupplyList)
+                    {
+                        Productdef.addRow(new Object[]{
+                                i.getSupply_id(), i.getSupply_name(), i.getLimit_day(), i.getLimit_week(),
+                                i.getLimit_month(), i.getPrice()
+                        });
+                    }
+                } else if(sortChoose.equals("Limit month")) {
+                    Productdef.setRowCount(0);
+                    ArrayList<supply> SupplyList = getDB.Supply.FunctionSupply.GetAllSupplyLimitMonthSort();
+                    for (supply i: SupplyList)
+                    {
+                        Productdef.addRow(new Object[]{
+                                i.getSupply_id(), i.getSupply_name(), i.getLimit_day(), i.getLimit_week(),
+                                i.getLimit_month(), i.getPrice()
+                        });
+                    }
+                } else if(sortChoose.equals("Limit week")) {
+                    Productdef.setRowCount(0);
+                    ArrayList<supply> SupplyList = getDB.Supply.FunctionSupply.GetAllSupplyLimitWeekSort();
+                    for (supply i: SupplyList)
+                    {
+                        Productdef.addRow(new Object[]{
+                                i.getSupply_id(), i.getSupply_name(), i.getLimit_day(), i.getLimit_week(),
+                                i.getLimit_month(), i.getPrice()
+                        });
+                    }
+                } else if(sortChoose.equals("Price")) {
+                    Productdef.setRowCount(0);
+                    ArrayList<supply> SupplyList = getDB.Supply.FunctionSupply.GetAllSupplyPriceSort();
+                    for (supply i: SupplyList)
+                    {
+                        Productdef.addRow(new Object[]{
+                                i.getSupply_id(), i.getSupply_name(), i.getLimit_day(), i.getLimit_week(),
+                                i.getLimit_month(), i.getPrice()
+                        });
+                    }
                 }
             }
         });
-
-        SortBySupplyName.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Productdef.setRowCount(0);
-                ArrayList<supply> SupplyList = getDB.Supply.FunctionSupply.GetAllSupplySupplyNameSort();
-                for (supply i: SupplyList)
-                {
-                    Productdef.addRow(new Object[]{
-                            i.getSupply_id(), i.getSupply_name(), i.getLimit_day(), i.getLimit_week(),
-                            i.getLimit_month(), i.getPrice()
-                    });
-                }
-            }
-        });
-
-        SortByLimitDay.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Productdef.setRowCount(0);
-                ArrayList<supply> SupplyList = getDB.Supply.FunctionSupply.GetAllSupplyLimitDaySort();
-                for (supply i: SupplyList)
-                {
-                    Productdef.addRow(new Object[]{
-                            i.getSupply_id(), i.getSupply_name(), i.getLimit_day(), i.getLimit_week(),
-                            i.getLimit_month(), i.getPrice()
-                    });
-                }
-            }
-        });
-
-        SortByLimitMonth.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Productdef.setRowCount(0);
-                ArrayList<supply> SupplyList = getDB.Supply.FunctionSupply.GetAllSupplyLimitMonthSort();
-                for (supply i: SupplyList)
-                {
-                    Productdef.addRow(new Object[]{
-                            i.getSupply_id(), i.getSupply_name(), i.getLimit_day(), i.getLimit_week(),
-                            i.getLimit_month(), i.getPrice()
-                    });
-                }
-            }
-        });
-
-        SortByLimitWeek.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Productdef.setRowCount(0);
-                ArrayList<supply> SupplyList = getDB.Supply.FunctionSupply.GetAllSupplyLimitWeekSort();
-                for (supply i: SupplyList)
-                {
-                    Productdef.addRow(new Object[]{
-                            i.getSupply_id(), i.getSupply_name(), i.getLimit_day(), i.getLimit_week(),
-                            i.getLimit_month(), i.getPrice()
-                    });
-                }
-            }
-        });
-
-
-        SortByPrice.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Productdef.setRowCount(0);
-                ArrayList<supply> SupplyList = getDB.Supply.FunctionSupply.GetAllSupplyPriceSort();
-                for (supply i: SupplyList)
-                {
-                    Productdef.addRow(new Object[]{
-                            i.getSupply_id(), i.getSupply_name(), i.getLimit_day(), i.getLimit_week(),
-                            i.getLimit_month(), i.getPrice()
-                    });
-                }
-            }
-        });
-
-
-
-
-        WestPanelSortSupply.add(SortById);
-        WestPanelSortSupply.add(SortBySupplyName);
-        WestPanelSortSupply.add(SortByLimitDay);
-        WestPanelSortSupply.add(SortByLimitWeek);
-        WestPanelSortSupply.add(SortByLimitMonth);
-        WestPanelSortSupply.add(SortByPrice);
-
-
     }
 }

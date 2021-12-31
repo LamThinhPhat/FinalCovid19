@@ -73,7 +73,7 @@ public class LogInFrame extends JFrame {
         contentPane.add(Header);
 
         JPanel UserNamePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JLabel UserNameLabel = new JLabel("Username: ");
+        JLabel UserNameLabel = new JLabel("Username:");
         UserNameLabel.setFont(Constant.LABEL_FONT);
         JTextField UserNameInput = new JTextField();
         UserNameInput.setFont(Constant.INFO_FONT);
@@ -86,7 +86,7 @@ public class LogInFrame extends JFrame {
         contentPane.add(UserNamePanel);
 
         JPanel PassPannel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JLabel PassLabel = new JLabel("Password: ");
+        JLabel PassLabel = new JLabel("Password:");
         PassLabel.setFont(Constant.LABEL_FONT);
         JPasswordField PassInput = new JPasswordField();
         PassLabel.setForeground(Constant.my_white);

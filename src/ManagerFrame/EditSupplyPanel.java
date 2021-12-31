@@ -10,100 +10,118 @@ import java.awt.event.ActionListener;
 
 public class EditSupplyPanel extends JPanel {
     public EditSupplyPanel(String supplyID) {
-
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         supply EditInfoSupply = getDB.Supply.FunctionSupply.GetInfoSupply(supplyID);
-
         setBackground(Constant.my_gray);
         JPanel EditSupplyPanel = new JPanel();
-        EditSupplyPanel.setLayout(new BoxLayout(EditSupplyPanel,BoxLayout.Y_AXIS));
+        EditSupplyPanel.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10,10,10,10);
+        gbc.anchor =GridBagConstraints.WEST;
+
         EditSupplyPanel.setBackground(Constant.my_gray);
-        add(EditSupplyPanel);
 
+        JPanel headerPanel = new JPanel();
+        headerPanel.setBackground(Constant.my_gray);
         JLabel AddNewSupplyLabel = new JLabel("Edit supply");
-        AddNewSupplyLabel.setFont(Constant.LABEL_FONT);
+        AddNewSupplyLabel.setFont(Constant.HEADER_FONT);
         AddNewSupplyLabel.setForeground(Constant.my_white);
-        EditSupplyPanel.add(AddNewSupplyLabel);
+        headerPanel.add(AddNewSupplyLabel);
 
-        JPanel SupplyIdPane = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        SupplyIdPane.setBackground(Constant.my_gray);
-        EditSupplyPanel.add(SupplyIdPane);
-        JLabel SupplyIdLabel = new JLabel("Supply ID:      ");
+        JLabel SupplyIdLabel = new JLabel("Supply ID:");
         SupplyIdLabel.setFont(Constant.LABEL_FONT);
         SupplyIdLabel.setForeground(Constant.my_white);
         JTextField SupplyIdField = new JTextField();
+        SupplyIdField.setFont(Constant.INFO_FONT);
         SupplyIdField.setColumns(30);
         SupplyIdField.setText(EditInfoSupply.getSupply_id());
         SupplyIdField.setEditable(false);
-        SupplyIdPane.add(SupplyIdLabel);
-        SupplyIdPane.add(SupplyIdField);
 
-        JPanel SupplyNamePane = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        SupplyNamePane.setBackground(Constant.my_gray);
-        EditSupplyPanel.add(SupplyNamePane);
-        JLabel SupplyNameLabel = new JLabel("Supply name: ");
+
+        JLabel SupplyNameLabel = new JLabel("Supply name:");
         SupplyNameLabel.setFont(Constant.LABEL_FONT);
         SupplyNameLabel.setForeground(Constant.my_white);
         JTextField SupplyNameField = new JTextField();
+        SupplyNameField.setFont(Constant.INFO_FONT);
         SupplyNameField.setText(EditInfoSupply.getSupply_name());
         SupplyNameField.setColumns(30);
-        SupplyNamePane.add(SupplyNameLabel);
-        SupplyNamePane.add(SupplyNameField);
 
-        JPanel LimitDayPane = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        LimitDayPane.setBackground(Constant.my_gray);
-        EditSupplyPanel.add(LimitDayPane);
-        JLabel LimitDayLabel = new JLabel("Limit day:       ");
+
+        JLabel LimitDayLabel = new JLabel("Limit day:");
         LimitDayLabel.setFont(Constant.LABEL_FONT);
         LimitDayLabel.setForeground(Constant.my_white);
         JTextField LimitDayField = new JTextField();
+        LimitDayField.setFont(Constant.INFO_FONT);
         LimitDayField.setText(String.valueOf(EditInfoSupply.getLimit_day()));
         LimitDayField.setColumns(30);
-        LimitDayPane.add(LimitDayLabel);
-        LimitDayPane.add(LimitDayField);
 
-        JPanel LimitWeekPane = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        LimitWeekPane.setBackground(Constant.my_gray);
-        EditSupplyPanel.add(LimitWeekPane);
-        JLabel LimitWeekLabel = new JLabel("Limit week:     ");
+
+        JLabel LimitWeekLabel = new JLabel("Limit week:");
         LimitWeekLabel.setFont(Constant.LABEL_FONT);
         LimitWeekLabel.setForeground(Constant.my_white);
         JTextField LimitWeekField = new JTextField();
+        LimitWeekField.setFont(Constant.INFO_FONT);
         LimitWeekField.setText(String.valueOf(EditInfoSupply.getLimit_week()));
         LimitWeekField.setColumns(30);
-        LimitWeekPane.add(LimitWeekLabel);
-        LimitWeekPane.add(LimitWeekField);
 
-        JPanel LimitMonthPane = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        LimitMonthPane.setBackground(Constant.my_gray);
-        EditSupplyPanel.add(LimitMonthPane);
-        JLabel LimitMonthLabel = new JLabel("Limit month:  ");
+
+        JLabel LimitMonthLabel = new JLabel("Limit month:");
         LimitMonthLabel.setFont(Constant.LABEL_FONT);
         LimitMonthLabel.setForeground(Constant.my_white);
         JTextField LimitMonthField = new JTextField();
+        LimitMonthField.setFont(Constant.INFO_FONT);
         LimitMonthField.setText(String.valueOf(EditInfoSupply.getLimit_month()));
         LimitMonthField.setColumns(30);
-        LimitMonthPane.add(LimitMonthLabel);
-        LimitMonthPane.add(LimitMonthField);
 
-        JPanel PricePane = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        PricePane.setBackground(Constant.my_gray);
-        EditSupplyPanel.add(PricePane);
-        JLabel PriceLabel = new JLabel("Price:               ");
+        JLabel PriceLabel = new JLabel("Price:");
         PriceLabel.setFont(Constant.LABEL_FONT);
         PriceLabel.setForeground(Constant.my_white);
         JTextField PriceField = new JTextField();
+        PriceField.setFont(Constant.INFO_FONT);
         PriceField.setText(String.valueOf(EditInfoSupply.getPrice()));
         PriceField.setColumns(30);
-        PricePane.add(PriceLabel);
-        PricePane.add(PriceField);
 
         JPanel EditSupplyButtonSouth = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         EditSupplyButtonSouth.setBackground(Constant.my_gray);
-        EditSupplyPanel.add(EditSupplyButtonSouth);
 
         JButton EditSupplyCancelButton = new JButton("Cancel");
         EditSupplyCancelButton.setForeground(Constant.my_white);
         EditSupplyCancelButton.setBackground(new Color(77,82,77));
+        EditSupplyCancelButton.setFont(Constant.INFO_FONT);
+
+        JButton EditSupplyConfirmButton = new JButton("Confirm");
+        EditSupplyConfirmButton.setForeground(Constant.my_white);
+        EditSupplyConfirmButton.setBackground(new Color(77,82,77));
+        EditSupplyConfirmButton.setFont(Constant.INFO_FONT);
+
+        EditSupplyButtonSouth.add(EditSupplyCancelButton);
+        EditSupplyButtonSouth.add(EditSupplyConfirmButton);
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        EditSupplyPanel.add(SupplyIdLabel, gbc);
+
+        gbc.gridy++;EditSupplyPanel.add(SupplyNameLabel, gbc);
+        gbc.gridy++;EditSupplyPanel.add(LimitDayLabel, gbc);
+        gbc.gridy++;EditSupplyPanel.add(LimitWeekLabel, gbc);
+        gbc.gridy++;EditSupplyPanel.add(LimitMonthLabel, gbc);
+        gbc.gridy++;EditSupplyPanel.add(PriceLabel, gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        EditSupplyPanel.add(SupplyIdField, gbc);
+
+        gbc.gridy++;EditSupplyPanel.add(SupplyNameField, gbc);
+        gbc.gridy++;EditSupplyPanel.add(LimitDayField, gbc);
+        gbc.gridy++;EditSupplyPanel.add(LimitWeekField, gbc);
+        gbc.gridy++;EditSupplyPanel.add(LimitMonthField, gbc);
+        gbc.gridy++;EditSupplyPanel.add(PriceField, gbc);
+
+        gbc.anchor = GridBagConstraints.EAST;
+        gbc.gridy++;EditSupplyPanel.add(EditSupplyButtonSouth, gbc);
+
+        add(headerPanel);
+        add(EditSupplyPanel);
 
         EditSupplyCancelButton.addActionListener(new ActionListener() {
             @Override
@@ -117,12 +135,6 @@ public class EditSupplyPanel extends JPanel {
                 setVisible(true);
             }
         });
-
-        EditSupplyButtonSouth.add(EditSupplyCancelButton);
-
-        JButton EditSupplyConfirmButton = new JButton("Confirm");
-        EditSupplyConfirmButton.setForeground(Constant.my_white);
-        EditSupplyConfirmButton.setBackground(new Color(77,82,77));
 
         EditSupplyConfirmButton.addActionListener(new ActionListener() {
             @Override
@@ -162,9 +174,5 @@ public class EditSupplyPanel extends JPanel {
 
             }
         });
-
-        EditSupplyButtonSouth.add(EditSupplyConfirmButton);
-
-
     }
 }
