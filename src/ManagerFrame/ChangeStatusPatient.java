@@ -13,134 +13,118 @@ import java.util.ArrayList;
 import java.util.Set;
 
 import static ManagerFrame.ManagerFrame.ShowPanel;
+import static ManagerFrame.ManagerFrame.main;
 
 
 public class ChangeStatusPatient extends JPanel {
     public ChangeStatusPatient(String username, String patient_status, String ManagerUsername)
     {
         setBackground(Constant.my_gray);
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         covid_user user = getDB.Account.FunctionAccount.GetCovidUserInfoByUserName(username);
         ArrayList<String> PDW = getDB.Address.FunctionAddress.GetPDW(user.getAddress_id());
 
-        JPanel EditUserPane = new JPanel(new BorderLayout());
-        add(EditUserPane);
+        JPanel headerPanel = new JPanel();
+        headerPanel.setBackground(Constant.my_gray);
+        JLabel headerLabel = new JLabel("Change user status");
+        headerLabel.setFont(Constant.HEADER_FONT);
+        headerLabel.setForeground(Constant.my_white);
+        headerPanel.add(headerLabel);
 
-        JPanel ShowInfoCenter = new JPanel();
-        ShowInfoCenter.setBackground(Constant.my_gray);
-        ShowInfoCenter.setLayout(new BoxLayout(ShowInfoCenter,BoxLayout.Y_AXIS));
-        EditUserPane.add(ShowInfoCenter, BorderLayout.CENTER);
+        JPanel mainPanel = new JPanel();
+        mainPanel.setForeground(Constant.my_white);
+        mainPanel.setBackground(Constant.my_gray);
+        mainPanel.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10,10,10,10);
+        gbc.anchor = GridBagConstraints.WEST;
 
-        JPanel UsernamePane = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        UsernamePane.setBackground(Constant.my_gray);
-        ShowInfoCenter.add(UsernamePane);
-        JLabel UserNameLabel = new JLabel("Username:          ");
+        JLabel UserNameLabel = new JLabel("Username:");
         UserNameLabel.setFont(Constant.LABEL_FONT);
         UserNameLabel.setForeground(Constant.my_white);
+        UserNameLabel.setFont(Constant.LABEL_FONT);
         JTextField UserNameField = new JTextField();
-        UserNameField.setColumns(30);
+        UserNameField.setColumns(20);
         UserNameField.setText(String.valueOf(user.getUsername()));
         UserNameField.setEditable(false);
-        UsernamePane.add(UserNameLabel);
-        UsernamePane.add(UserNameField);
+        UserNameField.setFont(Constant.INFO_FONT);
 
-        JPanel NamePane = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        NamePane.setBackground(Constant.my_gray);
-        ShowInfoCenter.add(NamePane);
-        JLabel NameLabel = new JLabel("Fullname:           ");
+        JLabel NameLabel = new JLabel("Full name:");
         NameLabel.setFont(Constant.LABEL_FONT);
         NameLabel.setForeground(Constant.my_white);
+        NameLabel.setFont(Constant.LABEL_FONT);
         JTextField NameField = new JTextField();
-        NameField.setColumns(30);
+        NameField.setColumns(20);
         NameField.setText(String.valueOf(user.getFull_name()));
         NameField.setEditable(false);
-        NamePane.add(NameLabel);
-        NamePane.add(NameField);
+        NameField.setFont(Constant.INFO_FONT);
 
-        JPanel IdNumPane = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        IdNumPane.setBackground(Constant.my_gray);
-        ShowInfoCenter.add(IdNumPane);
-        JLabel IdNumLabel = new JLabel("ID number:        ");
+        JLabel IdNumLabel = new JLabel("ID:");
         IdNumLabel.setFont(Constant.LABEL_FONT);
         IdNumLabel.setForeground(Constant.my_white);
+        IdNumLabel.setFont(Constant.LABEL_FONT);
         JTextField IdNumField = new JTextField();
-        IdNumField.setColumns(30);
+        IdNumField.setColumns(20);
         IdNumField.setText(String.valueOf(user.getId()));
         IdNumField.setEditable(false);
-        IdNumPane.add(IdNumLabel);
-        IdNumPane.add(IdNumField);
+        IdNumField.setFont(Constant.INFO_FONT);
 
-        JPanel DoBPane = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        DoBPane.setBackground(Constant.my_gray);
-        ShowInfoCenter.add(DoBPane);
-        JLabel DobLabel = new JLabel("Date of birth:     ");
+        JLabel DobLabel = new JLabel("Date of birth:");
         DobLabel.setFont(Constant.LABEL_FONT);
         DobLabel.setForeground(Constant.my_white);
+        DobLabel.setFont(Constant.LABEL_FONT);
         JTextField YobField = new JTextField();
-        YobField.setColumns(30);
+        YobField.setColumns(20);
         YobField.setText(String.valueOf(user.getDob()));
         YobField.setEditable(false);
-        DoBPane.add(DobLabel);
-        DoBPane.add(YobField);
+        YobField.setFont(Constant.INFO_FONT);
 
-        JPanel AddressPane = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        AddressPane.setBackground(Constant.my_gray);
-        ShowInfoCenter.add(AddressPane);
-        JLabel AddressLabel = new JLabel("House number:  ");
+        JLabel AddressLabel = new JLabel("House number:");
         AddressLabel.setFont(Constant.LABEL_FONT);
         AddressLabel.setForeground(Constant.my_white);
+        AddressLabel.setFont(Constant.LABEL_FONT);
         JTextField AddressField = new JTextField();
-        AddressField.setColumns(30);
+        AddressField.setColumns(20);
         AddressField.setText(String.valueOf(user.getHouse_number()));
         AddressField.setEditable(false);
-        AddressPane.add(AddressLabel);
-        AddressPane.add(AddressField);
+        AddressField.setFont(Constant.INFO_FONT);
 
-        JPanel ProvincePane = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        ProvincePane.setBackground(Constant.my_gray);
-        ShowInfoCenter.add(ProvincePane);
-        JLabel ProvinceLable = new JLabel("Province:            ");
+        JLabel ProvinceLable = new JLabel("Province:");
         ProvinceLable.setFont(Constant.LABEL_FONT);
         ProvinceLable.setForeground(Constant.my_white);
+        ProvinceLable.setFont(Constant.LABEL_FONT);
         JTextField ProviceField = new JTextField();
-        ProviceField.setColumns(30);
+        ProviceField.setColumns(20);
         ProviceField.setText(String.valueOf(PDW.get(0)));
         ProviceField.setEditable(false);
-        ProvincePane.add(ProvinceLable);
-        ProvincePane.add(ProviceField);
+        ProviceField.setFont(Constant.INFO_FONT);
 
-        JPanel DistrictPane = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        DistrictPane.setBackground(Constant.my_gray);
-        ShowInfoCenter.add(DistrictPane);
-        JLabel DistrictLabel = new JLabel("District:              ");
+        JLabel DistrictLabel = new JLabel("District:");
         DistrictLabel.setFont(Constant.LABEL_FONT);
         DistrictLabel.setForeground(Constant.my_white);
+        DistrictLabel.setFont(Constant.LABEL_FONT);
         JTextField DistrictField = new JTextField();
-        DistrictField.setColumns(30);
+        DistrictField.setColumns(20);
         DistrictField.setText(String.valueOf(PDW.get(1)));
         DistrictField.setEditable(false);
-        DistrictPane.add(DistrictLabel);
-        DistrictPane.add(DistrictField);
+        DistrictField.setFont(Constant.INFO_FONT);
 
-
-        JPanel WardPane = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        WardPane.setBackground(Constant.my_gray);
-        ShowInfoCenter.add(WardPane);
-        JLabel WardLabel = new JLabel("Ward:                 ");
+        JLabel WardLabel = new JLabel("Ward:");
         WardLabel.setFont(Constant.LABEL_FONT);
         WardLabel.setForeground(Constant.my_white);
+        WardLabel.setFont(Constant.LABEL_FONT);
         JTextField WardField = new JTextField();
-        WardField.setColumns(30);
+        WardField.setColumns(20);
         WardField.setText(String.valueOf(PDW.get(2)));
         WardField.setEditable(false);
-        WardPane.add(WardLabel);
-        WardPane.add(WardField);
+        WardField.setFont(Constant.INFO_FONT);
 
-        JPanel ChangeStatusPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        ChangeStatusPanel.setBackground(Constant.my_gray);
-        JLabel ChangeStatusLabel = new JLabel("Change status:   ");
+        JLabel ChangeStatusLabel = new JLabel("Change status:");
         ChangeStatusLabel.setFont(Constant.LABEL_FONT);
         ChangeStatusLabel.setForeground(Constant.my_white);
+        ChangeStatusLabel.setFont(Constant.LABEL_FONT);
         JComboBox Change_status_patient = new JComboBox();
+        Change_status_patient.setFont(Constant.INFO_FONT);
         if (patient_status.equals("RV") || patient_status.equals("NI"))
         {
             Change_status_patient.addItem("F0");
@@ -160,36 +144,91 @@ public class ChangeStatusPatient extends JPanel {
             Change_status_patient.addItem("NI");
 
         }
-        ChangeStatusPanel.add(ChangeStatusLabel);
-        ChangeStatusPanel.add(Change_status_patient);
 
-        ShowInfoCenter.add(ChangeStatusPanel);
-
-        JPanel ChangeFacilityPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        ChangeFacilityPanel.setBackground(Constant.my_gray);
-        JLabel ChangeFacilityLabel = new JLabel("Change facility: ");
+        JLabel ChangeFacilityLabel = new JLabel("Change facility:");
         ChangeFacilityLabel.setFont(Constant.LABEL_FONT);
         ChangeFacilityLabel.setForeground(Constant.my_white);
-
+        Change_status_patient.setFont(Constant.LABEL_FONT);
         JComboBox Change_Facility = new JComboBox();
+        Change_Facility.setFont(Constant.INFO_FONT);
         Set<String> facilites = getDB.Facility.FunctionFacility.getNameFacility();
         for(String i : facilites)
         {
             Change_Facility.addItem(i);
         }
 
-        ChangeFacilityPanel.add(ChangeFacilityLabel);
-        ChangeFacilityPanel.add(Change_Facility);
-
-        ShowInfoCenter.add(ChangeFacilityPanel);
-
-        JPanel ChangeStatusButtonPaneSouth = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        ChangeStatusButtonPaneSouth.setBackground(Constant.my_gray);
-        EditUserPane.add(ChangeStatusButtonPaneSouth,BorderLayout.SOUTH);
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setBackground(Constant.my_gray);
 
         JButton ChangeStatusCancelButton = new JButton("Cancel");
         ChangeStatusCancelButton.setForeground(Constant.my_white);
         ChangeStatusCancelButton.setBackground(new Color(77,82,77));
+        ChangeStatusCancelButton.setFont(Constant.INFO_FONT);
+
+        JButton ChangeStatusConfirmUserButton = new JButton("Confirm");
+        ChangeStatusConfirmUserButton.setForeground(Constant.my_white);
+        ChangeStatusConfirmUserButton.setBackground(new Color(77,82,77));
+        ChangeStatusConfirmUserButton.setFont(Constant.INFO_FONT);
+
+        buttonPanel.add(ChangeStatusCancelButton);
+        buttonPanel.add(ChangeStatusConfirmUserButton);
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        mainPanel.add(UserNameLabel, gbc);
+        gbc.gridy++;
+        mainPanel.add(NameLabel, gbc);
+        gbc.gridy++;
+        mainPanel.add(AddressLabel, gbc);
+        gbc.gridy++;
+        mainPanel.add(DistrictLabel, gbc);
+        gbc.gridy++;
+        mainPanel.add(ChangeStatusLabel, gbc);
+
+
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        mainPanel.add(UserNameField, gbc);
+        gbc.gridy++;
+        mainPanel.add(NameField, gbc);
+        gbc.gridy++;
+        mainPanel.add(AddressField, gbc);
+        gbc.gridy++;
+        mainPanel.add(DistrictField, gbc);
+        gbc.gridy++;
+        mainPanel.add(Change_status_patient, gbc);
+
+        gbc.gridx = 2;
+        gbc.gridy = 0;
+        mainPanel.add(IdNumLabel, gbc);
+        gbc.gridy++;
+        mainPanel.add(DobLabel, gbc);
+        gbc.gridy++;
+        mainPanel.add(WardLabel, gbc);
+        gbc.gridy++;
+        mainPanel.add(ProvinceLable, gbc);
+        gbc.gridy++;
+        mainPanel.add(ChangeFacilityLabel, gbc);
+
+        gbc.gridx = 3;
+        gbc.gridy = 0;
+        mainPanel.add(IdNumField, gbc);
+        gbc.gridy++;
+        mainPanel.add(YobField, gbc);
+        gbc.gridy++;
+        mainPanel.add(WardField, gbc);
+        gbc.gridy++;
+        mainPanel.add(ProviceField, gbc);
+        gbc.gridy++;
+        mainPanel.add(Change_Facility, gbc);
+
+        gbc.anchor = GridBagConstraints.EAST;
+        gbc.gridy++;
+        mainPanel.add(buttonPanel, gbc);
+
+        add(headerPanel);
+        add(mainPanel);
+
         ChangeStatusCancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -201,12 +240,6 @@ public class ChangeStatusPatient extends JPanel {
                 ShowPanel.setVisible(true);
             }
         });
-        ChangeStatusButtonPaneSouth.add(ChangeStatusCancelButton);
-
-
-        JButton ChangeStatusConfirmUserButton = new JButton("Confirm");
-        ChangeStatusConfirmUserButton.setForeground(Constant.my_white);
-        ChangeStatusConfirmUserButton.setBackground(new Color(77,82,77));
 
         ChangeStatusConfirmUserButton.addActionListener(new ActionListener() {
             @Override
@@ -276,9 +309,5 @@ public class ChangeStatusPatient extends JPanel {
                 }
             }
         });
-
-        ChangeStatusButtonPaneSouth.add(ChangeStatusConfirmUserButton);
-
-
     }
 }

@@ -29,7 +29,7 @@ public class StatisticDebtPanel extends JPanel {
         add(TitlePanel);
 
         JScrollPane ListUserDebt = new JScrollPane();
-        ListUserDebt.setPreferredSize(new Dimension(300,300));
+        ListUserDebt.setPreferredSize(new Dimension(400,400));
         add(ListUserDebt,BorderLayout.CENTER);
 
         JTable DebtTable = new JTable();
@@ -40,6 +40,8 @@ public class StatisticDebtPanel extends JPanel {
                 return false;
             }
         };
+        DebtTable.getTableHeader().setFont(Constant.TABLE_HEADER);
+        DebtTable.setFont(Constant.TABLE_FONT);
 
         DebtTable.setModel(def);
         def.addColumn("Username");
@@ -60,6 +62,8 @@ public class StatisticDebtPanel extends JPanel {
         JButton RefreshButton = new JButton("Refresh");
         RefreshButton.setForeground(Constant.my_white);
         RefreshButton.setBackground(new Color(77,82,77));
+        RefreshButton.setFont(Constant.INFO_FONT);
+
         RefreshButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

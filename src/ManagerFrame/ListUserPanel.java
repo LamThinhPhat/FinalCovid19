@@ -154,7 +154,7 @@ public class ListUserPanel extends JPanel {
         ShowHistoryUpdate.setBackground(new Color(77,82,77));
         ShowHistoryUpdate.setFont(Constant.INFO_FONT);
 
-        JButton EditUser = new JButton("Edit");
+        JButton EditUser = new JButton("Change statuss");
         EditUser.setForeground(Constant.my_white);
         EditUser.setBackground(new Color(77,82,77));
         EditUser.setFont(Constant.INFO_FONT);

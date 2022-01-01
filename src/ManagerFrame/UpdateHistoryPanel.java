@@ -21,6 +21,7 @@ public class UpdateHistoryPanel extends JPanel {
         JScrollPane ShowHistoryCenter = new JScrollPane();
         UpdateHistoryPanel.add(ShowHistoryCenter, BorderLayout.CENTER);
         UpdateHistoryPanel.setBackground(Constant.my_gray);
+        ShowHistoryCenter.setPreferredSize(new Dimension(1230,510));
 
         JTable HistoryTable = new JTable();
         HistoryTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -30,6 +31,8 @@ public class UpdateHistoryPanel extends JPanel {
                 return false;
             }
         };
+        HistoryTable.getTableHeader().setFont(Constant.TABLE_HEADER);
+        HistoryTable.setFont(Constant.TABLE_FONT);
         HistoryTable.setModel(HistoryDef);
         HistoryDef.addColumn("Username");
         HistoryDef.addColumn("Update date");
@@ -55,6 +58,7 @@ public class UpdateHistoryPanel extends JPanel {
         JButton RefreshHistoryListButton = new JButton("Refresh list");
         RefreshHistoryListButton.setForeground(Constant.my_white);
         RefreshHistoryListButton.setBackground(new Color(77,82,77));
+        RefreshHistoryListButton.setFont(Constant.INFO_FONT);
 
         RefreshHistoryListButton.addActionListener(new ActionListener() {
             @Override
@@ -75,6 +79,7 @@ public class UpdateHistoryPanel extends JPanel {
         JButton CancelHistoryListButton = new JButton("Cancel");
         CancelHistoryListButton.setForeground(Constant.my_white);
         CancelHistoryListButton.setBackground(new Color(77,82,77));
+        CancelHistoryListButton.setFont(Constant.INFO_FONT);
 
         CancelHistoryListButton.addActionListener(new ActionListener() {
             @Override

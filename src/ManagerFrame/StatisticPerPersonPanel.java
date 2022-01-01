@@ -30,6 +30,7 @@ public class StatisticPerPersonPanel extends JPanel {
         add(TitlePanel);
 
         JComboBox DateChoosePerPerson = new JComboBox();
+        DateChoosePerPerson.setFont(Constant.INFO_FONT);
         add(DateChoosePerPerson);
         Set<Date> GetDateChooser = getDB.Statistic.FunctionStatistic.GetAllDate("update_history");
         DateChoosePerPerson.addItem("Now");

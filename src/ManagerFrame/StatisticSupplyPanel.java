@@ -28,6 +28,7 @@ public class StatisticSupplyPanel extends JPanel{
             add(TitlePanel);
 
             JComboBox DateChoose = new JComboBox();
+            DateChoose.setFont(Constant.INFO_FONT);
             add(DateChoose);
             Set<Date> GetDateChooser = getDB.Statistic.FunctionStatistic.GetAllDateSupply();
             for (Date i : GetDateChooser) {

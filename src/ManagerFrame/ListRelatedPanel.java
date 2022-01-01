@@ -26,10 +26,13 @@ public class ListRelatedPanel extends JPanel{
         JScrollPane ShowListLeft = new JScrollPane();
         ListRelatedPanelLeft.add(ShowListLeft, BorderLayout.CENTER);
         ListRelatedPanelLeft.setBackground(Constant.my_gray);
+        ShowListLeft.setPreferredSize(new Dimension(605,510));
+
 
         JScrollPane ShowListRight = new JScrollPane();
         ListRelatedPanelRight.add(ShowListRight, BorderLayout.CENTER);
         ListRelatedPanelRight.setBackground(Constant.my_gray);
+        ShowListRight.setPreferredSize(new Dimension(605,510));
 
         JTable RelatedTableLeft = new JTable();
         RelatedTableLeft.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -39,10 +42,10 @@ public class ListRelatedPanel extends JPanel{
                 return false;
             }
         };
+        RelatedTableLeft.getTableHeader().setFont(Constant.TABLE_HEADER);
+        RelatedTableLeft.setFont(Constant.TABLE_FONT);
         RelatedTableLeft.setModel(RelatedDefLeft);
         RelatedDefLeft.addColumn("Username");
-
-
 
         JTable RelatedTableRight = new JTable();
         RelatedTableRight.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -52,6 +55,8 @@ public class ListRelatedPanel extends JPanel{
                 return false;
             }
         };
+        RelatedTableRight.getTableHeader().setFont(Constant.TABLE_HEADER);
+        RelatedTableLeft.setFont(Constant.TABLE_FONT);
         RelatedTableRight.setModel(RelatedDefRight);
         RelatedDefRight.addColumn("Username");
         RelatedDefRight.addColumn("Related username");
@@ -83,6 +88,30 @@ public class ListRelatedPanel extends JPanel{
         JButton DeleteRelatedListButton = new JButton("Delete");
         DeleteRelatedListButton.setForeground(Constant.my_white);
         DeleteRelatedListButton.setBackground(new Color(77,82,77));
+        DeleteRelatedListButton.setFont(Constant.INFO_FONT);
+
+
+
+        JButton CancelRelatedListButton = new JButton("Cancel");
+        CancelRelatedListButton.setForeground(Constant.my_white);
+        CancelRelatedListButton.setBackground(new Color(77,82,77));
+        CancelRelatedListButton.setFont(Constant.INFO_FONT);
+
+        JPanel ListRelatedPaneSouth = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        ListRelatedPanelRight.add(ListRelatedPaneSouth, BorderLayout.SOUTH);
+        ListRelatedPaneSouth.add(CancelRelatedListButton);
+        ListRelatedPaneSouth.add(DeleteRelatedListButton);
+        ListRelatedPaneSouth.setBackground(Constant.my_gray);
+
+        JButton AddRelatedButton = new JButton("Add related");
+        AddRelatedButton.setForeground(Constant.my_white);
+        AddRelatedButton.setBackground(new Color(77,82,77));
+        AddRelatedButton.setFont(Constant.INFO_FONT);
+
+        JPanel ListRelatedPaneLeftSouth = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        ListRelatedPaneLeftSouth.setBackground(Constant.my_gray);
+        ListRelatedPanelLeft.add(ListRelatedPaneLeftSouth,BorderLayout.SOUTH);
+        ListRelatedPaneLeftSouth.add(AddRelatedButton);
 
         DeleteRelatedListButton.addActionListener(new ActionListener() {
             @Override
@@ -121,10 +150,6 @@ public class ListRelatedPanel extends JPanel{
             }
         });
 
-        JButton CancelRelatedListButton = new JButton("Cancel");
-        CancelRelatedListButton.setForeground(Constant.my_white);
-        CancelRelatedListButton.setBackground(new Color(77,82,77));
-
         CancelRelatedListButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -135,16 +160,6 @@ public class ListRelatedPanel extends JPanel{
                 ShowPanel.setVisible(true);
             }
         });
-
-        JPanel ListRelatedPaneSouth = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        ListRelatedPanelRight.add(ListRelatedPaneSouth, BorderLayout.SOUTH);
-        ListRelatedPaneSouth.add(CancelRelatedListButton);
-        ListRelatedPaneSouth.add(DeleteRelatedListButton);
-        ListRelatedPaneSouth.setBackground(Constant.my_gray);
-
-        JButton AddRelatedButton = new JButton("Add related");
-        AddRelatedButton.setForeground(Constant.my_white);
-        AddRelatedButton.setBackground(new Color(77,82,77));
 
         AddRelatedButton.addActionListener(new ActionListener() {
             @Override
@@ -184,9 +199,6 @@ public class ListRelatedPanel extends JPanel{
                 }
             }
         });
-        JPanel ListRelatedPaneLeftSouth = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        ListRelatedPaneLeftSouth.setBackground(Constant.my_gray);
-        ListRelatedPanelLeft.add(ListRelatedPaneLeftSouth,BorderLayout.SOUTH);
-        ListRelatedPaneLeftSouth.add(AddRelatedButton);
+
     }
 }

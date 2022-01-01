@@ -168,6 +168,7 @@ public class ListSupplyPanel extends JPanel {
                             i.getLimit_month(), i.getPrice()
                     });
                 }
+                comboBox.setSelectedItem("ID");
             }
         });
 

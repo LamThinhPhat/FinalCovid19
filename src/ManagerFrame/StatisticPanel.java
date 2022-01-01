@@ -8,7 +8,7 @@ import java.awt.*;
 public class StatisticPanel extends JPanel {
     public StatisticPanel() {
         setBackground(Constant.my_gray);
-        JPanel ListStatisticContentPane = new JPanel(new FlowLayout(FlowLayout.CENTER,75,100));
+        JPanel ListStatisticContentPane = new JPanel(new FlowLayout(FlowLayout.CENTER,50,20));
         ListStatisticContentPane.setBackground(Constant.my_gray);
         add(ListStatisticContentPane);
 

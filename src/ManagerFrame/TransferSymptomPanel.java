@@ -27,6 +27,7 @@ public class TransferSymptomPanel extends JPanel {
             add(TitlePanel);
 
             JComboBox DateChoose = new JComboBox();
+            DateChoose.setFont(Constant.INFO_FONT);
             add(DateChoose);
             Set<Date> GetDateChooser = getDB.Statistic.FunctionStatistic.GetAllDate("update_history");
             for (Date i : GetDateChooser) {
