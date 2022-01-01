@@ -69,8 +69,9 @@ public class UpdateHistoryPanel extends JPanel {
                 for(update_history i : HistoryList)
                 {
                     HistoryDef.addRow(new Object[] {
-                            i.getUsername(), i.getUpdate_date(), i.getOld_status(),
-                            i.getCurrent_status(), i.getOld_facility(), i.getCurrent_facility()
+                            i.getUsername(), i.getUpdate_date(), i.getOld_status(), i.getCurrent_status(),
+                            getDB.Facility.FunctionFacility.GetNameFacilityById(i.getOld_facility()),
+                            getDB.Facility.FunctionFacility.GetNameFacilityById(i.getCurrent_facility())
                     });
                 }
             }
