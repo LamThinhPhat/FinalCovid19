@@ -36,6 +36,8 @@ public class PaymentHistory extends JPanel{
                 return false;
             }
         };
+        PaymentHistoryTable.getTableHeader().setFont(Constant.TABLE_HEADER);
+        PaymentHistoryTable.setFont(Constant.TABLE_FONT);
         PaymentHistoryTable.setModel(HistoryDef);
         HistoryDef.addColumn("Date created  ");
         HistoryDef.addColumn("Debt pay");

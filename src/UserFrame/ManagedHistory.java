@@ -36,6 +36,8 @@ public class ManagedHistory extends JPanel {
                 return false;
             }
         };
+        UpdateHistoryTable.getTableHeader().setFont(Constant.TABLE_HEADER);
+        UpdateHistoryTable.setFont(Constant.TABLE_FONT);
         UpdateHistoryTable.setModel(HistoryDef);
         HistoryDef.addColumn("Update date");
         HistoryDef.addColumn("Old status");

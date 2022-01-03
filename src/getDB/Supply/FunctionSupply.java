@@ -333,8 +333,8 @@ public class FunctionSupply {
         ArrayList<supply> Supplylist = new ArrayList<supply>();
         Connection conn = jdbc_connector.getConnection();
         String sql  = "SELECT * FROM supply ";
-        if(sortby.equals("Sort id")) sql  +=  "ORDER BY supply_id";
-        else if(sortby.equals("Sort name")) sql  += "ORDER BY supply_name";
+        if(sortby.equals("ID")) sql  +=  "ORDER BY supply_id";
+        else if(sortby.equals("Name")) sql  += "ORDER BY supply_name";
         else sql  += "ORDER BY price";
         try
         {

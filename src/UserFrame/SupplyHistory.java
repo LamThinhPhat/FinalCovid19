@@ -39,6 +39,8 @@ public class SupplyHistory extends JPanel {
                 return false;
             }
         };
+        SupplyHistoryTable.getTableHeader().setFont(Constant.TABLE_HEADER);
+        SupplyHistoryTable.setFont(Constant.TABLE_FONT);
         SupplyHistoryTable.setModel(SupplyDef);
         SupplyDef.addColumn("Supply ID");
         SupplyDef.addColumn("Create Date");

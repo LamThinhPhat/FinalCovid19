@@ -9,6 +9,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.ArrayList;
 
 public class BuySupply extends JPanel {
@@ -43,6 +45,8 @@ public class BuySupply extends JPanel {
                 return false;
             }
         };
+        SupplyTable.getTableHeader().setFont(Constant.TABLE_HEADER);
+        SupplyTable.setFont(Constant.TABLE_FONT);
 
         SupplyTable.setModel(Productdef);
         Productdef.addColumn("Supply ID");
@@ -66,11 +70,136 @@ public class BuySupply extends JPanel {
         JPanel nav=new JPanel(new FlowLayout(FlowLayout.LEFT));
 
         JTextField SearchSupplyField = new JTextField();
-        SearchSupplyField.setColumns(15);
+        SearchSupplyField.setColumns(10);
+        SearchSupplyField.setFont(Constant.INFO_FONT);
+        SearchSupplyField.setForeground(Color.GRAY);
+        SearchSupplyField.setText("Supply name");
 
-        JButton SearchSupplyNameButton = new JButton("Search by supply");
+        SearchSupplyField.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (SearchSupplyField.getText().equals("Supply name")) {
+                    SearchSupplyField.setText("");
+                    SearchSupplyField.setForeground(Color.BLACK);
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (SearchSupplyField.getText().isEmpty()) {
+                    SearchSupplyField.setForeground(Color.GRAY);
+                    SearchSupplyField.setText("Supply name");
+                }
+            }
+        });
+
+        JButton SearchSupplyNameButton = new JButton("Search");
         SearchSupplyNameButton.setForeground(Constant.my_white);
         SearchSupplyNameButton.setBackground(new Color(77,82,77));
+        SearchSupplyNameButton.setFont(Constant.INFO_FONT);
+
+        String[] sort_list ={"ID","Name","Price"};
+        JComboBox Sort = new JComboBox(sort_list);
+        Sort.setForeground(Constant.my_white);
+        Sort.setBackground(new Color(77,82,77));
+        Sort.setFont(Constant.INFO_FONT);
+
+        String[] filterValue = {"", "<50.000đ", "<100.000đ"};
+        JComboBox filter = new JComboBox(filterValue);
+        filter.setFont(Constant.INFO_FONT);
+        filter.setForeground(Constant.my_white);
+        filter.setBackground(new Color(77,82,77));
+
+        JButton Filter_all = new JButton("Refresh");
+        Filter_all.setForeground(Constant.my_white);
+        Filter_all.setBackground(new Color(77,82,77));
+        Filter_all.setFont(Constant.INFO_FONT);
+
+
+        JLabel filterLabel = new JLabel("Sort: ");
+        filterLabel.setFont(Constant.INFO_FONT);
+
+        nav.add(SearchSupplyField);
+        nav.add(SearchSupplyNameButton);
+        nav.add(Filter_all);
+        nav.add(Box.createRigidArea(new Dimension(50,0)));
+        nav.add(filterLabel);
+        nav.add(Sort);
+        nav.add(filter);
+
+        JPanel BuyPanel= new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        JButton Buy = new JButton("Buy");
+        Buy.setForeground(Constant.my_white);
+        Buy.setBackground(new Color(77,82,77));
+        Buy.setFont(Constant.INFO_FONT);
+        BuyPanel.add(Buy);
+
+        add(nav);
+        add(ListSupply);
+        add(BuyPanel);
+
+        Buy.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                int row = SupplyTable.getSelectedRow();
+                if(row == -1)
+                {
+                    JOptionPane.showMessageDialog(BuySupply.this, "Please pick a supply to buy", "Error",JOptionPane.ERROR_MESSAGE);
+                }else {
+                    supply chosen=getDB.Supply.FunctionSupply.GetInfoSupply((String) SupplyTable.getValueAt(row, 0));
+                    String supply_id=chosen.getSupply_id();
+                    new BuyFrame(chosen,username ).setVisible(true);
+                }
+            }});
+
+
+        filter.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String valueChoose = (String) filter.getSelectedItem();
+
+                if(valueChoose.equals("<50.000đ")) {
+                    ArrayList<supply> SupplyList = getDB.Supply.FunctionSupply.GetAllSupplyInfoFilter50k();
+                    Productdef.setRowCount(0);
+                    for (supply i: SupplyList)
+                    {
+                        Productdef.addRow(new Object[]{
+                                i.getSupply_id(), i.getSupply_name(), i.getLimit_day(), i.getLimit_week(),
+                                i.getLimit_month(),i.getPrice()
+                        });
+                    }
+                } else if(valueChoose.equals("<100.000đ")) {
+                    ArrayList<supply> SupplyList = getDB.Supply.FunctionSupply.GetAllSupplyInfoFilter100k();
+                    Productdef.setRowCount(0);
+                    for (supply i: SupplyList)
+                    {
+                        Productdef.addRow(new Object[]{
+                                i.getSupply_id(), i.getSupply_name(), i.getLimit_day(), i.getLimit_week(),
+                                i.getLimit_month(),i.getPrice()
+                        });
+                    }
+                }
+            }
+        });
+
+        Sort.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String sortChoose = (String) Sort.getSelectedItem();
+                filter.setSelectedIndex(0);
+
+                ArrayList<supply> SupplyList = getDB.Supply.FunctionSupply.GetAllSupplyInfoSort(sortChoose);
+                Productdef.setRowCount(0);
+                for (supply i: SupplyList)
+                {
+                    Productdef.addRow(new Object[]{
+                            i.getSupply_id(), i.getSupply_name(), i.getLimit_day(), i.getLimit_week(),
+                            i.getLimit_month(),i.getPrice()
+                    });
+                }
+            }
+        });
+
         SearchSupplyNameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e)
@@ -106,106 +235,14 @@ public class BuySupply extends JPanel {
             }
         });
 
-        String[] sort_list ={"Sort id","Sort name","Sort price"};
-        JComboBox<String> Sort = new JComboBox<>(sort_list);
-        Sort.setForeground(Constant.my_white);
-        Sort.setBackground(new Color(77,82,77));
-
-        Sort.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (Sort.getSelectedIndex() != -1) {
-                    ArrayList<supply> SupplyList = getDB.Supply.FunctionSupply.GetAllSupplyInfoSort(String.valueOf(Sort.getSelectedItem()));
-                    Productdef.setRowCount(0);
-                    for (supply i: SupplyList)
-                    {
-                        Productdef.addRow(new Object[]{
-                                i.getSupply_id(), i.getSupply_name(), i.getLimit_day(), i.getLimit_week(),
-                                i.getLimit_month(),i.getPrice()
-                        });
-                    }
-                }
-            }
-        });
-
-
-        JButton Filter_all = new JButton("Filter all");
-        Filter_all.setForeground(Constant.my_white);
-        Filter_all.setBackground(new Color(77,82,77));
         Filter_all.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                Sort.setSelectedIndex(1);
-            }});
-        JButton Filter_50k = new JButton("<50000đ");
-        Filter_50k.setForeground(Constant.my_white);
-        Filter_50k.setBackground(new Color(77,82,77));
-        Filter_50k.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                ArrayList<supply> SupplyList = getDB.Supply.FunctionSupply.GetAllSupplyInfoFilter50k();
-                Productdef.setRowCount(0);
-                for (supply i: SupplyList)
-                {
-                    Productdef.addRow(new Object[]{
-                            i.getSupply_id(), i.getSupply_name(), i.getLimit_day(), i.getLimit_week(),
-                            i.getLimit_month(),i.getPrice()
-                    });
-                }
+                Sort.setSelectedIndex(0);
+                filter.setSelectedIndex(0);
             }});
 
-        JButton Filter_100k = new JButton("<100000đ");
-        Filter_100k.setForeground(Constant.my_white);
-        Filter_100k.setBackground(new Color(77,82,77));
-        Filter_100k.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                ArrayList<supply> SupplyList = getDB.Supply.FunctionSupply.GetAllSupplyInfoFilter100k();
-                Productdef.setRowCount(0);
-                for (supply i: SupplyList)
-                {
-                    Productdef.addRow(new Object[]{
-                            i.getSupply_id(), i.getSupply_name(), i.getLimit_day(), i.getLimit_week(),
-                            i.getLimit_month(),i.getPrice()
-                    });
-                }
-            }});
-
-
-        nav.add(Sort);
-        nav.add(SearchSupplyField);
-        nav.add(SearchSupplyNameButton);
-        nav.add(Filter_all);
-        nav.add(Filter_50k);
-        nav.add(Filter_100k);
-
-        JPanel BuyPanel= new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        JButton Buy = new JButton("Buy");
-        Buy.setForeground(Constant.my_white);
-        Buy.setBackground(new Color(77,82,77));
-        BuyPanel.add(Buy);
-
-        Buy.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                int row = SupplyTable.getSelectedRow();
-                if(row == -1)
-                {
-                    JOptionPane.showMessageDialog(BuySupply.this, "Please pick a supply to buy", "Error",JOptionPane.ERROR_MESSAGE);
-                }else {
-                    supply chosen=getDB.Supply.FunctionSupply.GetInfoSupply((String) SupplyTable.getValueAt(row, 0));
-                    String supply_id=chosen.getSupply_id();
-                    new BuyFrame(chosen,username ).setVisible(true);
-                }
-            }});
-
-        add(nav);
-        add(ListSupply);
-        add(BuyPanel);
 
     }
 }
