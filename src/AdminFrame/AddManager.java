@@ -18,88 +18,164 @@ import java.util.Set;
 
 public class AddManager extends JFrame {
     public AddManager(JComboBox sort) {
-            setTitle("Covid Management System");
-            ImageIcon covid_icon=null;
-            try {
-                covid_icon=new ImageIcon(ImageIO.read(new File("rsc/covid_icon.png")));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            setIconImage(covid_icon.getImage());
-            setSize(700, 500);
-            setResizable(false);
-            setLocationRelativeTo(null);
+        setTitle("Covid Management System");
+        ImageIcon covid_icon=null;
+        try {
+            covid_icon=new ImageIcon(ImageIO.read(new File("rsc/covid_icon.png")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        setIconImage(covid_icon.getImage());
+        setSize(700, 600);
+        setResizable(false);
+        setLocationRelativeTo(null);
+        JPanel contentPane = new JPanel();
+        contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
+        contentPane.setBackground(Constant.my_gray);
+        setContentPane(contentPane);
 
-            JPanel contentPane = new JPanel();
-            contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
-            contentPane.setBackground(Constant.my_gray);
-            setContentPane(contentPane);
+        JPanel headerPanel = new JPanel();
+        headerPanel.setBackground(Constant.my_gray);
+        JLabel SignUpLabel = new JLabel("Add new manager");
+        SignUpLabel.setFont(Constant.HEADER_FONT);
+        SignUpLabel.setForeground(Constant.my_white);
+        headerPanel.add(SignUpLabel);
 
-            JLabel SignUpLabel = new JLabel("Add new manager to the system");
-            SignUpLabel.setFont(Constant.LABEL_FONT);
-            SignUpLabel.setForeground(Constant.my_white);
-            contentPane.add(SignUpLabel);
+        JPanel mainPanel = new JPanel();
+        mainPanel.setBackground(Constant.my_gray);
+        mainPanel.setForeground(Constant.my_white);
+        mainPanel.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
 
-            JPanel InputUserPane = new JPanel(new FlowLayout(FlowLayout.LEFT));
-            contentPane.add(InputUserPane);
-            JLabel InputUserLabel = new JLabel("Input Username:        ");
-            InputUserLabel.setFont(Constant.LABEL_FONT);
-            InputUserLabel.setForeground(Constant.my_white);
-            JTextField UserField = new JTextField();
-            UserField.setColumns(40);
-            InputUserPane.setBackground(Constant.my_gray);
-            InputUserPane.add(InputUserLabel);
-            InputUserPane.add(UserField);
+        gbc.insets = new Insets(10,10,10,10);
+        gbc.anchor = GridBagConstraints.WEST;
 
-            JPanel InputPasstPane = new JPanel(new FlowLayout(FlowLayout.LEFT));
-            contentPane.add(InputPasstPane);
-            JLabel InputPassLabel = new JLabel("Input Password:        ");
-            InputPassLabel.setFont(Constant.LABEL_FONT);
-            InputPassLabel.setForeground(Constant.my_white);
-            JPasswordField PassField = new JPasswordField();
-            PassField.setColumns(40);
-            InputPasstPane.setBackground(Constant.my_gray);
-            InputPasstPane.add(InputPassLabel);
-            InputPasstPane.add(PassField);
+        JLabel InputUserLabel = new JLabel("Username:");
+        InputUserLabel.setFont(Constant.LABEL_FONT);
+        InputUserLabel.setForeground(Constant.my_white);
+        JTextField UserField = new JTextField();
+        UserField.setFont(Constant.INFO_FONT);
+        UserField.setColumns(20);
 
-        JPanel PPane = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        PPane.setBackground(Constant.my_gray);
-        contentPane.add(PPane);
+        JLabel InputPassLabel = new JLabel("Password:");
+        InputPassLabel.setFont(Constant.LABEL_FONT);
+        InputPassLabel.setForeground(Constant.my_white);
+        JPasswordField PassField = new JPasswordField();
+        PassField.setFont(Constant.INFO_FONT);
+        PassField.setColumns(20);
 
-        JPanel DPane = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        DPane.setBackground(Constant.my_gray);
-        contentPane.add(DPane);
-
-        JPanel WPane = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        WPane.setBackground(Constant.my_gray);
-        contentPane.add(WPane);
-
-        JLabel ProvinceLable = new JLabel("Province:                     ");
+        JLabel ProvinceLable = new JLabel("Province:");
         ProvinceLable.setFont(Constant.LABEL_FONT);
         ProvinceLable.setForeground(Constant.my_white);
         JComboBox Province = new JComboBox();
-        JLabel WardLable = new JLabel("Ward:                          ");
+        Province.setFont(Constant.INFO_FONT);
+        JLabel WardLable = new JLabel("Ward:");
         WardLable.setFont(Constant.LABEL_FONT);
         WardLable.setForeground(Constant.my_white);
         JComboBox Ward = new JComboBox();
-        JLabel DistrictLable = new JLabel("District:                       ");
+        Ward.setFont(Constant.INFO_FONT);
+        JLabel DistrictLable = new JLabel("District:");
         DistrictLable.setFont(Constant.LABEL_FONT);
         DistrictLable.setForeground(Constant.my_white);
         JComboBox District = new JComboBox();
-
-        PPane.add(ProvinceLable);
-        PPane.add(Province);
-        DPane.add(DistrictLable);
-        DPane.add(District);
-        WPane.add(WardLable);
-        WPane.add(Ward);
-
+        District.setFont(Constant.INFO_FONT);
 
         Set<String> provinces = FunctionAddress.GetAllProvince();
         for (String s : provinces)
         {
             Province.addItem(s);
         }
+
+        JLabel FacilityLabel = new JLabel("Facility:");
+        FacilityLabel.setFont(Constant.LABEL_FONT);
+        FacilityLabel.setForeground(Constant.my_white);
+        JComboBox Facility = new JComboBox();
+        Facility.setFont(Constant.INFO_FONT);
+
+        JLabel StatusLabel = new JLabel("Status:");
+        StatusLabel.setFont(Constant.LABEL_FONT);
+        StatusLabel.setForeground(Constant.my_white);
+        JComboBox Status_patient = new JComboBox();
+        Status_patient.setFont(Constant.INFO_FONT);
+
+        Set<String> facilities = FunctionFacility.getNameFacility();
+        for (String s : facilities)
+        {
+            Facility.addItem(s);
+        }
+
+        Status_patient.addItem("F0");
+        Status_patient.addItem("F1");
+        Status_patient.addItem("F2");
+        Status_patient.addItem("F3");
+        Status_patient.addItem("RV");
+        Status_patient.addItem("NI");
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        buttonPanel.setBackground(Constant.my_gray);
+        JButton CancelButton = new JButton("Cancel");
+        CancelButton.setBackground(new Color(77,82,77));
+        CancelButton.setForeground(Constant.my_white);
+        CancelButton.setFont(Constant.INFO_FONT);
+
+        JButton ConfirmButton = new JButton("Confirm");
+        ConfirmButton.setBackground(new Color(77,82,77));
+        ConfirmButton.setForeground(Constant.my_white);
+        ConfirmButton.setFont(Constant.INFO_FONT);
+
+        buttonPanel.add(CancelButton);
+        buttonPanel.add(ConfirmButton);
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        mainPanel.add(InputUserLabel, gbc);
+
+        gbc.gridy++;
+        mainPanel.add(InputPassLabel, gbc);
+        gbc.gridy++;
+        mainPanel.add(ProvinceLable, gbc);
+        gbc.gridy++;
+        mainPanel.add(DistrictLable, gbc);
+        gbc.gridy++;
+        mainPanel.add(WardLable, gbc);
+        gbc.gridy++;
+        mainPanel.add(FacilityLabel, gbc);
+        gbc.gridy++;
+        mainPanel.add(StatusLabel, gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        mainPanel.add(UserField, gbc);
+
+        gbc.gridy++;
+        mainPanel.add(PassField, gbc);
+        gbc.gridy++;
+        mainPanel.add(Province, gbc);
+        gbc.gridy++;
+        mainPanel.add(District, gbc);
+        gbc.gridy++;
+        mainPanel.add(Ward, gbc);
+        gbc.gridy++;
+        mainPanel.add(Facility, gbc);
+        gbc.gridy++;
+        mainPanel.add(Status_patient, gbc);
+
+//        gbc.anchor = GridBagConstraints.EAST;
+//        gbc.gridy++;
+//        mainPanel.add(buttonPanel, gbc);
+
+        contentPane.add(headerPanel);
+        contentPane.add(mainPanel);
+        contentPane.add(buttonPanel);
+
+        CancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AddManager.this.dispose();
+                sort.setSelectedIndex(0);
+            }
+        });
 
         Province.addActionListener(new ActionListener() {
             @Override
@@ -129,59 +205,6 @@ public class AddManager extends JFrame {
                 }
             }
         });
-
-        JPanel StatusPanel = new JPanel(new FlowLayout(FlowLayout.LEFT,20,1));
-        JLabel FacilityLabel = new JLabel("Facility: ");
-        FacilityLabel.setFont(Constant.LABEL_FONT);
-        FacilityLabel.setForeground(Constant.my_white);
-        JComboBox Facility = new JComboBox();
-
-        JLabel StatusLabel = new JLabel("Status: ");
-        StatusLabel.setFont(Constant.LABEL_FONT);
-        StatusLabel.setForeground(Constant.my_white);
-        JComboBox Status_patient = new JComboBox();
-
-        Set<String> facilities = FunctionFacility.getNameFacility();
-        for (String s : facilities)
-        {
-            Facility.addItem(s);
-        }
-
-        Status_patient.addItem("F0");
-        Status_patient.addItem("F1");
-        Status_patient.addItem("F2");
-        Status_patient.addItem("F3");
-        Status_patient.addItem("RV");
-        Status_patient.addItem("NI");
-
-
-
-        contentPane.add(StatusPanel);
-        StatusPanel.setBackground(Constant.my_gray);
-        StatusPanel.add(FacilityLabel);
-        StatusPanel.add(Facility);
-        StatusPanel.add(StatusLabel);
-        StatusPanel.add(Status_patient);
-
-        JPanel ButtonPane = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-            ButtonPane.setBackground(Constant.my_gray);
-            contentPane.add(ButtonPane);
-
-            JButton CancelButton = new JButton("Cancel");
-            CancelButton.setBackground(new Color(77,82,77));
-            CancelButton.setForeground(Constant.my_white);
-            CancelButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    AddManager.this.dispose();
-                    sort.setSelectedIndex(0);
-                }
-            });
-            ButtonPane.add(CancelButton);
-
-            JButton ConfirmButton = new JButton("Confirm");
-            ConfirmButton.setBackground(new Color(77,82,77));
-            ConfirmButton.setForeground(Constant.my_white);
 
             ConfirmButton.addActionListener(new ActionListener() {
                 @Override
@@ -225,8 +248,5 @@ public class AddManager extends JFrame {
                     }
                 }
             });
-
-            ButtonPane.add(ConfirmButton);
-
         }
 }

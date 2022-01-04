@@ -22,7 +22,7 @@ public class ManagerHistoryFrame extends JFrame {
             e.printStackTrace();
         }
         setIconImage(covid_icon.getImage());
-        setSize(700, 500);
+        setSize(800, 400);
         setResizable(false);
         setLocationRelativeTo(null);
         setBackground(Constant.my_gray);
@@ -35,6 +35,8 @@ public class ManagerHistoryFrame extends JFrame {
         ListRelatedPanel.setBackground(Constant.my_gray);
 
         JTable UpdateHistoryTable = new JTable();
+        UpdateHistoryTable.getTableHeader().setFont(Constant.TABLE_HEADER);
+        UpdateHistoryTable.setFont(Constant.TABLE_FONT);
         UpdateHistoryTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         DefaultTableModel HistoryDef = new DefaultTableModel() {
             @Override

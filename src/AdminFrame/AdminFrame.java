@@ -4,6 +4,7 @@ import ColorFont.Constant;
 import Login.LogInFrame;
 
 import javax.imageio.ImageIO;
+import javax.print.MultiDocPrintService;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
@@ -69,19 +70,25 @@ public class AdminFrame extends JFrame {
         JLabel UserName=new JLabel();
         UserName.setText("Login as: "+AdminUsername);
         UserName.setForeground(Constant.my_white);
+        UserName.setFont(Constant.LABEL_FONT);
         JButton Logout= new JButton("Logout");
         Logout.setForeground(Constant.my_white);
         Logout.setBackground(new Color(77,82,77));
+        Logout.setFont(Constant.INFO_FONT);
         Logout.addActionListener(e->{
             new LogInFrame().setVisible(true);
             this.dispose();
 
         });
+
+        controlPanel.add(Box.createRigidArea(new Dimension(0,70)));
         controlPanel.add(UserName);
-        controlPanel.add(Logout);
+        controlPanel.add(Box.createRigidArea(new Dimension(0,20)));
         controlPanel.add(manage_manager);
         controlPanel.add(Box.createRigidArea(new Dimension(20,10)));
         controlPanel.add(manage_facility);
+        controlPanel.add(Box.createRigidArea(new Dimension(0,20)));
+        controlPanel.add(Logout);
 
         JLabel AdminLabel=new JLabel("Adminstrator");
         AdminLabel.setFont(new Font("Serif", Font.BOLD, 45));

@@ -23,7 +23,7 @@ public class EditFacilityFrame extends JFrame {
             e.printStackTrace();
         }
         setIconImage(covid_icon.getImage());
-        setSize(700, 500);
+        setSize(600, 300);
         setResizable(false);
         setLocationRelativeTo(null);
 
@@ -32,32 +32,33 @@ public class EditFacilityFrame extends JFrame {
         contentPane.setBackground(Constant.my_gray);
         setContentPane(contentPane);
 
+        JPanel headerPanel = new JPanel();
+        headerPanel.setBackground(Constant.my_gray);
         JLabel SignUpLabel = new JLabel("Edit facility");
-        SignUpLabel.setFont(Constant.LABEL_FONT);
+        SignUpLabel.setFont(Constant.HEADER_FONT);
         SignUpLabel.setForeground(Constant.my_white);
-        contentPane.add(SignUpLabel);
+        headerPanel.add(SignUpLabel);
 
-        JPanel InputFacilityPane = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        contentPane.add(InputFacilityPane);
-        JLabel InputFacilityLabel = new JLabel("Input Facility Name:        ");
+        JPanel mainPanel = new JPanel();
+        mainPanel.setBackground(Constant.my_gray);
+        mainPanel.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10,10,10,10);
+        gbc.anchor = GridBagConstraints.WEST;
+
+        JLabel InputFacilityLabel = new JLabel("Facility Name:");
         InputFacilityLabel.setFont(Constant.LABEL_FONT);
         InputFacilityLabel.setForeground(Constant.my_white);
         JTextField NameField = new JTextField();
+        NameField.setFont(Constant.INFO_FONT);
         NameField.setColumns(20);
-        InputFacilityPane.setBackground(Constant.my_gray);
-        InputFacilityPane.add(InputFacilityLabel);
-        InputFacilityPane.add(NameField);
 
-        JPanel InputCapacity = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        contentPane.add(InputCapacity);
-        JLabel InputCapacityLabel = new JLabel("Input Facility Capacity:        ");
+        JLabel InputCapacityLabel = new JLabel("Facility Capacity:");
         InputCapacityLabel.setFont(Constant.LABEL_FONT);
         InputCapacityLabel.setForeground(Constant.my_white);
         JTextField CapacityField = new JTextField();
+        CapacityField.setFont(Constant.INFO_FONT);
         CapacityField.setColumns(20);
-        InputCapacity.setBackground(Constant.my_gray);
-        InputCapacity.add(InputCapacityLabel);
-        InputCapacity.add(CapacityField);
 
         JPanel ButtonPane = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         ButtonPane.setBackground(Constant.my_gray);
@@ -66,18 +67,40 @@ public class EditFacilityFrame extends JFrame {
         JButton CancelButton = new JButton("Cancel");
         CancelButton.setBackground(new Color(77,82,77));
         CancelButton.setForeground(Constant.my_white);
+        CancelButton.setFont(Constant.INFO_FONT);
+
+        JButton ConfirmButton = new JButton("Confirm");
+        ConfirmButton.setBackground(new Color(77,82,77));
+        ConfirmButton.setForeground(Constant.my_white);
+        ConfirmButton.setFont(Constant.INFO_FONT);
+
+        ButtonPane.add(CancelButton);
+        ButtonPane.add(ConfirmButton);
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        mainPanel.add(InputFacilityLabel, gbc);
+
+        gbc.gridy++;
+        mainPanel.add(InputCapacityLabel, gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        mainPanel.add(NameField, gbc);
+
+        gbc.gridy++;
+        mainPanel.add(CapacityField, gbc);
+
+        contentPane.add(headerPanel);
+        contentPane.add(mainPanel);
+        contentPane.add(ButtonPane);
+
         CancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 EditFacilityFrame.this.dispose();
             }
         });
-        ButtonPane.add(CancelButton);
-
-        JButton ConfirmButton = new JButton("Confirm");
-        ConfirmButton.setBackground(new Color(77,82,77));
-        ConfirmButton.setForeground(Constant.my_white);
-
         ConfirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -110,8 +133,5 @@ public class EditFacilityFrame extends JFrame {
                 }
             }
         });
-
-        ButtonPane.add(ConfirmButton);
-
     }
 }

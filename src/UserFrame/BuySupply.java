@@ -157,6 +157,8 @@ public class BuySupply extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String valueChoose = (String) filter.getSelectedItem();
+                Sort.setSelectedIndex(0);
+                filter.setSelectedItem(valueChoose);
 
                 if(valueChoose.equals("<50.000đ")) {
                     ArrayList<supply> SupplyList = getDB.Supply.FunctionSupply.GetAllSupplyInfoFilter50k();
@@ -187,6 +189,7 @@ public class BuySupply extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 String sortChoose = (String) Sort.getSelectedItem();
                 filter.setSelectedIndex(0);
+                Sort.setSelectedItem(sortChoose);
 
                 ArrayList<supply> SupplyList = getDB.Supply.FunctionSupply.GetAllSupplyInfoSort(sortChoose);
                 Productdef.setRowCount(0);

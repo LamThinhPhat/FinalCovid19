@@ -14,14 +14,16 @@ public class ListFacilitiesPanel extends JPanel {
 
         JPanel ListUsercontentPane = new JPanel(new BorderLayout());
         add(ListUsercontentPane);
-        JPanel ListUserbuttonPaneNorth = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        ListUsercontentPane.add(ListUserbuttonPaneNorth, BorderLayout.NORTH);
+        JPanel ListUserbuttonPaneNorth = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        ListUsercontentPane.add(ListUserbuttonPaneNorth, BorderLayout.SOUTH);
         ListUserbuttonPaneNorth.setBackground(Constant.my_gray);
 
         JScrollPane ListFacilitiesCenter = new JScrollPane();
-        ListFacilitiesCenter.setPreferredSize(new Dimension(1100, 400));
+        ListFacilitiesCenter.setPreferredSize(new Dimension(1190,380));
         ListUsercontentPane.add(ListFacilitiesCenter, BorderLayout.CENTER);
         JTable FacilityTable = new JTable();
+        FacilityTable.setFont(Constant.TABLE_FONT);
+        FacilityTable.getTableHeader().setFont(Constant.TABLE_HEADER);
         FacilityTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         DefaultTableModel def = new DefaultTableModel() {
             @Override
@@ -48,6 +50,8 @@ public class ListFacilitiesPanel extends JPanel {
         JButton EditFacility = new JButton("Edit Facility");
         EditFacility.setForeground(Constant.my_white);
         EditFacility.setBackground(new Color(77,82,77));
+        EditFacility.setFont(Constant.INFO_FONT);
+
         EditFacility.addActionListener(e->{
             int row = FacilityTable.getSelectedRow();
             if(row == -1)
@@ -63,6 +67,8 @@ public class ListFacilitiesPanel extends JPanel {
         JButton AddFacility = new JButton("Add facility");
         AddFacility.setForeground(Constant.my_white);
         AddFacility.setBackground(new Color(77,82,77));
+        AddFacility.setFont(Constant.INFO_FONT);
+
         AddFacility.addActionListener(e->{
             new AddFacilityFrame(def).setVisible(true);
         });

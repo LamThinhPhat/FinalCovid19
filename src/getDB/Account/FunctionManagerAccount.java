@@ -49,12 +49,12 @@ public class FunctionManagerAccount {
         String sql="select cu.username,cu.full_name,cu.id,cu.dob,cu.house_number,cu.address_id,cu.patient_status,cu.facility_id,ac.ban_unban" +
                 " from covid_user cu join account_table ac on (cu.username=ac.username)"+
                 " where ac.user_role=1 ";;
-        if(sortby.equals("Sort Facility")) sql  +=  "ORDER BY facility_id";
-        else if(sortby.equals("Sort DoB")) sql  += "ORDER BY dob";
-        else if(sortby.equals("Sort City")) sql  += "ORDER BY address_id";
-        else if(sortby.equals("Sort fullname")) sql  += "ORDER BY full_name";
-        else if(sortby.equals("Sort ID")) sql  += " ORDER BY id";
-        else if(sortby.equals("Sort status")) sql  += " ORDER BY patient_status";
+        if(sortby.equals("Facility")) sql  +=  "ORDER BY facility_id";
+        else if(sortby.equals("DoB")) sql  += "ORDER BY dob";
+        else if(sortby.equals("City")) sql  += "ORDER BY address_id";
+        else if(sortby.equals("Full name")) sql  += "ORDER BY full_name";
+        else if(sortby.equals("ID")) sql  += " ORDER BY id";
+        else if(sortby.equals("Status")) sql  += " ORDER BY patient_status";
         else sql  += "ORDER BY username";
         try
         {
