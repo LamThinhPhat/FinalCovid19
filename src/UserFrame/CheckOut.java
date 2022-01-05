@@ -37,6 +37,9 @@ public class CheckOut extends JPanel{
     public JButton getCheckoutButton(){
         return CheckoutButton;
     }
+    public JButton getServerButton(){
+        return ServerButton;
+    }
 
     public JLabel getCheck_connection(){
         return check_connection;
@@ -152,7 +155,7 @@ public class CheckOut extends JPanel{
                             CheckoutButton.setEnabled(true);
                             check_connection.setText("Connected");
                             new CheckOutController(CheckOut.this, socket.getInputStream(), socket.getBufferedReader(), socket.getOutputStream(),
-                                    socket.getPrintWriter(), username);
+                                    socket.getPrintWriter(), username,new_thread);
                         }
                         else{
                             JOptionPane.showMessageDialog(CheckOut.this, "Can't connect to server", "error",JOptionPane.ERROR_MESSAGE);
@@ -175,7 +178,7 @@ public class CheckOut extends JPanel{
             check_connection.setText("Disconnected");
         }
         if(socket!=null&&socket.getBufferedReader()!=null) new CheckOutController(this, socket.getInputStream(), socket.getBufferedReader(), socket.getOutputStream(),
-                socket.getPrintWriter(), username);
+                socket.getPrintWriter(), username,t);
     }
 
 

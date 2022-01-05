@@ -62,7 +62,6 @@ public class UserThread implements Runnable{
             }
         } catch (IOException e) {
             check_connected.setValue(false);
-            exit = true;
             e.printStackTrace();
         }
         finally {

@@ -166,17 +166,7 @@ public class UserFrame extends JFrame {
             JPanel contentPane1 = (JPanel) getContentPane();
             CheckOut checkOut=null;
             CheckOutController controller=null;
-//            if(client==null) {
-//                try {
-//                    t.join();
-//                    if(!t.isAlive()) System.out.println("T exited");
-//                } catch (InterruptedException ex) {
-//                    ex.printStackTrace();
-//                }
-//            }
             checkOut = new CheckOut(username,socket,controller,check_connected,client,t);
-
-
 
             contentPane1.removeAll();
             contentPane1.add(checkOut);

@@ -17,6 +17,7 @@ public class CheckOutController implements ActionListener {
     OutputStream outputStream;
     PrintWriter printWriter;
 
+    Thread t;
     String username;
     CheckOutController(
             CheckOut checkOut,
@@ -24,7 +25,8 @@ public class CheckOutController implements ActionListener {
             BufferedReader bufferedReader,
             OutputStream outputStream,
             PrintWriter printWriter,
-            String username
+            String username,
+            Thread t
     )
     {
         this.checkOut = checkOut;
@@ -40,48 +42,46 @@ public class CheckOutController implements ActionListener {
         this.printWriter = printWriter;
 
         this.username=username;
+        this.t=t;
+
+
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e){
         if (e.getSource() == checkOut.getCheckoutButton()) {
-            if (checkOut.getCheckoutField().getText().isEmpty())
-            {
-                JOptionPane.showMessageDialog(checkOut, "Please input balance to pay", "error", JOptionPane.ERROR_MESSAGE);
+            if(!t.isAlive()){
+                this.checkOut.getServerButton().setEnabled(true);
+                this.checkOut.getCheckoutButton().setEnabled(false);
+                this.checkOut.getCheck_connection().setText("Disconnected");
+                JOptionPane.showMessageDialog(checkOut, "Server disconnected", "error", JOptionPane.ERROR_MESSAGE);
             }
-            else
-            {
-                try
-                {
-                    payment_user user=getDB.PaymentUser.FunctionPaymentUser.GetPaymentAccount(username);
-                    int balancepay = Integer.parseInt(checkOut.getCheckoutField().getText());
-                    if (balancepay <= 0)
-                    {
-                        JOptionPane.showMessageDialog(checkOut, "Please input valid balance", "error",JOptionPane.ERROR_MESSAGE);
-                    }
-                    else if (balancepay > user.getBalance())
-                    {
-                        JOptionPane.showMessageDialog(checkOut, "Balance's not enough", "error",JOptionPane.ERROR_MESSAGE);
-                    }
-                    else if (balancepay > user.getDebt())
-                    {
-                        JOptionPane.showMessageDialog(checkOut, "Out of debt", "error",JOptionPane.ERROR_MESSAGE);
-                    }
-                    else
-                    {
-                        user.setDebt(user.getDebt() - balancepay);
-                        user.setBalance(user.getBalance() - balancepay);
-                        printWriter.println(balancepay);
-                        JOptionPane.showMessageDialog(this.checkOut, "Checkout successfully");
-                        this.checkOut.getDebtField().setText(String.valueOf(user.getDebt()));
-                        this.checkOut.getBalanceField().setText(String.valueOf(user.getBalance()));
-                    }
+            else {
+                if (checkOut.getCheckoutField().getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(checkOut, "Please input balance to pay", "error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    try {
+                        payment_user user = getDB.PaymentUser.FunctionPaymentUser.GetPaymentAccount(username);
+                        int balancepay = Integer.parseInt(checkOut.getCheckoutField().getText());
+                        if (balancepay <= 0) {
+                            JOptionPane.showMessageDialog(checkOut, "Please input valid balance", "error", JOptionPane.ERROR_MESSAGE);
+                        } else if (balancepay > user.getBalance()) {
+                            JOptionPane.showMessageDialog(checkOut, "Balance's not enough", "error", JOptionPane.ERROR_MESSAGE);
+                        } else if (balancepay > user.getDebt()) {
+                            JOptionPane.showMessageDialog(checkOut, "Out of debt", "error", JOptionPane.ERROR_MESSAGE);
+                        } else {
+                            user.setDebt(user.getDebt() - balancepay);
+                            user.setBalance(user.getBalance() - balancepay);
+                            printWriter.println(balancepay);
+                            JOptionPane.showMessageDialog(this.checkOut, "Checkout successfully");
+                            this.checkOut.getDebtField().setText(String.valueOf(user.getDebt()));
+                            this.checkOut.getBalanceField().setText(String.valueOf(user.getBalance()));
+                        }
 
-                }
-                catch (NumberFormatException  err)
-                {
-                    JOptionPane.showMessageDialog(checkOut, "Please input valid balance", "error",JOptionPane.ERROR_MESSAGE);
+                    } catch (NumberFormatException err) {
+                        JOptionPane.showMessageDialog(checkOut, "Please input valid balance", "error", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             }
         }

@@ -8,7 +8,7 @@ public class jdbc_connector {
         final String DB_URL = "jdbc:mysql://localhost/covid19_management";
         final String USER = "root";
 
-        final String PASSWORD = "huudanh2802@";
+        final String PASSWORD = "";
         Connection conn = null;
         try{
             Class.forName(JBDC_DRIVER);
