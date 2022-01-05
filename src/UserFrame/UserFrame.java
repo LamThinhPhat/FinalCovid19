@@ -8,11 +8,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.net.Socket;
 
 public class UserFrame extends JFrame {
     private JMenuBar mainMenu;
     private JMenu mUser, mSupply, mPayment;
     private JMenuItem iInformation, iManagedHistory, iChangePass, iLogout, iSupplyHistory, iBuySupply ,iCheckOut, iPaymentHistory;
+
+    UserThread socket;
+    MutableBoolean check_connected;
 
     public UserFrame(String username)
     {
@@ -44,6 +48,14 @@ public class UserFrame extends JFrame {
         iCheckOut = new JMenuItem("Checkout");
         iLogout = new JMenuItem("Log out");
         iChangePass = new JMenuItem("Change Password");
+
+
+        check_connected=new MutableBoolean();
+        check_connected.setValue(false);
+        Socket client=null;
+        socket= new UserThread(username,check_connected,client);
+        Thread t = new Thread(socket);
+        t.start();
 
         mUser.add(iInformation);
         mUser.add(iManagedHistory);
@@ -152,7 +164,19 @@ public class UserFrame extends JFrame {
 
         iCheckOut.addActionListener(e -> {
             JPanel contentPane1 = (JPanel) getContentPane();
-            CheckOut checkOut = new CheckOut(username);
+            CheckOut checkOut=null;
+            CheckOutController controller=null;
+//            if(client==null) {
+//                try {
+//                    t.join();
+//                    if(!t.isAlive()) System.out.println("T exited");
+//                } catch (InterruptedException ex) {
+//                    ex.printStackTrace();
+//                }
+//            }
+            checkOut = new CheckOut(username,socket,controller,check_connected,client,t);
+
+
 
             contentPane1.removeAll();
             contentPane1.add(checkOut);

@@ -1,8 +1,5 @@
 package UserFrame;
 
-import table.payment_user;
-
-import javax.swing.*;
 import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
@@ -10,21 +7,20 @@ import java.net.Socket;
 
 public class UserThread implements Runnable{
     private static boolean exit;
-    Thread network;
-    PrintWriter printWriter = null;
-    InputStream inputStream = null;
-    BufferedReader bufferedReader = null;
-    OutputStream outputStream = null;
-    CheckOut Checkout;
+    PrintWriter printWriter ;
+    InputStream inputStream ;
+    BufferedReader bufferedReader ;
+    OutputStream outputStream ;
     String username;
-
-    public Thread getThread(){
-        return network;
+    MutableBoolean check_connected;
+    Socket client;
+    public Socket socket(){
+        return client;
     }
-    public UserThread(String username,CheckOut Checkout) {
+    public UserThread(String username,MutableBoolean check_connected,Socket client) {
+        this.client=client;
         this.username=username;
-        this.Checkout=Checkout;
-        network= new Thread(this);
+        this.check_connected=check_connected;
     }
 
     public InputStream getInputStream() {
@@ -43,19 +39,15 @@ public class UserThread implements Runnable{
         return bufferedReader;
     }
 
-    public static UserThread start_socket(String username,CheckOut checkOut) {
-        UserThread myThrd = new UserThread(username,checkOut);
-        myThrd.network.start(); // start the thread
-        exit = false;
-        return myThrd;
-    }
+
     @Override
     public void run() {
-        Socket client=null;
+        client=null;
         final int portNumber = 33000;
 
         try {
             client = new Socket(InetAddress.getLocalHost(), portNumber);
+            System.out.println(client);
             System.out.println("Client socket is created" + client);
             inputStream = client.getInputStream();
             bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
@@ -63,33 +55,18 @@ public class UserThread implements Runnable{
             outputStream = client.getOutputStream();
             printWriter = new PrintWriter(outputStream, true);
             printWriter.println(username);
-
-            JOptionPane.showMessageDialog(this.Checkout, "Connected to Server");
-
-            this.Checkout.getServerButton().setEnabled(true);
-            this.Checkout.getCheckoutButton().setEnabled(true);
-            this.Checkout.getCheck_connection().setText("Connected");
+            check_connected.setValue(true);
 
             while(true){
                 String messageFromServer = bufferedReader.readLine();
-                if(messageFromServer.equalsIgnoreCase("{Success}")){
-                    payment_user user = getDB.PaymentUser.FunctionPaymentUser.GetPaymentAccount(username);
-                    JOptionPane.showMessageDialog(this.Checkout, "Checkout successfully");
-                    this.Checkout.getDebtField().setText(String.valueOf(user.getDebt()));
-                    this.Checkout.getBalanceField().setText(String.valueOf(user.getBalance()));
-                }
-                else{
-                    JOptionPane.showMessageDialog(this.Checkout, "Checkout unsuccessfully");
-                }
             }
         } catch (IOException e) {
-            this.Checkout.getServerButton().setEnabled(true);
-            this.Checkout.getCheckoutButton().setEnabled(false);
-            this.Checkout.getCheck_connection().setText("Disconnected");
+            check_connected.setValue(false);
             exit = true;
             e.printStackTrace();
         }
         finally {
+            check_connected.setValue(false);
             try {
                 if (client != null) {
                     client.close();

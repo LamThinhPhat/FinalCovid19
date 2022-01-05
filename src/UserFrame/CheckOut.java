@@ -7,18 +7,22 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.Socket;
 
 
 public class CheckOut extends JPanel{
     boolean connected=false;
     UserThread socket;
-
+    MutableBoolean check_connected;
+    Thread t;
     JButton ServerButton;
     JButton CheckoutButton;
     JLabel check_connection;
     JTextField CheckoutField;
     JTextField DebtField;
     JTextField BalanceField;
+    String username;
+    Socket client;
 
     public JTextField getDebtField(){
         return DebtField;
@@ -26,8 +30,8 @@ public class CheckOut extends JPanel{
     public JTextField getBalanceField(){
         return BalanceField;
     }
-    public JButton getServerButton(){
-        return ServerButton;
+    public JTextField getCheckoutField(){
+        return CheckoutField;
     }
 
     public JButton getCheckoutButton(){
@@ -38,11 +42,16 @@ public class CheckOut extends JPanel{
         return check_connection;
     }
 
-    CheckOut( String username) {
+    CheckOut(String username, UserThread socket, CheckOutController Controller, MutableBoolean check_connected, Socket client,Thread t) {
+        this.check_connected=check_connected;
+        this.username=username;
+        this.socket = socket;
+        this.client=client;
+        this.t=t;
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        payment_user user=getDB.PaymentUser.FunctionPaymentUser.GetPaymentAccount(username);
+        payment_user user = getDB.PaymentUser.FunctionPaymentUser.GetPaymentAccount(username);
 
-        JPanel headerPane=new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel headerPane = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel lbHeader = new JLabel("CHECKOUT");
         lbHeader.setFont(Constant.HEADER_FONT);
         lbHeader.setForeground(Constant.my_white);
@@ -51,7 +60,7 @@ public class CheckOut extends JPanel{
         add(headerPane);
 
         JPanel ContentPanel = new JPanel();
-        ContentPanel.setLayout(new BoxLayout(ContentPanel,BoxLayout.Y_AXIS));
+        ContentPanel.setLayout(new BoxLayout(ContentPanel, BoxLayout.Y_AXIS));
         ContentPanel.setBackground(Constant.my_gray);
         add(ContentPanel);
 
@@ -59,7 +68,7 @@ public class CheckOut extends JPanel{
         midPanel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.anchor = GridBagConstraints.WEST;
-        gbc.insets = new Insets(10, 10,10,10);
+        gbc.insets = new Insets(10, 10, 10, 10);
 
 
         JLabel DebtLabel = new JLabel("Debt:");
@@ -109,70 +118,65 @@ public class CheckOut extends JPanel{
         JPanel ButtonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         ContentPanel.add(ButtonPanel);
 
-        check_connection=new JLabel();
-
+        check_connection = new JLabel();
 
         ServerButton = new JButton("Connect to server");
         ServerButton.setForeground(Constant.my_white);
-        ServerButton.setBackground(new Color(77,82,77));
+        ServerButton.setBackground(new Color(77, 82, 77));
         ServerButton.setFont(Constant.LABEL_FONT);
         ButtonPanel.add(ServerButton);
-        ServerButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                socket=UserThread.start_socket(username,CheckOut.this);
-            }
-        });
+
 
 
         ButtonPanel.add(check_connection);
         CheckoutButton = new JButton("Checkout");
         CheckoutButton.setForeground(Constant.my_white);
-        CheckoutButton.setBackground(new Color(77,82,77));
+        CheckoutButton.setBackground(new Color(77, 82, 77));
         CheckoutButton.setFont(Constant.LABEL_FONT);
         ButtonPanel.add(CheckoutButton);
 
-
-        CheckoutButton.addActionListener(new ActionListener() {
+        ServerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (CheckoutField.getText().isEmpty())
-                {
-                    JOptionPane.showMessageDialog(CheckOut.this, "Please input balance to pay", "error", JOptionPane.ERROR_MESSAGE);
-                }
-                else
-                {
-                    try
+                    if(!t.isAlive())
                     {
-                        int balancepay = Integer.parseInt(CheckoutField.getText());
-                        if (balancepay <= 0)
-                        {
-                            JOptionPane.showMessageDialog(CheckOut.this, "Please input valid balance", "error",JOptionPane.ERROR_MESSAGE);
+                        Thread new_thread= new Thread(socket);
+                        new_thread.start();
+                        try {
+                            Thread.sleep(5000);
+                        } catch (InterruptedException ex) {
+                            ex.printStackTrace();
                         }
-                        else if (balancepay > user.getBalance())
-                        {
-                            JOptionPane.showMessageDialog(CheckOut.this, "Balance's not enough", "error",JOptionPane.ERROR_MESSAGE);
+                        if(new_thread.isAlive()){
+                            ServerButton.setEnabled(false);
+                            CheckoutButton.setEnabled(true);
+                            check_connection.setText("Connected");
+                            new CheckOutController(CheckOut.this, socket.getInputStream(), socket.getBufferedReader(), socket.getOutputStream(),
+                                    socket.getPrintWriter(), username);
                         }
-                        else if (balancepay > user.getDebt())
-                        {
-                            JOptionPane.showMessageDialog(CheckOut.this, "Out of debt", "error",JOptionPane.ERROR_MESSAGE);
-                        }
-                        else
-                        {
-                            user.setDebt(user.getDebt() - balancepay);
-                            user.setBalance(user.getBalance() - balancepay);
-                            socket.getPrintWriter().println(balancepay);
+                        else{
+                            JOptionPane.showMessageDialog(CheckOut.this, "Can't connect to server", "error",JOptionPane.ERROR_MESSAGE);
 
                         }
-
                     }
-                    catch (NumberFormatException  err)
-                    {
-                        JOptionPane.showMessageDialog(CheckOut.this, "Please input valid balance", "error",JOptionPane.ERROR_MESSAGE);
-                    }
-                }
             }
         });
+
+
+        if(check_connected.getValue())
+        {
+            ServerButton.setEnabled(false);
+            CheckoutButton.setEnabled(true);
+            check_connection.setText("Connected");
+        }
+        else{
+            ServerButton.setEnabled(true);
+            CheckoutButton.setEnabled(false);
+            check_connection.setText("Disconnected");
+        }
+        if(socket!=null&&socket.getBufferedReader()!=null) new CheckOutController(this, socket.getInputStream(), socket.getBufferedReader(), socket.getOutputStream(),
+                socket.getPrintWriter(), username);
     }
+
 
 }
