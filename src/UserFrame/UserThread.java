@@ -1,5 +1,7 @@
 package UserFrame;
 
+import table.payment_user;
+
 import javax.swing.*;
 import java.io.*;
 import java.net.InetAddress;
@@ -71,7 +73,13 @@ public class UserThread implements Runnable{
             while(true){
                 String messageFromServer = bufferedReader.readLine();
                 if(messageFromServer.equalsIgnoreCase("{Success}")){
+                    payment_user user = getDB.PaymentUser.FunctionPaymentUser.GetPaymentAccount(username);
                     JOptionPane.showMessageDialog(this.Checkout, "Checkout successfully");
+                    this.Checkout.getDebtField().setText(String.valueOf(user.getDebt()));
+                    this.Checkout.getBalanceField().setText(String.valueOf(user.getBalance()));
+                }
+                else{
+                    JOptionPane.showMessageDialog(this.Checkout, "Checkout unsuccessfully");
                 }
             }
         } catch (IOException e) {

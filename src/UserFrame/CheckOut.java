@@ -17,7 +17,15 @@ public class CheckOut extends JPanel{
     JButton CheckoutButton;
     JLabel check_connection;
     JTextField CheckoutField;
+    JTextField DebtField;
+    JTextField BalanceField;
 
+    public JTextField getDebtField(){
+        return DebtField;
+    }
+    public JTextField getBalanceField(){
+        return BalanceField;
+    }
     public JButton getServerButton(){
         return ServerButton;
     }
@@ -56,7 +64,7 @@ public class CheckOut extends JPanel{
 
         JLabel DebtLabel = new JLabel("Debt:");
         DebtLabel.setFont(Constant.LABEL_FONT);
-        JTextField DebtField = new JTextField();
+        DebtField = new JTextField();
         DebtField.setFont(Constant.LABEL_FONT);
 
         DebtField.setColumns(15);
@@ -65,7 +73,7 @@ public class CheckOut extends JPanel{
 
         JLabel BalanceLabel = new JLabel("Balance:");
         BalanceLabel.setFont(Constant.LABEL_FONT);
-        JTextField BalanceField = new JTextField();
+        BalanceField = new JTextField();
         BalanceField.setFont(Constant.LABEL_FONT);
         BalanceField.setColumns(15);
         BalanceField.setEditable(false);
@@ -124,11 +132,6 @@ public class CheckOut extends JPanel{
         CheckoutButton.setFont(Constant.LABEL_FONT);
         ButtonPanel.add(CheckoutButton);
 
-        if(socket==null){
-            check_connection.setText("Disconnected");
-            CheckoutButton.setEnabled(false);
-            ServerButton.setEnabled(true);
-        }
 
         CheckoutButton.addActionListener(new ActionListener() {
             @Override
