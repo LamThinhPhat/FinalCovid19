@@ -2,6 +2,7 @@ package UserFrame;
 
 import ColorFont.Constant;
 import table.payment_user;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,7 +10,27 @@ import java.awt.event.ActionListener;
 
 
 public class CheckOut extends JPanel{
-    CheckOut(boolean connected, String username) {
+    boolean connected=false;
+    UserThread socket;
+
+    JButton ServerButton;
+    JButton CheckoutButton;
+    JLabel check_connection;
+    JTextField CheckoutField;
+
+    public JButton getServerButton(){
+        return ServerButton;
+    }
+
+    public JButton getCheckoutButton(){
+        return CheckoutButton;
+    }
+
+    public JLabel getCheck_connection(){
+        return check_connection;
+    }
+
+    CheckOut( String username) {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         payment_user user=getDB.PaymentUser.FunctionPaymentUser.GetPaymentAccount(username);
 
@@ -52,7 +73,7 @@ public class CheckOut extends JPanel{
 
         JLabel CheckoutLabel = new JLabel("Checkout:");
         CheckoutLabel.setFont(Constant.LABEL_FONT);
-        JTextField CheckoutField = new JTextField();
+        CheckoutField = new JTextField();
         CheckoutField.setFont(Constant.LABEL_FONT);
         CheckoutField.setColumns(15);
 
@@ -80,18 +101,34 @@ public class CheckOut extends JPanel{
         JPanel ButtonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         ContentPanel.add(ButtonPanel);
 
-        JLabel check_connection=new JLabel();
-        if(connected) check_connection.setText("Connected");
-        else check_connection.setText("Disconnected");
+        check_connection=new JLabel();
+
+
+        ServerButton = new JButton("Connect to server");
+        ServerButton.setForeground(Constant.my_white);
+        ServerButton.setBackground(new Color(77,82,77));
+        ServerButton.setFont(Constant.LABEL_FONT);
+        ButtonPanel.add(ServerButton);
+        ServerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                socket=UserThread.start_socket(username,CheckOut.this);
+            }
+        });
+
 
         ButtonPanel.add(check_connection);
-        JButton CheckoutButton = new JButton("Checkout");
+        CheckoutButton = new JButton("Checkout");
         CheckoutButton.setForeground(Constant.my_white);
         CheckoutButton.setBackground(new Color(77,82,77));
         CheckoutButton.setFont(Constant.LABEL_FONT);
         ButtonPanel.add(CheckoutButton);
-        if(connected)CheckoutButton.setEnabled(true);
-        else CheckoutButton.setEnabled(false);
+
+        if(socket==null){
+            check_connection.setText("Disconnected");
+            CheckoutButton.setEnabled(false);
+            ServerButton.setEnabled(true);
+        }
 
         CheckoutButton.addActionListener(new ActionListener() {
             @Override
@@ -121,11 +158,8 @@ public class CheckOut extends JPanel{
                         {
                             user.setDebt(user.getDebt() - balancepay);
                             user.setBalance(user.getBalance() - balancepay);
-                            getDB.PaymentUser.FunctionPaymentUser.UpdateDebtBalance(user);
-                            getDB.PaymentHistory.FunctionPaymentHistory.UpdatePaymentHistory(user.getUsername(), balancepay, user.getBalance());
-                            DebtField.setText(String.valueOf(user.getDebt()));
-                            BalanceField.setText(String.valueOf(user.getBalance()));
-                            JOptionPane.showMessageDialog(CheckOut.this, "Success","success", JOptionPane.ERROR_MESSAGE);
+                            socket.getPrintWriter().println(balancepay);
+
                         }
 
                     }
@@ -137,4 +171,5 @@ public class CheckOut extends JPanel{
             }
         });
     }
+
 }

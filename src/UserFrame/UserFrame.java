@@ -13,7 +13,9 @@ public class UserFrame extends JFrame {
     private JMenuBar mainMenu;
     private JMenu mUser, mSupply, mPayment;
     private JMenuItem iInformation, iManagedHistory, iChangePass, iLogout, iSupplyHistory, iBuySupply ,iCheckOut, iPaymentHistory;
-    public void display(){
+
+    public UserFrame(String username)
+    {
         setTitle("Covid Management System");
         ImageIcon covid_icon=null;
         try {
@@ -27,9 +29,6 @@ public class UserFrame extends JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
-    }
-    public UserFrame(String username, boolean connected)
-    {
         JPanel contentPane = (JPanel) getContentPane();
         setContentPane(contentPane);
 
@@ -151,10 +150,9 @@ public class UserFrame extends JFrame {
             }
         });
 
-        boolean finalConnected = connected;
         iCheckOut.addActionListener(e -> {
             JPanel contentPane1 = (JPanel) getContentPane();
-            CheckOut checkOut = new CheckOut(finalConnected, username);
+            CheckOut checkOut = new CheckOut(username);
 
             contentPane1.removeAll();
             contentPane1.add(checkOut);

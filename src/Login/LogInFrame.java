@@ -3,7 +3,7 @@ package Login;
 import AdminFrame.AdminFrame;
 import ColorFont.Constant;
 import ManagerFrame.ManagerFrame;
-import UserFrame.User;
+import UserFrame.UserFrame;
 import getDB.Account.FunctionAccount;
 import table.account;
 
@@ -14,7 +14,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-import java.net.Socket;
 
 
 public class LogInFrame extends JFrame {
@@ -139,9 +138,7 @@ public class LogInFrame extends JFrame {
                         }
                         else
                         {
-                            boolean connected = true;
-                            Socket client=null;
-                            User socket= new User(username,connected);
+                            new UserFrame(username).setVisible(true);
                             LogInFrame.this.dispose();
                         }
                     }
