@@ -14,7 +14,7 @@ public class FunctionSupplyHistory {
     static public ArrayList<supply_history> GetSupplyHistory(String username) {
         ArrayList<supply_history> SupplyHistoryList = new ArrayList<supply_history>();
         Connection conn = jdbc_connector.getConnection();
-        String sql = "SELECT * FROM supply_history WHERE username = ? ORDER BY sh_id DESC";
+        String sql = "SELECT * FROM supply_history join supply on supply.supply_id = supply_history.supply_id WHERE username = ? ORDER BY supply_name DESC";
         try {
             PreparedStatement PrSt = conn.prepareStatement(sql);
             PrSt.setString(1, username);
@@ -27,6 +27,7 @@ public class FunctionSupplyHistory {
                 history.setUsername(rs.getString(3));
                 history.setCreate_date(rs.getDate(4));
                 history.setQuantity(rs.getInt(5));
+                history.setSupply_name(rs.getString("supply_name"));
                 SupplyHistoryList.add(history);
             }
         } catch (SQLException err) {

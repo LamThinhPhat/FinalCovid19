@@ -23,7 +23,7 @@ public class AdminFrame extends JFrame {
         }
         setIconImage(covid_icon.getImage());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1400, 600);
+        setSize(1400, 650);
         setResizable(false);
         setLocationRelativeTo(null);
         JPanel ShowPanel = new JPanel();
@@ -67,10 +67,6 @@ public class AdminFrame extends JFrame {
             FacilityPanel.setVisible(true);
         });
 
-        JLabel UserName=new JLabel();
-        UserName.setText("Login as: "+AdminUsername);
-        UserName.setForeground(Constant.my_white);
-        UserName.setFont(Constant.LABEL_FONT);
         JButton Logout= new JButton("Logout");
         Logout.setForeground(Constant.my_white);
         Logout.setBackground(new Color(77,82,77));
@@ -82,7 +78,6 @@ public class AdminFrame extends JFrame {
         });
 
         controlPanel.add(Box.createRigidArea(new Dimension(0,70)));
-        controlPanel.add(UserName);
         controlPanel.add(Box.createRigidArea(new Dimension(0,20)));
         controlPanel.add(manage_manager);
         controlPanel.add(Box.createRigidArea(new Dimension(20,10)));
@@ -96,7 +91,18 @@ public class AdminFrame extends JFrame {
         JPanel HeaderPane=new JPanel(new FlowLayout(FlowLayout.LEFT));
         HeaderPane.setBackground(Constant.my_gray);
         HeaderPane.add(AdminLabel);
+
+        JPanel usernamePanel = new JPanel();
+        usernamePanel.setBackground(Constant.my_gray);
+        usernamePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        JLabel UserName=new JLabel();
+        UserName.setText("Login as: "+AdminUsername);
+        UserName.setForeground(Constant.my_white);
+        UserName.setFont(Constant.LABEL_FONT);
+        usernamePanel.add(UserName);
+
         ShowPanel.add(HeaderPane);
+        ShowPanel.add(usernamePanel);
         ShowPanel.add(ManagerPanel);
         ShowPanel.add(FacilityPanel);
         ShowPanel.setBackground(Constant.my_gray);

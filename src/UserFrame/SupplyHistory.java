@@ -42,7 +42,7 @@ public class SupplyHistory extends JPanel {
         SupplyHistoryTable.getTableHeader().setFont(Constant.TABLE_HEADER);
         SupplyHistoryTable.setFont(Constant.TABLE_FONT);
         SupplyHistoryTable.setModel(SupplyDef);
-        SupplyDef.addColumn("Supply ID");
+        SupplyDef.addColumn("Supply Name");
         SupplyDef.addColumn("Create Date");
         SupplyDef.addColumn("Quantity");
         SupplyDef.addColumn("Price");
@@ -53,7 +53,7 @@ public class SupplyHistory extends JPanel {
         for(supply_history i : UDList)
         {
             SupplyDef.addRow(new Object[] {
-                    i.getSupply_id(),i.getCreate_date(),i.getQuantity(),getDB.SupplyHistory.FunctionSupplyHistory.GetPrice(i.getSupply_id(),username,i.getSHId())
+                    i.getSupply_name(),i.getCreate_date(),i.getQuantity(),getDB.SupplyHistory.FunctionSupplyHistory.GetPrice(i.getSupply_id(),username,i.getSHId())
             });
         }
 

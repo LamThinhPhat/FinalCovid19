@@ -14,7 +14,7 @@ public class FunctionSupply {
     {
         ArrayList<supply> Supplylist = new ArrayList<supply>();
         Connection conn = jdbc_connector.getConnection();
-        String sql  = "SELECT * FROM supply";
+        String sql  = "SELECT * FROM supply order by supply_id asc";
         try
         {
             PreparedStatement PrSt = conn.prepareStatement(sql);

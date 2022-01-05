@@ -3,10 +3,18 @@ package table;
 import java.sql.Date;
 
 public class supply_history {
-    String supply_id, username;
+    String supply_id, username, supply_name;
     Date create_date;
     int sh_id;
     int quantity;
+
+    public String getSupply_name() {
+        return supply_name;
+    }
+
+    public void setSupply_name(String supply_name) {
+        this.supply_name = supply_name;
+    }
 
     public int getSHId() {
         return sh_id;

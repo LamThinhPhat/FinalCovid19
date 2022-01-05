@@ -50,6 +50,7 @@ public class EditFacilityFrame extends JFrame {
         InputFacilityLabel.setFont(Constant.LABEL_FONT);
         InputFacilityLabel.setForeground(Constant.my_white);
         JTextField NameField = new JTextField();
+        NameField.setText(update.getFacility_name());
         NameField.setFont(Constant.INFO_FONT);
         NameField.setColumns(20);
 
@@ -57,6 +58,7 @@ public class EditFacilityFrame extends JFrame {
         InputCapacityLabel.setFont(Constant.LABEL_FONT);
         InputCapacityLabel.setForeground(Constant.my_white);
         JTextField CapacityField = new JTextField();
+        CapacityField.setText(String.valueOf(update.getCapacity()));
         CapacityField.setFont(Constant.INFO_FONT);
         CapacityField.setColumns(20);
 

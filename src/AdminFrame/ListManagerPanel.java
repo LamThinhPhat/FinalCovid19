@@ -19,16 +19,11 @@ public class ListManagerPanel extends JPanel {
         setBackground(Constant.my_gray);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        JPanel ListUsercontentPane = new JPanel(new BorderLayout());
-        add(ListUsercontentPane);
-
         JPanel ListUserbuttonPaneNorth = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        ListUsercontentPane.add(ListUserbuttonPaneNorth, BorderLayout.NORTH);
         ListUserbuttonPaneNorth.setBackground(Constant.my_gray);
 
         JScrollPane ListCovidUserCenter = new JScrollPane();
-        ListCovidUserCenter.setPreferredSize(new Dimension(1150,380));
-        ListUsercontentPane.add(ListCovidUserCenter,BorderLayout.CENTER);
+        ListCovidUserCenter.setPreferredSize(new Dimension(1100,380));
 
         JTable CovidUserTable = new JTable();
         CovidUserTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -84,7 +79,6 @@ public class ListManagerPanel extends JPanel {
         centerRenderer.setHorizontalAlignment( JLabel.CENTER );
         CovidUserTable.getColumnModel().getColumn(8).setCellRenderer(centerRenderer);
         CovidUserTable.getColumnModel().getColumn(10).setCellRenderer(centerRenderer);
-
 
         JTextField SearchUserNameField = new JTextField();
         SearchUserNameField.setColumns(15);
@@ -158,6 +152,9 @@ public class ListManagerPanel extends JPanel {
         bottomPanel.add(CreateManager);
         bottomPanel.add(BanUser);
         bottomPanel.add(ManagerHistory);
+
+        add(ListUserbuttonPaneNorth);
+        add(ListCovidUserCenter);
         add(bottomPanel);
 
         BanUser.addActionListener(e -> {
