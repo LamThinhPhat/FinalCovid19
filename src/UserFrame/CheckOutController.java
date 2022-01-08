@@ -30,7 +30,6 @@ public class CheckOutController implements ActionListener {
     )
     {
         this.checkOut = checkOut;
-        this.checkOut.getCheck_connection();
         this.checkOut.getDebtField();
         this.checkOut.getBalanceField();
         this.checkOut.getCheckoutButton().addActionListener(this);
@@ -43,23 +42,20 @@ public class CheckOutController implements ActionListener {
 
         this.username=username;
         this.t=t;
-
-
-
     }
 
     @Override
     public void actionPerformed(ActionEvent e){
         if (e.getSource() == checkOut.getCheckoutButton()) {
             if(!t.isAlive()){
-                this.checkOut.getServerButton().setEnabled(true);
                 this.checkOut.getCheckoutButton().setEnabled(false);
-                this.checkOut.getCheck_connection().setText("Disconnected");
                 JOptionPane.showMessageDialog(checkOut, "Server disconnected", "error", JOptionPane.ERROR_MESSAGE);
             }
             else {
                 if (checkOut.getCheckoutField().getText().isEmpty()) {
                     JOptionPane.showMessageDialog(checkOut, "Please input balance to pay", "error", JOptionPane.ERROR_MESSAGE);
+                } else if(Integer.parseInt(checkOut.getCheckoutField().getText()) < 10000){
+                    JOptionPane.showMessageDialog(checkOut, "Minimum checkout is 10000", "error", JOptionPane.ERROR_MESSAGE);
                 } else {
                     try {
                         payment_user user = getDB.PaymentUser.FunctionPaymentUser.GetPaymentAccount(username);
@@ -82,8 +78,10 @@ public class CheckOutController implements ActionListener {
                     } catch (NumberFormatException err) {
                         JOptionPane.showMessageDialog(checkOut, "Please input valid balance", "error", JOptionPane.ERROR_MESSAGE);
                     }
+                    checkOut.getCheckoutField().setText("");
                 }
             }
         }
+
     }
 }

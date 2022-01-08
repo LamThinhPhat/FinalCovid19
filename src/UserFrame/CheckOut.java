@@ -5,8 +5,6 @@ import table.payment_user;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.net.Socket;
 
 
@@ -15,9 +13,7 @@ public class CheckOut extends JPanel{
     UserThread socket;
     MutableBoolean check_connected;
     Thread t;
-    JButton ServerButton;
     JButton CheckoutButton;
-    JLabel check_connection;
     JTextField CheckoutField;
     JTextField DebtField;
     JTextField BalanceField;
@@ -37,13 +33,7 @@ public class CheckOut extends JPanel{
     public JButton getCheckoutButton(){
         return CheckoutButton;
     }
-    public JButton getServerButton(){
-        return ServerButton;
-    }
 
-    public JLabel getCheck_connection(){
-        return check_connection;
-    }
 
     CheckOut(String username, UserThread socket, CheckOutController Controller, MutableBoolean check_connected, Socket client,Thread t) {
         this.check_connected=check_connected;
@@ -121,65 +111,14 @@ public class CheckOut extends JPanel{
         JPanel ButtonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         ContentPanel.add(ButtonPanel);
 
-        check_connection = new JLabel();
-
-        ServerButton = new JButton("Connect to server");
-        ServerButton.setForeground(Constant.my_white);
-        ServerButton.setBackground(new Color(77, 82, 77));
-        ServerButton.setFont(Constant.LABEL_FONT);
-        ButtonPanel.add(ServerButton);
-
-
-
-        ButtonPanel.add(check_connection);
         CheckoutButton = new JButton("Checkout");
         CheckoutButton.setForeground(Constant.my_white);
         CheckoutButton.setBackground(new Color(77, 82, 77));
         CheckoutButton.setFont(Constant.LABEL_FONT);
         ButtonPanel.add(CheckoutButton);
 
-        ServerButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                    if(!t.isAlive())
-                    {
-                        Thread new_thread= new Thread(socket);
-                        new_thread.start();
-                        try {
-                            Thread.sleep(5000);
-                        } catch (InterruptedException ex) {
-                            ex.printStackTrace();
-                        }
-                        if(new_thread.isAlive()){
-                            ServerButton.setEnabled(false);
-                            CheckoutButton.setEnabled(true);
-                            check_connection.setText("Connected");
-                            new CheckOutController(CheckOut.this, socket.getInputStream(), socket.getBufferedReader(), socket.getOutputStream(),
-                                    socket.getPrintWriter(), username,new_thread);
-                        }
-                        else{
-                            JOptionPane.showMessageDialog(CheckOut.this, "Can't connect to server", "error",JOptionPane.ERROR_MESSAGE);
-
-                        }
-                    }
-            }
-        });
-
-
-        if(check_connected.getValue())
-        {
-            ServerButton.setEnabled(false);
-            CheckoutButton.setEnabled(true);
-            check_connection.setText("Connected");
-        }
-        else{
-            ServerButton.setEnabled(true);
-            CheckoutButton.setEnabled(false);
-            check_connection.setText("Disconnected");
-        }
         if(socket!=null&&socket.getBufferedReader()!=null) new CheckOutController(this, socket.getInputStream(), socket.getBufferedReader(), socket.getOutputStream(),
                 socket.getPrintWriter(), username,t);
     }
-
 
 }

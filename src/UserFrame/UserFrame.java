@@ -49,11 +49,10 @@ public class UserFrame extends JFrame {
         iLogout = new JMenuItem("Log out");
         iChangePass = new JMenuItem("Change Password");
 
-
         check_connected=new MutableBoolean();
         check_connected.setValue(false);
         Socket client=null;
-        socket= new UserThread(username,check_connected,client);
+        socket= new UserThread(username,check_connected,client, this);
         Thread t = new Thread(socket);
         t.start();
 
@@ -173,6 +172,5 @@ public class UserFrame extends JFrame {
             contentPane1.revalidate();
             contentPane1.repaint();
         });
-
     }
 }

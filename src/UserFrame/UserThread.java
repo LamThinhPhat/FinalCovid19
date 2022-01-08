@@ -1,5 +1,8 @@
 package UserFrame;
 
+import Login.LogInFrame;
+
+import javax.swing.*;
 import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
@@ -14,13 +17,15 @@ public class UserThread implements Runnable{
     String username;
     MutableBoolean check_connected;
     Socket client;
+    public JFrame f;
     public Socket socket(){
         return client;
     }
-    public UserThread(String username,MutableBoolean check_connected,Socket client) {
+    public UserThread(String username,MutableBoolean check_connected,Socket client, JFrame f) {
         this.client=client;
         this.username=username;
         this.check_connected=check_connected;
+        this.f = f;
     }
 
     public InputStream getInputStream() {
@@ -63,6 +68,9 @@ public class UserThread implements Runnable{
         } catch (IOException e) {
             check_connected.setValue(false);
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Cannot connect to checkout server", "Error", JOptionPane.ERROR_MESSAGE);
+            f.dispose();
+            new LogInFrame().setVisible(true);
         }
         finally {
             check_connected.setValue(false);
