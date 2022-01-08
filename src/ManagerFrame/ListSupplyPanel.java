@@ -169,6 +169,8 @@ public class ListSupplyPanel extends JPanel {
                     });
                 }
                 comboBox.setSelectedItem("ID");
+                SearchSupplyField.setForeground(Color.GRAY);
+                SearchSupplyField.setText("Supply name");
             }
         });
 
@@ -176,7 +178,7 @@ public class ListSupplyPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                if(!SearchSupplyField.getText().equals(""))
+                if(!SearchSupplyField.getText().equals("Supply name"))
                 {
                     String supplynamesearch = SearchSupplyField.getText();
 

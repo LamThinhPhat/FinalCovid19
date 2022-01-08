@@ -183,6 +183,8 @@ public class ListUserPanel extends JPanel {
                     });
                 }
                 comboBox.setSelectedItem("Username");
+                SearchUserNameField.setForeground(Color.GRAY);
+                SearchUserNameField.setText("Username");
             }
         });
 
@@ -190,7 +192,7 @@ public class ListUserPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                if(!SearchUserNameField.getText().equals(""))
+                if(!SearchUserNameField.getText().equals("Username"))
                 {
                     String usernamesearch = SearchUserNameField.getText();
 

@@ -250,6 +250,8 @@ public class ListManagerPanel extends JPanel {
                     });
                 }
                 Sort.setSelectedItem("Username");
+                SearchUserNameField.setForeground(Color.GRAY);
+                SearchUserNameField.setText("Username");
             }
         });
 
